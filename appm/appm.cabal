@@ -1,0 +1,88 @@
+-- This file has been generated from package.yaml by hpack version 0.28.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 493555bbfb8d96468c6bebcf32b0c35de7c6f3f46deab86ab794cbe16b438a66
+
+name:           appm
+version:        0.0.0
+build-type:     Simple
+cabal-version:  >= 1.10
+
+library
+  exposed-modules:
+      Defs
+      Utils
+      Parser
+      Solver
+  other-modules:
+      Main
+      ParserImpl
+      SolverImpl
+      Paths_appm
+  hs-source-dirs:
+      src
+  build-depends:
+      QuickCheck
+    , base
+    , containers
+    , tasty
+    , tasty-hunit
+    , tasty-quickcheck
+  default-language: Haskell2010
+
+executable appm
+  main-is: Main.hs
+  other-modules:
+      Defs
+      Parser
+      ParserImpl
+      Solver
+      SolverImpl
+      Utils
+      Paths_appm
+  hs-source-dirs:
+      src
+  build-depends:
+      QuickCheck
+    , base
+    , containers
+    , tasty
+    , tasty-hunit
+    , tasty-quickcheck
+  default-language: Haskell2010
+
+test-suite blackbox-tests
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  other-modules:
+      Paths_appm
+  hs-source-dirs:
+      tests/BB
+  build-depends:
+      QuickCheck
+    , appm
+    , base
+    , containers
+    , tasty
+    , tasty-hunit
+    , tasty-quickcheck
+  default-language: Haskell2010
+
+test-suite quickcheck-tests
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  other-modules:
+      Properties
+      Paths_appm
+  hs-source-dirs:
+      tests/QC
+  build-depends:
+      QuickCheck
+    , appm
+    , base
+    , containers
+    , tasty
+    , tasty-hunit
+    , tasty-quickcheck
+  default-language: Haskell2010
