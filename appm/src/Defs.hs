@@ -6,7 +6,7 @@ newtype PName = P String
   deriving (Eq, Ord, Show, Read)
 
 data VNum = VN Int String
-  deriving (Eq, Show, Read)
+  deriving (Eq, Show, Read, Ord)
 
 newtype Version = V [VNum]
   deriving (Eq, Show, Read)
@@ -26,5 +26,5 @@ data Pkg = Pkg {name :: PName,
 
 newtype Database = DB [Pkg]
   deriving (Eq, Show, Read)
-  
+
 type Sol = [(PName, Version)]
