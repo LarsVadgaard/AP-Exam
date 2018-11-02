@@ -1,10 +1,4 @@
 name:                ap-haskell
-version:             0.1.0.0
-github:              "githubuser/ap-haskell"
-license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2018 Author name here"
 
 extra-source-files:
 - README.md
@@ -20,16 +14,20 @@ extra-source-files:
 description:         Please see the README on GitHub at <https://github.com/githubuser/ap-haskell#readme>
 
 dependencies:
-- base >= 4.7 && < 5
+- base
+- tasty            # The test framework tasty
+- tasty-hunit      # unit-testing with tasty
+- QuickCheck       # property-based testing
 
 library:
   source-dirs: src
 
 executables:
-  ap-haskell-exe:
+  ap-haskell: # selve navnet
     main:                Main.hs
     source-dirs:         app
     ghc-options:
+    - -Wall
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
@@ -38,9 +36,10 @@ executables:
 
 tests:
   ap-haskell-test:
-    main:                Spec.hs
+    main:                Test.hs
     source-dirs:         test
     ghc-options:
+    - -Wall
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
