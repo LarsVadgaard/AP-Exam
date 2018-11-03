@@ -57,11 +57,6 @@ symbol = token . string
 symbol1 :: String -> Parser String
 symbol1 = token1 . string
 
--- Reserved word
--- notReserved :: String -> Parser String
--- notReserved s | s `elem` keywords = unexpected $ "keyword '" ++ s ++ "'"
---               | otherwise         = return s
-
 -- Delimiters
 parens :: Parser a -> Parser a
 parens = between (symbol "(") (symbol ")")
@@ -173,7 +168,7 @@ bound b = do
       v <- version
       if lt == b then return (name, minV, v)
                  else return (name, v, maxV))
-    <|> return (name, minV, maxV)
+    <|> return (name, minV, if b then maxV else minV)
 
 bounds :: Bool -> Parser [(PName, Version, Version)]
 bounds b = sepBy1 (bound b) (symbol ",")

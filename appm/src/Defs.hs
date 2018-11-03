@@ -11,7 +11,7 @@ data VNum = VN Int String
   deriving (Eq, Show, Read, Ord)
 
 newtype Version = V [VNum]
-  deriving (Eq, Show, Read)
+  deriving (Eq, Show, Read, Ord)
 
 minV, maxV :: Version
 minV = V [VN 0 ""]        -- inclusive lower bound

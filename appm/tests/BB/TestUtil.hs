@@ -69,9 +69,9 @@ v7    = listToVersion [(3,""),(4,"z")]
 v8    = listToVersion [(3,""),(5,"a")]
 
 
-------------------------------
--- Merging two constrain lists
-------------------------------
+-------------------------------
+-- Merging two constraint lists
+-------------------------------
 
 -- Test 1
 c1l   = [ (P "i3-wm",  (True, V [VN 2 "",VN 0 "",VN 4 ""], V [VN 5 "",VN 2 "",VN 2 ""]))
@@ -98,19 +98,19 @@ c2r   = [ (P "uxterm", (True,  V [VN 7 "",VN 2 ""], V [VN 9 "",VN 0 "",VN 0 ""])
         , (P "vim",    (True,  V [VN 5 "",VN 1 "",VN 3 ""], V [VN 7 "",VN 0 "",VN 2 "",VN 0 ""]))
         ]
 c2Out = Just
-        [ (P "i3-wm",  (True,  V [VN 2 "",VN 0 "",VN 4 ""], V [VN 5 "",VN 2 "",VN 2 ""]))
-        , (P "emacs",  (True,  V [VN 4 "",VN 3 ""], V [VN 4 "",VN 6 ""]))
-        , (P "ghc",    (True,  V [VN 1 "",VN 1 "",VN 25 ""], V [VN 3 "",VN 6 ""]))
-        , (P "uxterm", (True,  V [VN 7 "",VN 2 ""], V [VN 9 "",VN 0 "",VN 0 ""]))
-        , (P "mono",   (True,  V [VN 4 "",VN 1 "",VN 1 ""], V [VN 5 "",VN 8 ""]))
-        , (P "vim",    (True,  V [VN 6 "",VN 0 "",VN 2 "",VN 0 ""], V [VN 7 "",VN 0 "",VN 2 "",VN 0 ""]))
+        [ (P "i3-wm",(True,V [VN 2 "",VN 0 "",VN 4 ""],V [VN 5 "",VN 2 "",VN 2 ""]))
+        , (P "emacs",(True,V [VN 4 "",VN 1 ""],V [VN 4 "",VN 3 ""]))
+        , (P "ghc",(True,V [VN 1 "",VN 1 "",VN 25 ""],V [VN 3 "",VN 6 ""]))
+        , (P "vim",(True,V [VN 5 "",VN 1 "",VN 3 ""],V [VN 6 "",VN 0 "",VN 2 "",VN 0 ""]))
+        , (P "uxterm",(True,V [VN 7 "",VN 2 ""],V [VN 9 "",VN 0 "",VN 0 ""]))
+        , (P "mono",(True,V [VN 4 "",VN 1 "",VN 1 ""],V [VN 5 "",VN 8 ""]))
         ]
 
 -- Test 3
 c3l   = [ (P "i3-wm",  (True, V [VN 2 "",VN 0 "",VN 4 ""], V [VN 5 "",VN 2 "",VN 2 ""]))
         , (P "emacs",  (True,  V [VN 4 "",VN 1 ""], V [VN 4 "",VN 6 ""]))
         , (P "ghc",    (True, V [VN 1 "",VN 1 "",VN 25 ""], V [VN 3 "",VN 6 ""]))
-        , (P "vim",    (False,  V [VN 2 "",VN 0 ""], V [VN 7 "",VN 0 "",VN 2 "",VN 0 ""]))
+        , (P "vim",    (False,  V [VN 2 "",VN 0 ""], V [VN 3 "",VN 0 "",VN 2 "",VN 0 ""]))
         ]
 c3r   = [ (P "uxterm", (True,  V [VN 7 "",VN 2 ""], V [VN 9 "",VN 0 "",VN 0 ""]))
         , (P "emacs",  (True,  V [VN 2 "",VN 3 ""], V [VN 4 "",VN 3 ""]))
@@ -131,12 +131,12 @@ c4r   = [ (P "uxterm", (True,  V [VN 7 "",VN 2 ""], V [VN 9 "",VN 0 "",VN 0 ""])
         , (P "vim",    (True,  V [VN 5 "",VN 1 "",VN 3 ""], V [VN 7 "",VN 0 "",VN 2 "",VN 0 ""]))
         ]
 c4Out = Just
-        [ (P "i3-wm",  (True,  V [VN 2 "",VN 0 "",VN 4 ""], V [VN 5 "",VN 2 "",VN 2 ""]))
-        , (P "ghc",    (True,  V [VN 1 "",VN 1 "",VN 25 ""], V [VN 3 "",VN 6 ""]))
-        , (P "uxterm", (True,  V [VN 7 "",VN 2 ""], V [VN 9 "",VN 0 "",VN 0 ""]))
-        , (P "mono",   (True,  V [VN 4 "",VN 1 "",VN 1 ""], V [VN 5 "",VN 8 ""]))
-        , (P "vim",    (True,  V [VN 6 "",VN 0 "",VN 2 "",VN 0 ""], V [VN 7 "",VN 0 "",VN 2 "",VN 0 ""]))
-        , (P "emacs",  (False,  V [VN 3 "",VN 1 ""], V [VN 4 "",VN 2 ""]))
+        [ (P "i3-wm",  (True,V [VN 2 "",VN 0 "",VN 4 ""],V [VN 5 "",VN 2 "",VN 2 ""]))
+        , (P "emacs",  (False,V [VN 3 "",VN 1 ""],V [VN 4 "",VN 2 ""]))
+        , (P "ghc",    (True,V [VN 1 "",VN 1 "",VN 25 ""],V [VN 3 "",VN 6 ""]))
+        , (P "vim",    (True,V [VN 5 "",VN 1 "",VN 3 ""],V [VN 6 "",VN 0 "",VN 2 "",VN 0 ""]))
+        , (P "uxterm", (True,V [VN 7 "",VN 2 ""],V [VN 9 "",VN 0 "",VN 0 ""]))
+        , (P "mono",   (True,V [VN 4 "",VN 1 "",VN 1 ""],V [VN 5 "",VN 8 ""]))
         ]
 
 -- Test 3

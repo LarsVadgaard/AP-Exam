@@ -40,7 +40,7 @@ src2 =
 db2  = DB [ Pkg { name = P "hej"
                 , ver = V [VN 1 "",VN 3 "",VN 5 "f"]
                 , desc = "LOL du \"hej\" med dig"
-                , deps = [(P "bar",(True,V [VN 1 "",VN 0 ""],V [VN 4 "",VN 0 "",VN 9 ""]))]
+                , deps = [(P "bar",(True,V [VN 4 "",VN 0 "",VN 9 ""],maxV))]
             }
           ]
 
@@ -69,7 +69,7 @@ src3 =
   \}"
 db3  = DB [ Pkg { name = P "foo", ver = V [VN 2 "",VN 3 ""]
                 , desc = "The foo application"
-                , deps = [(P "bar",(True,V [VN 1 "",VN 0 ""],V [VN 1000000 ""]))]
+                , deps = [(P "bar",(True,V [VN 1 "",VN 0 ""],maxV))]
             }
 
           , Pkg { name = P "bar", ver = V [VN 1 "",VN 0 ""]
@@ -114,8 +114,8 @@ src4 =
 
 -- Test 5
 src5 = "package {name foo; requires hej, dav < 9.2}"
-db5  = DB [Pkg (P "foo") (V [VN 1 ""]) "" [(P "hej", (True,V [VN 0 ""],V [VN 1000000 ""])),(P "dav", (True,V [VN 0 ""],V [VN 9 "",VN 2 ""]))]]
+db5  = DB [Pkg (P "foo") (V [VN 1 ""]) "" [(P "hej", (True,minV,maxV)),(P "dav", (True,minV,V [VN 9 "",VN 2 ""]))]]
 
 -- Test 5
 src6 = "package {name foo; conflicts hej, dav < 9.2}"
-db6  = DB [Pkg (P "foo") (V [VN 1 ""]) "" [(P "hej", (False,V [VN 0 ""],V [VN 1000000 ""])),(P "dav", (False,V [VN 9 "",VN 2 ""],V [VN 1000000 ""]))]]
+db6  = DB [Pkg (P "foo") (V [VN 1 ""]) "" [(P "hej", (False,minV,minV)),(P "dav", (False,V [VN 9 "",VN 2 ""],maxV))]]
