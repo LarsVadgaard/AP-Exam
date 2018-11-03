@@ -22,7 +22,6 @@ merge' ((n,c):lst) (n',c') | n == n' = do
 merge' (c:lst) c' = (:) c <$> merge' lst c'
 merge' [] c = return [c]
 
--- Both are conflicts or required
 merge'' (b1, vmin1, vmax1) (b2, vmin2, vmax2) =
   let (vmin',vmax') = (max vmin1 vmin2, min vmax1 vmax2)
   in if vmax' <= vmin'

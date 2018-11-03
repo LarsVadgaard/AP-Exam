@@ -19,12 +19,12 @@ import Utils
 
 parseVersion :: String -> Either ErrMsg Version
 parseVersion s = case parse (spaces *> version <* eof) "" s of
-  Left e -> Left $ messageString . head . errorMessages $ e
+  Left e -> Left $ show e
   Right v -> Right v
 
 parseDatabase :: String -> Either ErrMsg Database
 parseDatabase s = case parse (spaces *> database <* eof) "" s of
-  Left e -> Left $ messageString . head . errorMessages $ e
+  Left e -> Left $ show e
   Right v -> Right v
 
 -- Utility
@@ -124,7 +124,7 @@ pname = token $ (do
 
 pname' :: Parser String
 pname' = do
-  c <- string "_" <|> return ""
+  c <- string "-" <|> return ""
   a <- alphaNum
   return $ c++[a]
 

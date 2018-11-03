@@ -113,8 +113,8 @@ src4 =
   \}"
 
 -- Test 5
-src5 = "package {name foo; requires hej, dav < 9.2}"
-db5  = DB [Pkg (P "foo") (V [VN 1 ""]) "" [(P "hej", (True,minV,maxV)),(P "dav", (True,minV,V [VN 9 "",VN 2 ""]))]]
+src5 = "package {name foo-hoo; requires hej, dav < 9.2}"
+db5  = DB [Pkg (P "foo-hoo") (V [VN 1 ""]) "" [(P "hej", (True,minV,maxV)),(P "dav", (True,minV,V [VN 9 "",VN 2 ""]))]]
 
 -- Test 5
 src6 = "package {name foo; conflicts hej, dav < 9.2}"

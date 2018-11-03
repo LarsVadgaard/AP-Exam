@@ -13,14 +13,14 @@ prettyVersion (V l) =
   intercalate "." [show n ++ s | VN n s <- l]
 
 check :: String -> Either String a -> IO a
-check s (Left e) = do error $ s ++ ":" ++ e
+check s (Left e) = error $ s ++ ":" ++ e
 check s (Right a) = return a
 
 main :: IO ()
 main = do
   args <- getArgs
   case args of
-    [dbfile, pkg] -> 
+    [dbfile, pkg] ->
       do s <- readFile dbfile
          db <- check "Parsing" $ parseDatabase s
          db' <- check "Normalizing" $ normalize db
