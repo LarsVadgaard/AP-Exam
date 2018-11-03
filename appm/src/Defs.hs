@@ -1,5 +1,7 @@
 module Defs where
 
+import Data.List (intercalate)
+
 type ErrMsg = String -- for all human-readable error messages
 
 newtype PName = P String
@@ -28,3 +30,10 @@ newtype Database = DB [Pkg]
   deriving (Eq, Show, Read)
 
 type Sol = [(PName, Version)]
+
+-- Showing
+--instance Show Version where
+--  show (V v) = intercalate "." . map show $ v
+--
+--instance Show VNum where
+--  show (VN n s) = show n ++ s
