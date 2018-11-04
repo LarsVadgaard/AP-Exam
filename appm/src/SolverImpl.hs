@@ -64,10 +64,9 @@ install :: Database -> PName -> Maybe Sol
 install (DB db) p = do
   let cands = filter (\pkg -> name pkg == p) db
   when (null cands) Nothing
-  let pkg  = (maximum . filter (\pkg -> name pkg == p)) cands
-      sols = solve (DB db) (deps pkg) [(name pkg, ver pkg)]
-  when (null sols) Nothing
-  return $ head sols
+  let sols = map (\pkg -> solve (DB db) (deps pkg) [(name pkg, ver pkg)]) cands
+  when (all null sols) Nothing
+  return $ (head . concat) sols -- TODO: gør mere robust
 
 
 --------------------
@@ -95,7 +94,7 @@ quality sol1 sol2 =
 
 -- check if a package is already in the solution
 inSol :: Pkg -> Sol -> Bool
-inSol pkg = elem (name pkg,ver pkg)
+inSol pkg = any (\(p,_) -> p == name pkg)
 
 -- convert a list of packages to a solution
 toSol :: [Pkg] -> Sol
