@@ -41,7 +41,7 @@ spaces1 = many1 space <* skipMany cmt <|> skipMany1 cmt $> ""
 
 -- Comments
 cmt :: Parser String
-cmt = string "--" *> manyTill anyChar (oneOf "\r\n") <* spaces
+cmt = string "--" *> (manyTill anyChar (oneOf "\r\n") <|> manyTill anyChar eof) <* spaces
 
 -- Token
 token :: Parser a -> Parser a

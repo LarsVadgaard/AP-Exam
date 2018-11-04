@@ -26,14 +26,11 @@ data Pkg = Pkg {name :: PName,
                 deps :: Constrs}
   deriving (Eq, Show, Read)
 
+-- define package ordering
+instance Ord Pkg where
+  Pkg n1 v1 _ _ <= Pkg n2 v2 _ _ = (n1 < n2) || (n1 == n2 && v1 <= v2)
+
 newtype Database = DB [Pkg]
   deriving (Eq, Show, Read)
 
 type Sol = [(PName, Version)]
-
--- Showing
---instance Show Version where
---  show (V v) = intercalate "." . map show $ v
---
---instance Show VNum where
---  show (VN n s) = show n ++ s

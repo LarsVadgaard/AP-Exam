@@ -3,6 +3,8 @@ module TestParser where
 import Test.Tasty
 import Test.Tasty.HUnit
 
+import Data.Either (isLeft)
+
 import Defs
 import Parser (parseDatabase)
 
@@ -16,11 +18,13 @@ tests = testGroup "Parser tests"
     , testCase "large" $
        parseDatabase src3 @?= Right db3
     , testCase "multiple names" $
-       parseDatabase src4 @?= Left "\"p\""
+       isLeft(parseDatabase src4) @?= True
     , testCase "implicit version range (requires)" $
        parseDatabase src5 @?= Right db5
     , testCase "implicit version range (conflicts)" $
        parseDatabase src6 @?= Right db6
+    , testCase "comments" $
+       parseDatabase src3cmt @?= Right db3
     ]
 
 
@@ -119,3 +123,28 @@ db5  = DB [Pkg (P "foo-hoo") (V [VN 1 ""]) "" [(P "hej", (True,minV,maxV)),(P "d
 -- Test 5
 src6 = "package {name foo; conflicts hej, dav < 9.2}"
 db6  = DB [Pkg (P "foo") (V [VN 1 ""]) "" [(P "hej", (False,minV,minV)),(P "dav", (False,V [VN 9 "",VN 2 ""],maxV))]]
+
+-- Test 6
+src3cmt =
+  "package { \n\
+  \  name foo; -- this is the name \n\
+  \  version 2.3; \n\
+  \  description \"The foo application\"; \n\
+  \  requires bar >= 1.0 \n\
+  \} \n-- now i'm between packages\n\
+  \package { \n\
+  \  name bar; \n\
+  \  version 1.0; --this is the version \n\
+  \  description \"The bar library\" \n\
+  \} \n\n\
+  \package { \n\
+  \  name bar; \n\
+  \  version 2.1; \n\
+  \  description \"The bar library, new API\"; \n\
+  \  conflicts baz < 3.4, baz >= 5.0.3 \n\
+  \} \n\n-- almost done!\n\n\
+  \package { \n\
+  \  name baz; \n\
+  \  version 6.1.2; \n\
+  \}  -- goodbye\n\
+  \"

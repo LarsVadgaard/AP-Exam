@@ -1,4 +1,4 @@
---module Main where
+module Main where
 
 import Defs
 import Properties
@@ -28,7 +28,8 @@ pname = oneof [simple, general]
 
 simple  = do
   first <- choose ('a','z')
-  after <- listOf $ frequency
+  after <- resize 8 $
+                listOf $ frequency
                   [ (5, do {
                           l <- elements letters;
                           return [l]             })
@@ -41,7 +42,7 @@ simple  = do
                   ]
   return $ first : concat after
 
-general = listOf1 arbitrary
+general = resize 10 $ listOf1 arbitrary
 
 
 -- Versions
@@ -54,7 +55,7 @@ instance Arbitrary VNum where
     where lowerString4 = resize 4 (listOf1 (elements lowers))
 
 instance Arbitrary Version where
-  arbitrary = V <$> listOf1 arbitrary
+  arbitrary = V <$> resize 5 (listOf1 arbitrary)
 
 
 -- Packages
@@ -62,7 +63,7 @@ instance Arbitrary Pkg where
   arbitrary = do
     p <- arbitrary
     v <- arbitrary
-    desc <- listOf1 arbitrary
+    desc <- resize 15 $ listOf1 arbitrary
     return $ Pkg p v desc []
 
 
@@ -73,7 +74,7 @@ instance Arbitrary Database where
 -- remove duplicates even though the chance of such is tiny
 trim :: [Pkg] -> Gen [Pkg]
 trim (Pkg p c d1 d2:pkgs) = do
-  trimmed <- trim $ filter (\(Pkg p' _ _ _) -> p == p') pkgs
+  trimmed <- trim $ filter (\(Pkg p' _ _ _) -> p /= p') pkgs
   return $ Pkg p c d1 d2 : trimmed
 trim [] = return []
 
@@ -105,4 +106,4 @@ tests = testGroup "QC tests"
           , testProperty "simple" prop_install_d
           ]
 
---main = defaultMain tests
+main = defaultMain tests
