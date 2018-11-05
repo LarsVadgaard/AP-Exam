@@ -100,6 +100,7 @@ checkDeps pkg = do
     unexpected "self-referential dependencies"
   return pkg
 
+countClause :: (Int,Int,Int) -> Clause -> (Int,Int,Int)
 countClause (n,v,d) Name{}        = (n+1,v,d)
 countClause (n,v,d) Version{}     = (n,v+1,d)
 countClause (n,v,d) Desc{}        = (n,v,d+1)
