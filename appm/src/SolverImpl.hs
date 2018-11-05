@@ -3,14 +3,11 @@ module SolverImpl where
 -- Put your solver implementation in this file.
 -- Do not change the types of the following exported functions
 
-import qualified Data.Map as M
-
 import Control.Monad
 import Control.Arrow ((&&&)) -- just a small convenience
 
 import Data.Maybe (mapMaybe)
-import Data.Ord (comparing, Ordering(..))
-import Data.List (sort, sortBy, minimumBy, groupBy, partition)
+import Data.List (sort, partition, groupBy)
 
 import Defs
 import Utils
@@ -21,164 +18,115 @@ import Utils
 --------------
 
 -- for each package, find all packages with the same name,
--- check that they are semantically equivalent, and group
--- them together
+-- check that they are semantically equivalent, group them
+-- together, and run recursively on the rest of rest
 normalize :: Database -> Either String Database
-normalize (DB db) = DB <$> normalize' db
+normalize (DB db) =
+  let groups = groupSame db
+  in if all allEquiv groups
+     then return $ (DB . sortPkgs . map head) groups
+     else Left "The database is not consistent"
 
--- helper to avoid handling the DB-constructor
-normalize' :: [Pkg] -> Either String [Pkg]
-normalize' (pkg:db) = do
-  (eq,rest) <- normalize'' pkg db ([pkg],[])
-  let eq' = sortBy (flip compare) eq
-    in (++) eq' <$> normalize' rest
-normalize' [] = return []
+-- equivalence between all packages in a list
+allEquiv :: [Pkg] -> Bool
+allEquiv (pkg:pkgs) =
+  foldl (\b pkg' -> b && pkg' `equiv` pkg) True pkgs
+allEquiv [] = False -- shouldn't ever happen
 
--- helper to do so for each package
-normalize'' _ [] buf = return buf
-normalize'' pkg (pkg':db) (eq,rest)
-      | name pkg == name pkg' && ver pkg == ver pkg' =
-  if pkg `equiv` pkg'
-  then normalize'' pkg db (pkg':eq,rest)
-  else Left $ (show . name) pkg ++ " is not consistent"
-normalize'' pkg (pkg':db) (eq,rest) = normalize'' pkg db (eq,pkg':rest)
-
--- sort to match the individual constraints;
--- the internal constraints have been merged
--- when parsed, so we don't need to do anything
--- special to check deeper semantic equivalence
+-- equivalence between two packages
 equiv :: Pkg -> Pkg -> Bool
-equiv pkg1 pkg2 = desc pkg1 == desc pkg2 &&
-                  sort (deps pkg1) == sort (deps pkg2)
+equiv pkg1 pkg2 =
+  name pkg1 == name pkg2 &&
+  desc pkg1 == desc pkg2 &&
+  sort (deps pkg1) == sort (deps pkg2)
 
 
--------------
--- The Solver
--------------
+-------------------------
+-- Solving and installing
+-------------------------
 
-type Context = ([Sol],Database)
-
-newtype Solver a = S { runSolver :: Context -> (a,[Sol])}
-
-execSolver :: Solver a -> Context -> [Sol]
-execSolver act = snd . runSolver act
-
-instance Monad Solver where
-  return a = S $ \(s,_) -> (a,s)
-  m >>= f = S $ \(s,db) ->
-    let (a,s') = runSolver m (s,db)
-    in runSolver (f a) (s',db)
-
-instance Functor Solver where
-   fmap = liftM
-
-instance Applicative Solver where
-   pure  = return
-   (<*>) = ap
-
-get :: Solver Database
-get = S $ \(s,db) -> (db,s)
-
-put :: Sol -> Solver ()
-put s' = S $ \(s,_) -> ((), s':s)
-
-
--- base case: the solution satisfies the constraints
--- else, compute all subset of required packages and
--- check each bruteforce - we do this recursively
---solve :: Database -> Constrs -> Sol -> [Sol]
---solve _ cs sol | sol `satisfies` cs = [sol]
---solve (DB db) cs sol =
---  let req     = filter (\pkg -> pkg `isRequired` cs && not (pkg `inSol` sol)) db
---      groups  = groupByName req
---      combos  = sequence groups
---      sat     = mapMaybe (`takeIfSat` (cs,sol)) combos
---      branch  = concatMap (uncurry $ solve (DB db)) sat
---  in sortBy (flip compare) branch
-solve :: Constrs -> Sol -> Solver ()
-solve cs sol | sol `satisfies` cs = put sol
-solve cs sol = do
-  DB db <- get
-  let req     = filter (\pkg -> pkg `isRequired` cs && not (pkg `inSol` sol)) db
-      groups  = groupByName req
+-- solving constraints given a solution
+solve :: Database -> Constrs -> Sol -> [Sol]
+solve _ cs sol | sol `satisfies` cs = [sol]
+solve db cs sol =
+  let req     = getRequired cs sol db
+      groups  = groupName req
       combos  = sequence groups
-      sat     = mapMaybe (`takeIfSat` (cs,sol)) combos
-  mapM_ (uncurry solve) sat
+      sat     = getSats cs sol combos
+  in concatMap (uncurry $ solve db) sat
 
 
+-- installing:
 -- fetch all versions of the wanted package and find
 -- all solutions for each. then fetch the first sat-
 -- isfying solution - if one exists
 install :: Database -> PName -> Maybe Sol
 install db p = do
-  cands <- getPkgs p db
+  cands <- getWithName p db
   sols  <- getSols db cands
   return $ head sols
-
-
---------------------
--- Utility functions
---------------------
-
--- get all packages with given name
-getPkgs :: PName -> Database -> Maybe [Pkg]
-getPkgs p (DB db) =
-  case sortBy (flip $ comparing ver) . filter ((p ==) . name) $ db of
-    []   -> Nothing
-    pkgs -> Just pkgs
 
 -- get all solutions for a list of packages to be installed
 getSols :: Database -> [Pkg] -> Maybe [Sol]
 getSols db pkgs =
-  case concatMap (\pkg -> execSolver (solve (deps pkg) [(name pkg, ver pkg)]) ([],db)) pkgs of
+  let sols = map (\pkg ->
+          solve db (deps pkg) [(name pkg, ver pkg)]
+        ) pkgs
+  in case concat sols of
+      []   -> Nothing
+      sols -> Just sols
+
+
+------------------------------
+-- Secondary utility functions
+------------------------------
+
+-- get required packages from the context
+getRequired :: Constrs -> Sol -> Database -> [Pkg]
+getRequired cs sol (DB pkgs) = filter (\pkg ->
+      pkg `isRequired` cs && not (pkg `inSol` sol)
+    ) pkgs
+
+-- get all packages with given name in the database
+getWithName :: PName -> Database -> Maybe [Pkg]
+getWithName p (DB db) =
+  case filter (\pkg -> p == name pkg) db of
     []   -> Nothing
-    sols -> Just sols
+    pkgs -> Just pkgs
 
--- group all packages by name apparently 'group' and 'groupBy' don't have this
--- exact behaviour
-groupByName :: [Pkg] -> [[Pkg]]
-groupByName [] = []
-groupByName (pkg:pkgs) =
-  let (g,r) = partition ((name pkg ==) . name) pkgs
-  in sort (pkg:g) : groupByName r
+-- grouping packages with same name
+groupName :: [Pkg] -> [[Pkg]]
+groupName = groupBy (\pkg1 pkg2 -> name pkg1 == name pkg2)
 
--- check if a list of packages can be added consistently
--- if so, return the new partial solution and the constraints
-takeIfSat :: [Pkg] -> (Constrs, Sol) -> Maybe (Constrs,Sol)
-takeIfSat pkgs (cs,sol) | newsol <- sol ++ toSol pkgs = do
-  unless (newsol `satisfies` cs) Nothing
-  cs' <- mergeAll pkgs cs
-  return (cs',newsol)
+-- grouping packages with same name and version
+groupSame :: [Pkg] -> [[Pkg]]
+groupSame = groupBy (\pkg1 pkg2 ->
+            name pkg1 == name pkg2 &&
+            ver  pkg1 == ver  pkg2)
 
-  where mergeAll pkgs cs = foldM merge cs $ map deps pkgs
+-- for a list of lists of packages, convert the lists of packages
+-- that can be added consistently to a constraint/solution tuple
+getSats :: Constrs -> Sol -> [[Pkg]] -> [(Constrs,Sol)]
+getSats cs sol = mapMaybe (`takeIfSat` (cs,sol))
+
+  where takeIfSat pkgs (cs,sol) | newsol <- sol ++ toSol pkgs = do
+              unless (newsol `satisfies` cs) Nothing
+              cs' <- (mergeAll cs . map deps) pkgs
+              return (cs',newsol)
+
+-- merge all constraints
+mergeAll :: Constrs -> [Constrs] -> Maybe Constrs
+mergeAll = foldM merge
+
+-- convert a list of packages to a solution
+toSol :: [Pkg] -> Sol
+toSol = map (name &&& ver)
 
 -- check if a package is required by a set of constraints
 isRequired :: Pkg -> Constrs -> Bool
 isRequired pkg = any (\(p,(b,_,_)) ->
               b && name pkg == p)
 
--- an ordering for quality of solutions
--- better orderings are greater
-quality :: Sol -> Sol -> Ordering
-quality sol1 sol2 | length sol1 < length sol2 = GT
-quality sol1 sol2 | length sol1 > length sol2 = LT
-quality sol1 sol2 =
-  let zipped  = zip (sort sol1) (sort sol2)
-      (lt,gt) = foldl (\(lt,gt) (l,r) ->
-                        if l < r
-                        then (lt+1,gt)
-                        else if l > r
-                        then (lt,gt+1)
-                        else (lt,gt)
-                ) (0,0) zipped
-  in if lt > gt then LT
-     else if lt < gt  then GT
-     else EQ
-
 -- check if a package is already in the solution
 inSol :: Pkg -> Sol -> Bool
 inSol pkg = any (\(p,_) -> p == name pkg)
-
--- convert a list of packages to a solution
-toSol :: [Pkg] -> Sol
-toSol = map (name &&& ver)

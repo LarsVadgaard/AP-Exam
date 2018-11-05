@@ -2,6 +2,11 @@ module Defs where
 
 import Data.List (intercalate)
 
+
+--------
+-- Types
+--------
+
 type ErrMsg = String -- for all human-readable error messages
 
 newtype PName = P String
@@ -13,10 +18,15 @@ data VNum = VN Int String
 newtype Version = V [VNum]
   deriving (Eq, Show, Read, Ord) -- the default ordering works perfectly
 
+minVN, maxVN, stdVN :: Int
+stdVN = 1
+minVN = 0
+maxVN = 1000000
+
 minV, maxV, stdV :: Version
-minV = V [VN 0 ""]        -- inclusive lower bound
-maxV = V [VN 1000000 ""]  -- exclusive upper bound
-stdV = V [VN 1 ""]
+minV = V [VN minVN ""]  -- inclusive lower bound
+maxV = V [VN maxVN ""]  -- exclusive upper bound
+stdV = V [VN stdVN ""]
 
 type PConstr = (Bool, Version, Version) -- req'd; allowed interval [lo,hi)
 type Constrs = [(PName, PConstr)]
@@ -28,7 +38,7 @@ data Pkg = Pkg {name :: PName,
   deriving (Eq, Show, Read)
 
 newtype Database = DB [Pkg]
-  deriving (Eq, Read)
+  deriving (Eq, Show, Read)
 
 type Sol = [(PName, Version)]
 
@@ -41,11 +51,6 @@ type Sol = [(PName, Version)]
 instance Ord Pkg where
   l <= r = (name l < name r) || (name l == name r && ver l <= ver r)
 
--- show the database as the beautiful thing it is, but let
--- the subtypes have the standard string representation
-instance Show Database where
-  show (DB db) = prettyPkgs db
-
 
 -------------------------------
 -- Pretty printer for databases
@@ -54,16 +59,19 @@ instance Show Database where
 -- used to quickcheck the parser and better read output
 -- not a pretty implementation, but the output is OK
 
+prettyDB :: Database -> String
+prettyDB (DB pkgs) = (intercalate "\n\n" . map prettyPkg) pkgs
+
 prettyPkgs :: [Pkg] -> String
 prettyPkgs = intercalate "\n\n" . map prettyPkg
 
 prettyPkg :: Pkg -> String
-prettyPkg (Pkg n v desc deps) =
+prettyPkg (Pkg n v des dep) =
   "package {\n" ++
   "  name " ++ prettyPName n ++ ";\n"   ++
      (if v /= stdV then "  version " ++ prettyVer v   ++ ";\n" else "") ++
-     (if null desc then "" else "  description \"" ++ escape desc ++ "\";\n") ++
-      prettyConstrs deps ++
+     (if null des then "" else "  description \"" ++ escape des ++ "\";\n") ++
+      prettyConstrs dep ++
   "}"
 
   where escape = concatMap escapeChar

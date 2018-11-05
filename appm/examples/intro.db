@@ -13,13 +13,13 @@ package {
 }
 
 package {
+  name baz;
+  version 6.1.2;
+}
+
+package {
   name bar;
   version 2.1;
   description "The bar library, new API";
   conflicts baz < 3.4, baz >= 5.0.3;
-}
-
-package {
-  name baz;
-  version 6.1.2;
 }

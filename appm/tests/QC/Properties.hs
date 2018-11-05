@@ -3,15 +3,16 @@ module Properties where
 import Defs
 import Utils
 import Parser
+import Solver
 
 import Control.Monad (foldM,mapM)
 
-import Data.List (partition, delete, sort, intercalate)
+import Data.List (partition, delete, sort)
 
 type InstallProp = Database -> PName -> Maybe Sol -> Bool
 
 ---------------------
--- install properties
+-- Install properties
 ---------------------
 
 -- a) all packages (with the indicated versions) are actually available in the
@@ -25,7 +26,7 @@ install_a _db _ (Just sol) = all (`isInDB` _db ) sol
 -- possible to install two different versions of the same package
 -- simultaneously
 install_b :: InstallProp
-install_b _ _ Nothing       = True
+install_b _ _ Nothing = True
 install_b _db _p (Just sol) =
   let groups = groupByName sol
   in not . any (\group -> length group > 1) $ groups
@@ -33,7 +34,7 @@ install_b _db _p (Just sol) =
 
 -- c) the package requested by the user is in the list
 install_c :: InstallProp
-install_c _ _ Nothing       = True
+install_c _ _ Nothing = True
 install_c _db _p (Just sol) = any (\(p,_) -> _p == p) sol
 
 
@@ -57,8 +58,8 @@ install_e _db _p (Just sol) =
 -- does the solution satisfy the constraints of a given package?
 sat :: Sol -> (PName, Version) -> Database -> Bool
 sat sol pv db = case getReqs pv db of
-  Just cs -> sol `satisfies` cs
   Nothing -> False
+  Just cs -> sol `satisfies` cs
 
 
 -- f) you should not be able to remove a package without breaking consistency
@@ -78,20 +79,20 @@ install_g _ _ Nothing = True
 install_g _db _p (Just sol) =
   all (\pv -> case getNewerVers pv _db of
       []   -> True
-      pkgs -> let sol' = delete pv sol
-              in all (\pv -> let sol'' = pv:sol' in
-                  case genConstrs _db sol'' of
-                     Nothing -> True
-                     Just cs -> not $ sol'' `satisfies` cs
-                 ) pkgs
-    ) sol
+      pkgs ->
+        let sol' = delete pv sol
+        in all (\pv -> let sol'' = pv:sol' in
+             case genConstrs _db sol'' of
+               Nothing -> True
+               Just cs -> not $ sol'' `satisfies` cs ) pkgs
+      ) sol -- so sorry for this layout
 
 
 --------------------
--- parser properties
+-- Parser properties
 --------------------
 
-parses_db _db = case parseDatabase (show _db) of
+parses_db _db = case parseDatabase (prettyDB _db) of
   Right db -> db `dbEquiv` _db
   Left _ -> False
 
@@ -107,7 +108,7 @@ dbEquiv (DB db1) (DB db2) =
 
 
 --------------------
--- utility functions
+-- Utility functions
 --------------------
 
 -- group solution tuples by name

@@ -1,12 +1,30 @@
 module Utils where
 
--- Any auxiliary code to be shared by Parser, Solver, or tests
--- should be placed here.
-
 import Defs
 
-import Control.Monad
-import Data.List
+import Control.Monad (foldM)
+
+import Data.List (sortBy)
+
+
+-- merging constraint lists
+merge :: Constrs -> Constrs -> Maybe Constrs
+merge c1 c2 = foldM merge' [] (c1 ++ c2)
+
+merge' :: Constrs -> (PName,PConstr) -> Maybe Constrs
+merge' ((p,c):lst) (p',c') | p == p' = do
+  new <-  c `intersection` c'
+  return $ (p,new) : lst
+merge' (c:lst) c' = (:) c <$> merge' lst c'
+merge' [] c = return [c]
+
+-- compute the intersection between two version ranges
+intersection :: PConstr -> PConstr -> Maybe PConstr
+intersection (b1, vmin1, vmax1) (b2, vmin2, vmax2) =
+  let (vmin',vmax') = (max vmin1 vmin2, min vmax1 vmax2)
+  in if vmax' <= vmin'
+     then Nothing
+     else return (b1 || b2, vmin', vmax')
 
 
 -- check if a solution satisfies some constraints
@@ -20,18 +38,6 @@ satisfies' sol (p,(_,vmin,vmax)) =
   not $ any (\(p',v) -> p' == p && (v < vmin || v >= vmax)) sol
 
 
--- merging constraint lists
-merge :: Constrs -> Constrs -> Maybe Constrs
-merge c1 c2 = foldM merge' [] (c1 ++ c2)
-
-merge' ((p,c):lst) (p',c') | p == p' = do
-  new <-  c `intersection` c'
-  return $ (p,new) : lst
-merge' (c:lst) c' = (:) c <$> merge' lst c'
-merge' [] c = return [c]
-
-intersection (b1, vmin1, vmax1) (b2, vmin2, vmax2) =
-  let (vmin',vmax') = (max vmin1 vmin2, min vmax1 vmax2)
-  in if vmax' <= vmin'
-     then Nothing
-     else return (b1 || b2, vmin', vmax')
+-- sorting packages (newer version first)
+sortPkgs :: [Pkg] -> [Pkg]
+sortPkgs = sortBy (flip compare)

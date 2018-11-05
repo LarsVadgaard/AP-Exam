@@ -47,6 +47,8 @@ tests = testGroup "Parser tests"
        isLeft (parseDatabase src15) @?= True
     , testCase "inherently contradictory" $
        isLeft (parseDatabase src16) @?= True
+    , testCase "many letters in suffix" $
+       isLeft (parseDatabase src17) @?= True
     ]
 
 
@@ -284,6 +286,17 @@ src16 =
   "pAcKAge { \n\
   \  NAme \"This is a general name!!1 --- \n\"\"test\"\"\"; \n\
   \  dEScrIption \"LOL du; \"\"hej\"\" med dig\"; \n\
+  \  requires bar < 3; \n\
+  \  requires bar > 7.9 \n\
+  \}"
+
+
+-- Test 17
+src17 =
+  "pAcKAge { \n\
+  \  NAme \"This is a general name!!1 --- \n\"\"test\"\"\"; \n\
+  \  dEScrIption \"LOL du; \"\"hej\"\" med dig\"; \n\
+  \  version 1.2abcde.3\n\
   \  requires bar < 3; \n\
   \  requires bar > 7.9 \n\
   \}"

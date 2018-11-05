@@ -3,7 +3,7 @@ module Main where
 import Defs
 import Properties
 import Solver (install)
-import Utils (merge)
+import Utils (sortPkgs, merge)
 
 import Test.Tasty
 import Test.Tasty.QuickCheck
@@ -55,36 +55,45 @@ instance Arbitrary Version where
   arbitrary = V <$> resize 5 (listOf1 arbitrary)
 
 
--- perhaps a bit hacky: generate a list of possible names
--- this helps us generate a valid database
-validPNames :: Gen [PName]
-validPNames = nub <$> listOf1 arbitrary
-
-
 -- packages
 instance Arbitrary Pkg where
   arbitrary = do
-    p <- elements =<< validPNames
     v <- frequency [(4,arbitrary),(1,return stdV)]
-    desc <- frequency [(5, return ""),(1,resize 15 $ listOf1 arbitrary)]
-    return $ Pkg p v desc []
+    desc <- frequency [ (5, return "")
+                      , (1,take <$> choose (1,15)
+                                <*> listOf1 arbitrary) ]
+    return $ Pkg (P "") v desc []
 
 
 -- the database
 instance Arbitrary Database where
-  arbitrary = DB <$> (genDeps <=< trim <=< listOf1) arbitrary
+  arbitrary = DB . sortPkgs
+          <$> ( genAllDeps
+            <=< trimDatabase
+            <=< genNames
+            <=< listOf1
+           ) arbitrary
   shrink (DB db) = DB <$> shrink db
 
+-- generate names for packages
+genNames :: [Pkg] -> Gen [Pkg]
+genNames pkgs = do
+  validPNames <- nub <$> vectorOf (length pkgs) arbitrary
+  mapM (\pkg -> do
+         name' <- elements validPNames
+         return $ pkg{name = name'}
+       ) pkgs
+
 -- remove duplicates
-trim :: [Pkg] -> Gen [Pkg]
-trim (pkg:pkgs) = do
-  trimmed <- trim $ filter (\pkg' -> name pkg /= name pkg' || ver pkg /= ver pkg') pkgs
-  return $ pkg : trimmed
-trim [] = return []
+trimDatabase :: [Pkg] -> Gen [Pkg]
+trimDatabase (pkg:pkgs) =
+  let rest = filter (\pkg' -> name pkg /= name pkg' || ver pkg /= ver pkg') pkgs
+  in (:) pkg <$> trimDatabase rest
+trimDatabase [] = return []
 
 -- generating dependencies
-genDeps :: [Pkg] -> Gen [Pkg]
-genDeps pkgs =
+genAllDeps :: [Pkg] -> Gen [Pkg]
+genAllDeps pkgs =
   mapM (\pkg -> do
     cs <- pkg `genAvailDeps` pkgs
     return $ pkg{deps = cs}
