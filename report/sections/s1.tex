@@ -13,7 +13,13 @@ It turns out that ordering versions as described in the assignment can be accomp
 
 
 \subsection*{Parsing \texttt{appm} databases}
-I chose to use the Parsec parser combinator library since I have worked with it berfore. Furthermore, it is well documented and widely used.
+I chose to use the Parsec parser combinator library since I have worked with it before. Furthermore, it is well documented and widely used.
+
+My approach to the implementation of the parser was to, as much as possible, model the grammar such that each production from the assignment has a corresponding function in the parser. This approach has worked great, but naturally there are some intricacies, i.e. generating a package record from an arbitrary sequence of clauses, making sure that said record is well-formed. Other than that, correctly parsing the bounds and merging them together to generate constraints was a bit tricky without too much code. \\
+
+\noindent The parser satisfies all criteria listed in the assignment;
+
+
 
 
 \subsection*{Solving \texttt{appm} constraints}
