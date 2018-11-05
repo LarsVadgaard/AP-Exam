@@ -5,7 +5,7 @@ module SolverImpl where
 
 import qualified Data.Map as M
 
-import Control.Monad (foldM,unless,when)
+import Control.Monad
 import Control.Arrow ((&&&)) -- just a small convenience
 
 import Data.Maybe (mapMaybe)
@@ -56,18 +56,54 @@ equiv pkg1 pkg2 = desc pkg1 == desc pkg2 &&
 -- The Solver
 -------------
 
+type Context = ([Sol],Database)
+
+newtype Solver a = S { runSolver :: Context -> (a,[Sol])}
+
+execSolver :: Solver a -> Context -> [Sol]
+execSolver act = snd . runSolver act
+
+instance Monad Solver where
+  return a = S $ \(s,_) -> (a,s)
+  m >>= f = S $ \(s,db) ->
+    let (a,s') = runSolver m (s,db)
+    in runSolver (f a) (s',db)
+
+instance Functor Solver where
+   fmap = liftM
+
+instance Applicative Solver where
+   pure  = return
+   (<*>) = ap
+
+get :: Solver Database
+get = S $ \(s,db) -> (db,s)
+
+put :: Sol -> Solver ()
+put s' = S $ \(s,_) -> ((), s':s)
+
+
 -- base case: the solution satisfies the constraints
--- else, comput all subset of required packages and
+-- else, compute all subset of required packages and
 -- check each bruteforce - we do this recursively
-solve :: Database -> Constrs -> Sol -> [Sol]
-solve _ cs sol | sol `satisfies` cs = [sol]
-solve (DB db) cs sol =
+--solve :: Database -> Constrs -> Sol -> [Sol]
+--solve _ cs sol | sol `satisfies` cs = [sol]
+--solve (DB db) cs sol =
+--  let req     = filter (\pkg -> pkg `isRequired` cs && not (pkg `inSol` sol)) db
+--      groups  = groupByName req
+--      combos  = sequence groups
+--      sat     = mapMaybe (`takeIfSat` (cs,sol)) combos
+--      branch  = concatMap (uncurry $ solve (DB db)) sat
+--  in sortBy (flip compare) branch
+solve :: Constrs -> Sol -> Solver ()
+solve cs sol | sol `satisfies` cs = put sol
+solve cs sol = do
+  DB db <- get
   let req     = filter (\pkg -> pkg `isRequired` cs && not (pkg `inSol` sol)) db
       groups  = groupByName req
       combos  = sequence groups
       sat     = mapMaybe (`takeIfSat` (cs,sol)) combos
-      branch  = concatMap (uncurry $ solve (DB db)) sat
-  in sortBy (flip compare) branch
+  mapM_ (uncurry solve) sat
 
 
 -- fetch all versions of the wanted package and find
@@ -94,7 +130,7 @@ getPkgs p (DB db) =
 -- get all solutions for a list of packages to be installed
 getSols :: Database -> [Pkg] -> Maybe [Sol]
 getSols db pkgs =
-  case concatMap (\pkg -> solve db (deps pkg) [(name pkg, ver pkg)]) pkgs of
+  case concatMap (\pkg -> execSolver (solve (deps pkg) [(name pkg, ver pkg)]) ([],db)) pkgs of
     []   -> Nothing
     sols -> Just sols
 
@@ -104,7 +140,7 @@ groupByName :: [Pkg] -> [[Pkg]]
 groupByName [] = []
 groupByName (pkg:pkgs) =
   let (g,r) = partition ((name pkg ==) . name) pkgs
-  in (pkg:g) : groupByName r
+  in sort (pkg:g) : groupByName r
 
 -- check if a list of packages can be added consistently
 -- if so, return the new partial solution and the constraints
