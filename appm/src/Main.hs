@@ -16,17 +16,23 @@ check :: String -> Either String a -> IO a
 check s (Left e) = error $ s ++ ":" ++ e
 check s (Right a) = return a
 
+doError s = putStrLn $ "Error: " ++ s
+
 main :: IO ()
 main = do
   args <- getArgs
   case args of
+    ["-p", dbfile] ->
+      do s <- readFile dbfile
+         db <- check "Parsing" $ parseDatabase s
+         print db
     [dbfile, pkg] ->
       do s <- readFile dbfile
          db <- check "Parsing" $ parseDatabase s
          db' <- check "Normalizing" $ normalize db
          case install db' (P pkg) of
-            Nothing -> error "Cannot solve constraints"
+            Nothing -> doError "Cannot solve constraints"
             Just l ->
               do putStrLn "installing packages:"
                  mapM_ (\(P p,v) -> putStrLn $ p ++ " (" ++ prettyVersion v ++ ")") l
-    _ -> error "Usage: appm DATABASE.db PACKAGE"
+    _ -> doError "Usage: appm DATABASE.db PACKAGE"

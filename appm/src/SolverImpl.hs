@@ -5,13 +5,12 @@ module SolverImpl where
 
 import qualified Data.Map as M
 
-import Control.Monad (foldM,when)
-import Control.Arrow ((&&&))
+import Control.Monad (foldM,unless,when)
+import Control.Arrow ((&&&)) -- just a small convenience
 
-import Debug.Trace
-
+import Data.Maybe (mapMaybe)
 import Data.Ord (comparing, Ordering(..))
-import Data.List (sort, sortBy, minimumBy)
+import Data.List (sort, sortBy, minimumBy, groupBy, partition)
 
 import Defs
 import Utils
@@ -20,58 +19,106 @@ import Utils
 --------------
 -- Normalizing
 --------------
+
+-- for each package, find all packages with the same name,
+-- check that they are semantically equivalent, and group
+-- them together
 normalize :: Database -> Either String Database
 normalize (DB db) = DB <$> normalize' db
 
+-- helper to avoid handling the DB-constructor
 normalize' :: [Pkg] -> Either String [Pkg]
 normalize' (pkg:db) = do
   (eq,rest) <- normalize'' pkg db ([pkg],[])
-  (++) (sortBy (flip compare) eq) <$> normalize' rest
+  let eq' = sortBy (flip compare) eq
+    in (++) eq' <$> normalize' rest
 normalize' [] = return []
 
-normalize'' _ [] buf = Right buf
-normalize'' pkg (pkg':db) (eq,rest) | name pkg == name pkg' =
+-- helper to do so for each package
+normalize'' _ [] buf = return buf
+normalize'' pkg (pkg':db) (eq,rest)
+      | name pkg == name pkg' && ver pkg == ver pkg' =
   if pkg `equiv` pkg'
   then normalize'' pkg db (pkg':eq,rest)
   else Left $ (show . name) pkg ++ " is not consistent"
-normalize'' pkg (pkg':db) (eq,rest) = normalize'' pkg db (eq,rest++[pkg']) -- append not necessary, just keeps the order and makes it easier to do simple tests
+normalize'' pkg (pkg':db) (eq,rest) = normalize'' pkg db (eq,pkg':rest)
 
+-- sort to match the individual constraints;
+-- the internal constraints have been merged
+-- when parsed, so we don't need to do anything
+-- special to check deeper semantic equivalence
 equiv :: Pkg -> Pkg -> Bool
-equiv (Pkg p1 _ _ deps1) (Pkg p2 _ _ deps2) =
-  sort deps1 == sort deps2 -- sort to match the individual constraints
+equiv pkg1 pkg2 = desc pkg1 == desc pkg2 &&
+                  sort (deps pkg1) == sort (deps pkg2)
 
 
 -------------
 -- The Solver
 -------------
 
+-- base case: the solution satisfies the constraints
+-- else, comput all subset of required packages and
+-- check each bruteforce - we do this recursively
 solve :: Database -> Constrs -> Sol -> [Sol]
-solve (DB db) cs sol | sol `solSatisfies` cs = [sol]
+solve _ cs sol | sol `satisfies` cs = [sol]
 solve (DB db) cs sol =
-  let cand   = filter (not . (`inSol` sol)) db
-      combos = subsets cand
-      sat = foldl (\spkgs combo -> case combo `pkgsSatisfy` cs of
-              Nothing -> spkgs
-              Just cs'-> (combo,cs') : spkgs
-            ) [] combos
-      m = foldl (\s (pkgs,cs') ->
-            s ++ solve (DB db) cs' (toSol pkgs ++ sol)
-          ) [] sat
-  in sortBy (flip quality) m
+  let reqpkgs = filter (\pkg -> pkg `isRequired` cs && not (pkg `inSol` sol)) db
+      groups  = groupByName reqpkgs
+      combos  = sequence groups
+      sats    = mapMaybe (`takeIfSat` (cs,sol)) combos
+      branch  = concatMap (uncurry $ solve (DB db)) sats
+  in sortBy (flip compare) branch
 
-
+-- fetch all versions of the wanted package and find
+-- all solutions for each. then fetch the first sat-
+-- isfying solution - if one exists
 install :: Database -> PName -> Maybe Sol
-install (DB db) p = do
-  let cands = filter (\pkg -> name pkg == p) db
-  when (null cands) Nothing
-  let sols = map (\pkg -> solve (DB db) (deps pkg) [(name pkg, ver pkg)]) cands
-  when (all null sols) Nothing
-  return $ (head . concat) sols -- TODO: gør mere robust
+install db p = do
+  cands <- getPkgs p db
+  sols  <- getSols db cands
+  return $ head sols
 
 
 --------------------
 -- Utility functions
 --------------------
+
+-- get all packages with given name
+getPkgs :: PName -> Database -> Maybe [Pkg]
+getPkgs p (DB db) =
+  case sortBy (flip $ comparing ver) . filter ((p ==) . name) $ db of
+    []   -> Nothing
+    pkgs -> Just pkgs
+
+-- get all solutions for a list of packages to be installed
+getSols :: Database -> [Pkg] -> Maybe [Sol]
+getSols db pkgs =
+  case concatMap (\pkg -> solve db (deps pkg) [(name pkg, ver pkg)]) pkgs of
+    []   -> Nothing
+    sols -> Just sols
+
+-- group all packages by name apparently 'group' and 'groupBy' don't have this
+-- exact behaviour
+groupByName :: [Pkg] -> [[Pkg]]
+groupByName [] = []
+groupByName (pkg:pkgs) =
+  let (g,r) = partition ((name pkg ==) . name) pkgs
+  in (pkg:g) : groupByName r
+
+-- check if a list of packages can be added consistently
+-- if so, return the new partial solution and the constraints
+takeIfSat :: [Pkg] -> (Constrs, Sol) -> Maybe (Constrs,Sol)
+takeIfSat pkgs (cs,sol) | newsol <- sol ++ toSol pkgs = do
+  unless (newsol `satisfies` cs) Nothing
+  cs' <- mergeAll pkgs cs
+  return (cs',newsol)
+
+  where mergeAll pkgs cs = foldM merge cs $ map deps pkgs
+
+-- check if a package is required by a set of constraints
+isRequired :: Pkg -> Constrs -> Bool
+isRequired pkg = any (\(p,(b,_,_)) ->
+              b && name pkg == p)
 
 -- an ordering for quality of solutions
 -- better orderings are greater
@@ -91,7 +138,6 @@ quality sol1 sol2 =
      else if lt < gt  then GT
      else EQ
 
-
 -- check if a package is already in the solution
 inSol :: Pkg -> Sol -> Bool
 inSol pkg = any (\(p,_) -> p == name pkg)
@@ -99,42 +145,3 @@ inSol pkg = any (\(p,_) -> p == name pkg)
 -- convert a list of packages to a solution
 toSol :: [Pkg] -> Sol
 toSol = map (name &&& ver)
-
-
--- generate a list of subsets
-subsets :: [a] -> [[a]]
-subsets []  = [[]]
-subsets (x:xs) = subsets xs ++ map (x:) (subsets xs)
-
-
--- check if a list af packages satisfies some constraints
--- if it does, merge all the constraints and return the
--- resulting constraint list
-pkgsSatisfy :: [Pkg] -> Constrs -> Maybe Constrs
-pkgsSatisfy pkgs cs =
-  let cs' = mergeAll pkgs cs
-  in if all (pkgs `pkgsSatisfy'`) cs then cs' else Nothing
-
-  where mergeAll pkgs cs = foldM merge cs $ map deps pkgs
-
-pkgsSatisfy' :: [Pkg] -> (PName,PConstr) -> Bool
-pkgsSatisfy' pkgs (p,(b,vmin,vmax)) | b =
-  any ((`reqCheck` (p,vmin,vmax)) . (name &&& ver)) pkgs
-pkgsSatisfy' pkgs (p,(_,vmin,vmax)) =
-  not $ any ((`conflictCheck` (p,vmin,vmax)) . (name &&& ver)) pkgs
-
-
--- check if a solution satisfies some constraints
-solSatisfies :: Sol -> Constrs -> Bool
-solSatisfies sol = all (sol `solSatisfies'`)
-
-solSatisfies' :: Sol -> (PName,PConstr) -> Bool
-solSatisfies' sol (p,(b,vmin,vmax)) | b =
-  any (`reqCheck` (p,vmin,vmax)) sol
-solSatisfies' sol (p,(_,vmin,vmax)) =
-  not $ any (`conflictCheck` (p,vmin,vmax)) sol
-
-reqCheck (p',v) (p,vmin,vmax) =
-  p' == p && v >= vmin && v < vmax
-conflictCheck (p',v) (p,vmin,vmax) =
-  p' == p && (v < vmin || v >= vmax)

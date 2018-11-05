@@ -1,0 +1,22 @@
+\section*{The \texttt{appm} package manager}
+
+\subsection*{Utility functions}
+It turns out that ordering versions as described in the assignment can be accomplished by simply deriving the \texttt{Ord} typeclass from \texttt{Version} and \texttt{VNum}. By doing this, we tell the compiler to use the default approach on the contained \texttt{VNum} list. Each of these will, by default, be compared by first comparing the number, and then the string, contained in the version number. Thus, the default ordering accomplishes what we set out to do with the \texttt{Version} type.
+
+% The \texttt{merge} function works by computing the intersections of allowed version ranges for constraints on the same package. More specifically, when merging two constraint lists $c_1$ and $c_2$, we add each element of $c_2$ to $c_1$ iteratively. Each time, we perform a linear traversal of $c_1$; if we stumble upon a constraint on the same package, we merge the two individual constraints by computing the intersection of allowed versions and setting the flag, indicating whether the package is required or a conflict, to \texttt{True} if at least one of the flags was set beforehand.
+%
+% The claim that this will yield a fully reduced constraint list is based on the assumption that both individual lists are fully reduced. In fact, we only rely on the assumption that $c_1$ is fully reduced. In order to \textit{guarantee} a fully reduced solution, one could instead merge each element in \texttt{$c_1$ ++ $c_2$} into an initially empty list by the same approach.
+
+ The \texttt{merge} function works by computing the intersections of allowed version ranges for constraints on the same package. More specifically, when merging two constraint lists $c_1$ and $c_2$, we build a new constraint list $c'$ from scratch. Each element of $c_1$ and $c_2$ is added to $c'$ iteratively. Each time, we perform a linear traversal of $c'$; if we stumble upon a constraint on the same package along the way, we merge the two individual constraints by computing the intersection of allowed versions and setting the flag, indicating whether the package is required or a conflict, to \texttt{True} if at least one of the flags was set beforehand. If any intersection yields an empty range, there is no result.
+
+ By building the new constraint list from scratch, we make sure that the resulting constraint list is fully reduced; if we simply merged each constraint of $c_2$ into $c_1$ and assumed $c_1$ itself to be fully reduced, we could potentially encounter some problems where this is not the case, i.e.\ when checking equivalence between dependencies of two different versions of the same package. The assumption may be reasonable, but a more robust behaviour is in my opinion preferable.
+
+
+\subsection*{Parsing \texttt{appm} databases}
+I chose to use the Parsec parser combinator library since I have worked with it berfore. Furthermore, it is well documented and widely used.
+
+
+\subsection*{Solving \texttt{appm} constraints}
+
+
+\subsection*{Testing \texttt{appm} properties}

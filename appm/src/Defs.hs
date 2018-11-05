@@ -11,11 +11,12 @@ data VNum = VN Int String
   deriving (Eq, Show, Read, Ord)
 
 newtype Version = V [VNum]
-  deriving (Eq, Show, Read, Ord)
+  deriving (Eq, Show, Read, Ord) -- the default ordering works perfectly
 
-minV, maxV :: Version
+minV, maxV, stdV :: Version
 minV = V [VN 0 ""]        -- inclusive lower bound
 maxV = V [VN 1000000 ""]  -- exclusive upper bound
+stdV = V [VN 1 ""]
 
 type PConstr = (Bool, Version, Version) -- req'd; allowed interval [lo,hi)
 type Constrs = [(PName, PConstr)]
@@ -26,11 +27,66 @@ data Pkg = Pkg {name :: PName,
                 deps :: Constrs}
   deriving (Eq, Show, Read)
 
--- define package ordering
-instance Ord Pkg where
-  Pkg n1 v1 _ _ <= Pkg n2 v2 _ _ = (n1 < n2) || (n1 == n2 && v1 <= v2)
-
 newtype Database = DB [Pkg]
-  deriving (Eq, Show, Read)
+  deriving (Eq, Read)
 
 type Sol = [(PName, Version)]
+
+
+----------------
+-- Own instances
+----------------
+
+-- define package ordering
+instance Ord Pkg where
+  l <= r = (name l < name r) || (name l == name r && ver l <= ver r)
+
+-- show the database as the beautiful thing it is, but let
+-- the subtypes have the standard string representation
+instance Show Database where
+  show (DB db) = prettyPkgs db
+
+
+-------------------------------
+-- Pretty printer for databases
+-------------------------------
+
+-- used to quickcheck the parser and better read output
+-- not a pretty implementation, but the output is OK
+
+prettyPkgs :: [Pkg] -> String
+prettyPkgs = intercalate "\n\n" . map prettyPkg
+
+prettyPkg :: Pkg -> String
+prettyPkg (Pkg n v desc deps) =
+  "package {\n" ++
+  "  name " ++ prettyPName n ++ ";\n"   ++
+     (if v /= stdV then "  version " ++ prettyVer v   ++ ";\n" else "") ++
+     (if null desc then "" else "  description \"" ++ escape desc ++ "\";\n") ++
+      prettyConstrs deps ++
+  "}"
+
+  where escape = concatMap escapeChar
+        escapeChar '"' = "\"\""
+        escapeChar c = [c]
+
+prettyPName :: PName -> String
+prettyPName (P s) = s
+
+prettyVer :: Version -> String
+prettyVer (V vnums) = intercalate "." . map prettyVNum $ vnums
+
+prettyVNum :: VNum -> String
+prettyVNum (VN n s) = show n ++ s
+
+prettyConstrs :: Constrs -> String
+prettyConstrs = concatMap prettyConstr
+
+prettyConstr :: (PName,PConstr) -> String
+prettyConstr (p,(b,vmin,vmax)) =
+  (if b then "  requires " else "  conflicts ")  ++
+  prettyPName p ++ (if b && vmin > minV then " >= " else " < ") ++
+  prettyVer vmin ++ ";\n" ++
+  (if b then "  requires " else "  conflicts ")  ++
+  prettyPName p ++ (if b then " < " else " >= ") ++
+  prettyVer vmax ++ ";\n"

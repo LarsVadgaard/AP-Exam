@@ -41,7 +41,9 @@ spaces1 = many1 space <* skipMany cmt <|> skipMany1 cmt $> ""
 
 -- Comments
 cmt :: Parser String
-cmt = string "--" *> (manyTill anyChar (oneOf "\r\n") <|> manyTill anyChar eof) <* spaces
+cmt = string "--" *> (try (manyTill anyChar (oneOf "\r\n")) <|> manyTill anyChar eof) <* spaces
+
+  --   <|> manyTill anyChar eof) <* spaces
 
 -- Token
 token :: Parser a -> Parser a
@@ -79,9 +81,9 @@ package :: Parser Pkg
 package = do
   keyword "package"
   clauses <- checkClauses =<< braces (sepEndBy clause (symbol ";"))
-  foldM (flip genAction) start clauses
+  checkDeps =<< foldM (flip genAction) start clauses
 
-  where start = Pkg{name=P "",ver=V [VN 1 ""],desc="",deps=[]}
+  where start = Pkg{name=P "",ver=stdV,desc="",deps=[]}
 
 checkClauses :: [Clause] -> Parser [Clause]
 checkClauses cs = do
@@ -91,6 +93,12 @@ checkClauses cs = do
   return cs
 
   where (n,v,d) = foldl countClause (0,0,0) cs
+
+checkDeps :: Pkg -> Parser Pkg
+checkDeps pkg = do
+  when (any (\(p,_) -> p == name pkg) $ deps pkg) $
+    unexpected "self-referential dependencies"
+  return pkg
 
 countClause (n,v,d) Name{}        = (n+1,v,d)
 countClause (n,v,d) Version{}     = (n,v+1,d)
@@ -110,7 +118,7 @@ genAction :: Clause -> Pkg -> Parser Pkg
 genAction (Name id)        pkg = return $ pkg{name=id}
 genAction (Version v)      pkg = return $ pkg{ver=v}
 genAction (Desc d)         pkg = return $ pkg{desc=d}
-genAction (Constraints cs) pkg = case cs `merge` deps pkg of
+genAction (Constraints cs) pkg = case deps pkg `merge` cs of
   Nothing  -> unexpected "inconsistence between constraints"
   Just cs' -> return $ pkg{deps=cs'}
 

@@ -1,61 +1,149 @@
 module Properties where
 
 import Defs
+import Utils
+import Parser
+
+import Control.Monad (foldM,mapM)
+
+import Data.List (partition, delete, sort, intercalate)
 
 type InstallProp = Database -> PName -> Maybe Sol -> Bool
 
--- for reference; may discard after implementing full install_c
-install_c' :: InstallProp
-install_c' _db _p Nothing = True
-install_c' _db _p (Just []) = False
-install_c' _db _p (Just _) = True
+---------------------
+-- install properties
+---------------------
 
--- if you don't implement one or more of these, leave them as 'undefined'
-
--- all packages (with the indicated versions) are actually available in the
+-- a) all packages (with the indicated versions) are actually available in the
 -- database
 install_a :: InstallProp
 install_a _ _ Nothing   = True
-install_a _ _ (Just []) = True
-install_a _db _p (Just ((p,_):sol)) = case getReqs p _db of
-  Just reqs -> all (`isInDB` _db) reqs && install_a _db _p (Just sol)
-  Nothing   -> False
+install_a _db _ (Just sol) = all (`isInDB` _db ) sol
 
-isInDB :: (PName,PConstr) -> Database -> Bool
-isInDB (p,(True, vmin, vmax)) (DB db) = any (\pkg -> name pkg == p && ver pkg >= vmin && ver pkg < vmax) db
-isInDB _ _ = True
 
--- any package name may only occur once in the list; in particular, it is not
+-- b) any package name may only occur once in the list; in particular, it is not
 -- possible to install two different versions of the same package
 -- simultaneously
 install_b :: InstallProp
-install_b _ _ Nothing               = True
-install_b _ _ (Just [])             = True
-install_b _db _p (Just ((p,_):sol)) = count p sol == 0 && install_b _db _p (Just sol)
+install_b _ _ Nothing       = True
+install_b _db _p (Just sol) =
+  let groups = groupByName sol
+  in not . any (\group -> length group > 1) $ groups
 
-count p = foldl (\c (p',_) -> if p == p' then c+1 else c) 0
 
--- the package requested by the user is in the list
+-- c) the package requested by the user is in the list
 install_c :: InstallProp
 install_c _ _ Nothing       = True
-install_c _db _p (Just sol) = any (\(p,_) -> p == _p) sol
+install_c _db _p (Just sol) = any (\(p,_) -> _p == p) sol
 
--- for any package in the list, all the packages it requires are also in the
+
+-- d) for any package in the list, all the packages it requires are also in the
 -- list
 install_d :: InstallProp
-install_d _ _ Nothing    = True
-install_d _ _ (Just [])  = True
-install_d _db _ (Just ((p,v):sol)) = case getReqs p _db of
-  Just reqs -> all (`isInSol` sol) reqs
-  Nothing   -> False
-
-isInSol :: (PName,PConstr) -> Sol -> Bool
-isInSol (p,(True, vmin, vmax)) sol = any (\(p',v) -> p' == p && v >= vmin && v < vmax) sol
-isInSol _ _ = True
+install_d _ _ Nothing = True
+install_d _db _p (Just sol) =
+  all (\pv -> case getReqs pv _db of
+          Nothing   -> False
+          Just reqs -> all (`isReqInSol` sol) reqs
+      ) sol
 
 
--- getting requirements; shared between a) and d)
-getReqs :: PName -> Database -> Maybe Constrs
-getReqs p (DB [])     = Nothing
-getReqs p (DB (pkg':ps)) | name pkg' == p = Just $ deps pkg'
-getReqs p (DB (_:ps)) = getReqs p (DB ps)
+-- e) for any package in the list, all other packages in the list should
+-- satisfy it
+install_e _ _ Nothing = True
+install_e _db _p (Just sol) =
+  all (\pv -> sat (delete pv sol) pv _db) sol
+
+-- does the solution satisfy the constraints of a given package?
+sat :: Sol -> (PName, Version) -> Database -> Bool
+sat sol pv db = case getReqs pv db of
+  Just cs -> sol `satisfies` cs
+  Nothing -> False
+
+
+-- f) you should not be able to remove a package without breaking consistency
+install_f _ _ Nothing = True
+install_f _db _p (Just sol) =
+  all (\pv -> fst pv == _p || -- dont remove the package we want to install
+      let sol' = delete pv sol
+      in case genConstrs _db sol' of
+        Nothing -> True
+        Just cs -> not $ sol' `satisfies` cs
+    ) sol
+
+
+-- g) you should not be able to replace a package with a newer version without
+-- breaking consistency
+install_g _ _ Nothing = True
+install_g _db _p (Just sol) =
+  all (\pv -> case getNewerVers pv _db of
+      []   -> True
+      pkgs -> let sol' = delete pv sol
+              in all (\pv -> let sol'' = pv:sol' in
+                  case genConstrs _db sol'' of
+                     Nothing -> True
+                     Just cs -> not $ sol'' `satisfies` cs
+                 ) pkgs
+    ) sol
+
+
+--------------------
+-- parser properties
+--------------------
+
+parses_db _db = case parseDatabase (show _db) of
+  Right db -> db `dbEquiv` _db
+  Left _ -> False
+
+dbEquiv :: Database -> Database -> Bool
+dbEquiv (DB db1) (DB db2) =
+  length db1 == length db2 &&
+    all (\(pkg1,pkg2) ->
+            name pkg1 == name pkg2 &&
+            ver pkg1 == ver pkg2   &&
+            desc pkg1 == desc pkg2 &&
+            sort (deps pkg1) == sort (deps pkg2)
+        ) (zip (sort db1) (sort db2))
+
+
+--------------------
+-- utility functions
+--------------------
+
+-- group solution tuples by name
+groupByName :: [(PName,Version)] -> [[(PName,Version)]]
+groupByName [] = []
+groupByName ((p,v):sol) =
+  let (g,r) = partition ((p ==) . fst) sol
+  in ((p,v):g) : groupByName r
+
+-- is a given package name and version in the database?
+isInDB :: (PName,Version) -> Database -> Bool
+isInDB (p,v) (DB db) = any (\pkg -> name pkg == p && ver pkg == v) db
+
+-- is a given package required?
+isReqInSol :: (PName,PConstr) -> Sol -> Bool
+isReqInSol (p,(b, vmin, vmax)) sol | b =
+  any (\(p',v) -> p' == p  && v >= vmin && v < vmax) sol
+isReqInSol _ _ = True
+
+-- get requirements of a single package
+getReqs :: (PName,Version) -> Database -> Maybe Constrs
+getReqs _ (DB []) = Nothing
+getReqs (p,v) (DB (pkg':ps))
+  | name pkg' == p && ver pkg' == v =
+      Just $ deps pkg'
+getReqs (p,v) (DB (_:ps)) = getReqs (p,v) (DB ps)
+
+-- generate constraints from a solution
+genConstrs :: Database -> Sol -> Maybe Constrs
+genConstrs db sol =
+  foldM merge [] =<< mapM (`getReqs` db) sol
+
+-- get a list of newer versions of a given package
+getNewerVers :: (PName,Version) -> Database -> [(PName,Version)]
+getNewerVers _ (DB []) = []
+getNewerVers (p,v) (DB (pkg':ps))
+  | name pkg' == p && ver pkg' > v =
+      (name pkg', ver pkg') : getNewerVers (p,v) (DB ps)
+getNewerVers pv (DB (_:ps)) = getNewerVers pv (DB ps)
