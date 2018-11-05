@@ -12,8 +12,8 @@ import qualified TestSolver as Solver
 
 -- just a sample; feel free to replace with your own structure
 tests = testGroup "Unit tests"
-  [ Parser.tests
-  , Util.tests
+  [ Util.tests
+  , Parser.tests
   , Solver.tests
   ]
 

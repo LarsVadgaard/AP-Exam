@@ -62,12 +62,13 @@ equiv pkg1 pkg2 = desc pkg1 == desc pkg2 &&
 solve :: Database -> Constrs -> Sol -> [Sol]
 solve _ cs sol | sol `satisfies` cs = [sol]
 solve (DB db) cs sol =
-  let reqpkgs = filter (\pkg -> pkg `isRequired` cs && not (pkg `inSol` sol)) db
-      groups  = groupByName reqpkgs
+  let req     = filter (\pkg -> pkg `isRequired` cs && not (pkg `inSol` sol)) db
+      groups  = groupByName req
       combos  = sequence groups
-      sats    = mapMaybe (`takeIfSat` (cs,sol)) combos
-      branch  = concatMap (uncurry $ solve (DB db)) sats
+      sat     = mapMaybe (`takeIfSat` (cs,sol)) combos
+      branch  = concatMap (uncurry $ solve (DB db)) sat
   in sortBy (flip compare) branch
+
 
 -- fetch all versions of the wanted package and find
 -- all solutions for each. then fetch the first sat-

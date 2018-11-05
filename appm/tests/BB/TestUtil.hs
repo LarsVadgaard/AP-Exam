@@ -8,7 +8,7 @@ import Utils
 
 
 tests :: TestTree
-tests = testGroup "Util"
+tests = testGroup "Util tests"
     [ testGroup "Version comparison"
 
       [ testCase "1.0.0 <= 1.0" $
