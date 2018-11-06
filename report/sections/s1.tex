@@ -1,28 +1,99 @@
 \section*{The \texttt{appm} package manager}
 
 \subsection*{Utility functions}
-It turns out that ordering versions as described in the assignment can be accomplished by simply deriving the \texttt{Ord} typeclass from \texttt{Version} and \texttt{VNum}. By doing this, we tell the compiler to use the default approach on the contained \texttt{VNum} list. Each of these will, by default, be compared by first comparing the number, and then the string, contained in the version number. Thus, the default ordering accomplishes what we set out to do with the \texttt{Version} type.
+\paragraph{Version ordering}
+It turns out that ordering versions as described in the assignment can be accomplished by simply deriving the \texttt{Ord} typeclass from \texttt{Version} and \texttt{VNum}. By doing this, I tell the compiler to use the default ordering on the contained \texttt{VNum} list. Each of the version numbers in the list will, by default, be compared by first comparing the number, and then the string. Each element of the two lists are compared, in order, until two version numbers aren't equal, in which case the inequality determines the result of the comparison. Thus, the default ordering accomplishes what I set out to do with the \texttt{Version} type.
 
-% The \texttt{merge} function works by computing the intersections of allowed version ranges for constraints on the same package. More specifically, when merging two constraint lists $c_1$ and $c_2$, we add each element of $c_2$ to $c_1$ iteratively. Each time, we perform a linear traversal of $c_1$; if we stumble upon a constraint on the same package, we merge the two individual constraints by computing the intersection of allowed versions and setting the flag, indicating whether the package is required or a conflict, to \texttt{True} if at least one of the flags was set beforehand.
+% The \texttt{merge} function works by computing the intersections of allowed version ranges for constraints on the same package. More specifically, when merging two constraint lists $c_1$ and $c_2$, I add each element of $c_2$ to $c_1$ iteratively. Each time, I perform a linear traversal of $c_1$; if I stumble upon a constraint on the same package, I merge the two individual constraints by computing the intersection of allowed versions and setting the flag, indicating whether the package is required or a conflict, to \texttt{True} if at least one of the flags was set beforehand.
 %
-% The claim that this will yield a fully reduced constraint list is based on the assumption that both individual lists are fully reduced. In fact, we only rely on the assumption that $c_1$ is fully reduced. In order to \textit{guarantee} a fully reduced solution, one could instead merge each element in \texttt{$c_1$ ++ $c_2$} into an initially empty list by the same approach.
+% The claim that this will yield a fully reduced constraint list is based on the assumption that both individual lists are fully reduced. In fact, I only rely on the assumption that $c_1$ is fully reduced. In order to \textit{guarantee} a fully reduced solution, one could instead merge each element in \texttt{$c_1$ ++ $c_2$} into an initially empty list by the same approach.
 
- The \texttt{merge} function works by computing the intersections of allowed version ranges for constraints on the same package. More specifically, when merging two constraint lists $c_1$ and $c_2$, we build a new constraint list $c'$ from scratch. Each element of $c_1$ and $c_2$ is added to $c'$ iteratively. Each time, we perform a linear traversal of $c'$; if we stumble upon a constraint on the same package along the way, we merge the two individual constraints by computing the intersection of allowed versions and setting the flag, indicating whether the package is required or a conflict, to \texttt{True} if at least one of the flags was set beforehand. If any intersection yields an empty range, there is no result.
+\paragraph{Merging dependencies}
+ The \texttt{merge} function works by computing the intersections of allowed version ranges for constraints on the same package. More specifically, when merging two constraint lists $c_1$ and $c_2$, I build a new constraint list $c'$ from scratch. Each element of $c_1$ and $c_2$ is added to $c'$ iteratively. Each time, I perform a linear traversal of $c'$; if I stumble upon a constraint on the same package along the way, I merge the two individual constraints by computing the intersection of allowed versions and setting the flag, indicating whether the package is required or a conflict, to \texttt{True} if at least one of the flags was set beforehand. If any intersection yields an empty range, there is no result.
 
- By building the new constraint list from scratch, we make sure that the resulting constraint list is fully reduced; if we simply merged each constraint of $c_2$ into $c_1$ and assumed $c_1$ itself to be fully reduced, we could potentially encounter some problems where this is not the case, i.e.\ when checking equivalence between dependencies of two different versions of the same package. The assumption may be reasonable, but a more robust behaviour is in my opinion preferable.
-
+ By building the new constraint list from scratch, I make sure that the resulting constraint list is fully reduced; if I simply merged each constraint of $c_2$ into $c_1$ and assumed $c_1$ itself to be fully reduced, I could potentially encounter some problems where this is not the case, i.e.\ when checking equivalence between dependencies of two different versions of the same package. The assumption may be reasonable, but a more robust behaviour is in my opinion preferable.
 
 \subsection*{Parsing \texttt{appm} databases}
-I chose to use the Parsec parser combinator library since I have worked with it before. Furthermore, it is well documented and widely used.
+I chose to use the Parsec parser combinator library since I have worked with it before. Furthermore, it is well documented and widely used. It generates reasonable error messages when parsing, and I like the overall layout of the combinator as a whole.
 
-My approach to the implementation of the parser was to, as much as possible, model the grammar such that each production from the assignment has a corresponding function in the parser. This approach has worked great, but naturally there are some intricacies, i.e. generating a package record from an arbitrary sequence of clauses, making sure that said record is well-formed. Other than that, correctly parsing the bounds and merging them together to generate constraints was a bit tricky without too much code. \\
+Only few intricacies occured when implementing the parser, in particular parsing and generating packages. Given the Parsec parser combinator, the rest has been more or less trivial; most of the requirements are addressed by simply adding a case or two to each parser.
 
-\noindent The parser satisfies all criteria listed in the assignment;
+\paragraph{Parsing and generating packages} The task is to parse a package in the database, but also to make sure that said record is well-formed given the criteria from the assignment. I achieve this by defining a custom data type, \texttt{Clause}, which denotes each type of valid clause in a package. When parsing a package, I parse all the clauses and generate a \texttt{Clause} list of these. I then check that these clauses collectively satisfy the constraints on the number of each type of clause. If all is as expected, I traverse the \texttt{Clause} list and accumulate a package. The dependendcies are generated by merging (using the \texttt{merge} function described in the previous section) each occurring constraint with the already accumulated dependencies in the package. If I aren't able to merge some constraints along the way, I throw an error.
 
+I chose to do it this way since it eases the sanity check of a package and allows the user to define clauses in any arbitrary order. Furthermore, it is based on a simple, linear traversal of all clauses, which can be accomplished with our favourite bulk operators (\texttt{map}, \texttt{foldl}, etc.).
 
+\paragraph{Other stuff worth mentioning} To make keywords case insensitive I have chosen to simply parse each char of a string, convert it to lower case if applicable, generate a new string from these, and then match this string on the predefined keyword.
+
+In order to correctly escape double quotes within a string, I parse arbitrary characters until I encounter a pair of double quotes. When this happens, I put one double quote in the string.
+
+To parse dependencies, I first parse either the \texttt{"requires"}- or the \texttt{"conflicts"} keyword. Which of these is parsed determines the boolean flag in the resulting constraint. Then, the way the actual range is generated depends on this flag; if the flag is set, the resulting range is the \textit{intersection} of the two inequalities. If not, the range is the \textit{complement} of the two inequialities. That is,
+\begin{align*}
+  \texttt{requires bar >= 0, bar < 7}  & \ \ : \ \  \text{versions 0-7 are \it required} \\
+  \texttt{conflicts bar < 0, bar >= 7} & \ \ : \ \  \text{versions 0-7 are \it allowed}
+\end{align*}
+Note that the inequalities are still inferred when no version numbers are specified explicitly.
+
+\paragraph{Correctness}
+\noindent The parser satisfies all criteria listed in the assignment; as we will see in the section dedicated to testing, it parses some hard coded databases as well as automatically generated ones correctly.
 
 
 \subsection*{Solving \texttt{appm} constraints}
 
+\paragraph{Normalizing the database}
+Since the assignment doesn't clarify this, I make the assumption that no package in the database be equivalent to any other package in the database after normalizing. That is, two equivalent packages are discovered, I discard one of them.
+
+The idea when normalizing a database is to group the packages into lists of packages with the same name and version. For each of these lists, I check if all packages in this list are equivalent to each other. If they are, I take an arbitrary package from the group (since they are equivalent) and put it in the resulting database. If not, I return an error message. I finally sort the database such that packages of the same name are adjacent in order from newest to oldest versions. This can make the job easier for the solver; if well implemented, assuming the order of packages allows us to avoid sorting in the solver.
+
+\paragraph{Solving constraints}
+At first I implemented the solver by defining an appropriate \texttt{Solver} monad to keep track of the found soulutions. It worked by keeping the database as a constant resource and a list of solutions as a 'mutable' state. Everytime a solution was discovered, it was appended onto the implicit state of the monad. I chose not to keep this implementation because it produced some substantial overhead given how relatively small the task is.
+% The monad, along with two functions \texttt{fetch} and \texttt{put}, were implemented as follows:
+% \begin{lstlisting}[language = haskell]
+% newtype Solver a = S { runSolver :: [Sol] -> Database -> (a,[Sol])}
+%
+% instance Monad Solver where
+%   return a = S $ \s _  -> (a,s)
+%   m >>= f = S $ \s db  ->
+%     let (a,s') = runSolver m s db
+%     in runSolver (f a) s' db
+%
+% instance Functor Solver where
+%    fmap = liftM
+%
+% instance Applicative Solver where
+%    pure  = return
+%    (<*>) = ap
+%
+% fetch :: Solver [Pkg]
+% fetch = S $ \s (DB ps) -> (ps,s)
+%
+% put :: Sol -> Solver ()
+% put s' = S $ \s _  -> ((), s++[s'])
+% \end{lstlisting}
+
+The actual \texttt{solve} function is implemented recursively. Given some constraints $c$ and a partial solution $s$, it checks whether $s$ satisfies $c$, in which case the solution is returned. If not, it groups all required packages from the database (that aren't already in $s$) by name and computes the cartesian product of all groups --- this gives us all subsets of packages that may satisfy the constraints of the partial solution. Filtering out the packages that either aren't required or are already in the solution guarantees that no package will occur twice in the solution, and that we don't waste time solving constraints for unnecessary packages. \texttt{solve} then tries to merge each subset into $s$. Each that succeeds will be added to $s$, yielding $s'$ and corresponding constraints $c'$. If $c'$ is consistent, the function then solves $c'$ on $s'$ recursively.
+
+Since we assume the database to be normalized, I can exploit the fact that packages with the same name are adjacent; grouping them can be done without looking through the whole database. Furthermore, the ordering makes sure that the result of the cartesian product begins with the combinations of newest versions and ends with the combinations of lowest versions. That is, to achieve a list of solutions of decreasing quality (as was one of the requirements), I don't even need to sort when solving. Thus, these assumptions can save us some (in some cases substantial) overhead and allow the implemenation to be relatively simple.
+
+
+\paragraph{Installing packages}
+This leads us to the installation of a package. My implementation of \texttt{install} works as follows. Given a database and a package name, the function fetches all versions of the package from the database. Again, their ordering allows us to assume the versions of the packages to be decreasing. Thus, I try to solve the newest version of the package, passing its dependencies as the initial constraints and the list containing only the name/version tuple as the inital partial solution. If the result is a non-empty list, the best solution must be the first element of said list; since my implementation doesn't alter the order of packages, our assumptions tell us that the quality of the solutions decreases, so the best solution must necessarily be the first in the solution list. If there is no solution to the newest version, the function does the same with the version immediately below this. This is repeated until a solution is found, or until there are no more versions left.
+
 
 \subsection*{Testing \texttt{appm} properties}
+I have already reasoned about the correctness of my implementation given the assumptions about the database. To further ensure the all parts of the solver, I have written a bunch of automated tests.
+
+\paragraph{Black-box tests}
+The black-box tests are hardcoded instances tested against some expected output. In particular, I have written black-box tests for version comparison, merging of constraints, the parser, and the overall solver, all of which pass. The parser tests cover all requirements from the assignment. Since hardcoding an instance for each test is demanding, there are not \textit{too} blackbox-tests. Instead we rely on quickcheck to automatically generate instances and checking the properties of the solution.
+
+\paragraph{QuickCheck}
+In order to actually generate well-formed instances, I have defined an automatic database generator. The generator for each component of the database (i.e. package names, version numbers, etc.) was pretty straightforward to implement, however, the database as a whole has to be well-formed in order for QuickCheck to make sense. Thus, my generator works as follows. It starts by generating a list of packages with empty names and constraints. Then a list of possible name the size of the database is generated, which ensures the possibility for multiple versions of the same package and additionally makes it possible to generate sensible dependencies. Each package in the package list will receive a random name from the name list, and up to four dependencies are chosen randomly from the available packages. Afterwards the generate trims the package list such that it is normalized --- this is easier than using the \texttt{normalize} function since normalizing the database won't yield a database if the input isn't valid. An example of an automatically generated database can be seen in Appendix \ref{app:gendb}. \\
+
+\noindent I have implemented the property-based tests for criteria (a), (b), (c), (d), (e), (f), and (g), along with the parser. I won't go into detail about the implementation of criteria (a) through (g), but they are implemented as dictated by the assignment. Each of them has been tested manually by tweaking things and making sure that the behaviour changes accordingly.
+
+The property-based test for the parser works by simply 'pretty-printing' the database to a string, parsing the string, and making sure that the resulting database is equivalent to the input database. Again, I won't go into detail about the implementation of the property-based test nor the pretty-printer.
+
+For each of the property-based tests, QuickCheck generates a database instance. The first package from the database is then selected as the package to install. This ensures that we actually try to install a package that is in the database. It then uses \texttt{install} to find the corresponding solution, if any, and feeds it into the predicate for the corresponding property. As with the black-box tests, all property-based tests in the QuickCheck suite pass.
+
+
+\paragraph{Assessment}
+I have already argued some points regarding the integrity of my implementation, but I will dedicate this paragraph to a brief assessment of the tests. The databases being generated are not only well-formed, but also represent sensible instances yielding varying solutions that are ideal when testing the given properties. This means that if a property-based test passes, we can be sure that it is not just because it is trivially true (i.e. when there is no solution). In my opinion, the black-box tests and the property-based tests (all of which pass), along with the database generator, fulfill the intended purpose of testing arbitrary implementations of the dependency solver.

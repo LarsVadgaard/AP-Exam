@@ -1,4 +1,4 @@
-module TestUtil where
+module UtilTest where
 
 import Test.Tasty
 import Test.Tasty.HUnit

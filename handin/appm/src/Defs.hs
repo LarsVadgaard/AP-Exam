@@ -38,7 +38,7 @@ data Pkg = Pkg {name :: PName,
   deriving (Eq, Show, Read)
 
 newtype Database = DB [Pkg]
-  deriving (Eq, Show, Read)
+  deriving (Eq, Read)
 
 type Sol = [(PName, Version)]
 
@@ -50,6 +50,10 @@ type Sol = [(PName, Version)]
 -- define package ordering
 instance Ord Pkg where
   l <= r = (name l < name r) || (name l == name r && ver l <= ver r)
+
+-- define the database to be pretty printed using show
+instance Show Database where
+  show = prettyDB
 
 
 -------------------------------

@@ -61,20 +61,16 @@ solve db cs sol =
 -- all solutions for each. then fetch the first sat-
 -- isfying solution - if one exists
 install :: Database -> PName -> Maybe Sol
-install db p = do
-  cands <- getWithName p db
-  sols  <- getSols db cands
-  return $ head sols
+install db p =
+  let cands = getWithName p db
+  in firstSol db cands
 
--- get all solutions for a list of packages to be installed
-getSols :: Database -> [Pkg] -> Maybe [Sol]
-getSols db pkgs =
-  let sols = map (\pkg ->
-          solve db (deps pkg) [(name pkg, ver pkg)]
-        ) pkgs
-  in case concat sols of
-      []   -> Nothing
-      sols -> Just sols
+firstSol :: Database -> [Pkg] -> Maybe Sol
+firstSol db (pkg:pkgs) =
+  case solve db (deps pkg) $ toSol [pkg] of
+    []    -> firstSol db pkgs
+    sol:_ -> Just sol
+firstSol _ _ = Nothing
 
 
 ------------------------------
@@ -88,11 +84,8 @@ getRequired cs sol (DB pkgs) = filter (\pkg ->
     ) pkgs
 
 -- get all packages with given name in the database
-getWithName :: PName -> Database -> Maybe [Pkg]
-getWithName p (DB db) =
-  case filter (\pkg -> p == name pkg) db of
-    []   -> Nothing
-    pkgs -> Just pkgs
+getWithName :: PName -> Database -> [Pkg]
+getWithName p (DB db) = filter (\pkg -> p == name pkg) db
 
 -- grouping packages with same name
 groupName :: [Pkg] -> [[Pkg]]

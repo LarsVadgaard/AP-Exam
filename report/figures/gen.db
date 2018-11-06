@@ -1,0 +1,68 @@
+*Gen> generate (arbitrary :: Gen Database)
+package {
+  name or69g-rNt;
+  version 5.5.1.4apyh;
+  conflicts jH < 4.3.2yjf.2;
+  conflicts jH >= 5.3.2.2.5;
+}
+
+package {
+  name lchs-37-Dk;
+  version 2;
+  description "hLm5
+                   =wJ1A";
+  requires jH >= 1fyht.3.1.4;
+  requires jH < 2.5acd;
+  requires l-LzJmK >= 2.4.4;
+  requires l-LzJmK < 4.1.5qw.3.1yp;
+}
+
+package {
+  name lchs-37-Dk;
+  requires jY2-XIF1P >= 1;
+  requires jY2-XIF1P < 5.5.4;
+}
+
+package {
+  name l-LzJmK;
+  version 4.1.5;
+}
+
+package {
+  name jY2-XIF1P;
+  version 1.3.4.5;
+}
+
+package {
+  name jY2-XIF1P;
+  version 1.2.5.3;
+  description "O8*kY'C*b7";
+  conflicts l-LzJmK < 1;
+  conflicts l-LzJmK >= 4.3.1.1.3;
+}
+
+package {
+  name jH;
+  version 4.4eh.5.1.5zm;
+}
+
+package {
+  name jH;
+  version 1.5.2.2.1;
+  description "Ny       ^`kzvI\";
+}
+
+package {
+  name jH;
+}
+
+package {
+  name h;
+  version 5.3;
+  conflicts jY2-XIF1P < 1.2.2;
+  conflicts jY2-XIF1P >= 5;
+  conflicts lchs-37-Dk < 1.3.2.3;
+  conflicts lchs-37-Dk >= 3doo.2.5.5;
+  conflicts l-LzJmK < 2fk.5qt.4;
+  conflicts l-LzJmK >= 5;
+}

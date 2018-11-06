@@ -6,9 +6,9 @@ import Test.Tasty
 import Test.Tasty.HUnit
 
 import Defs
-import qualified TestParser as Parser
-import qualified TestUtil   as Util
-import qualified TestSolver as Solver
+import qualified ParserTest as Parser
+import qualified UtilTest   as Util
+import qualified SolverTest as Solver
 
 -- just a sample; feel free to replace with your own structure
 tests = testGroup "Unit tests"

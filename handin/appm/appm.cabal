@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e69a3033ceb2486bdfbb9aeb3ebc9969b844d33a360ab943d4a4228594db153a
+-- hash: 59b41316dbe171a425d949bbc4f9488229e2ff0d7a9f01c2eac3165e966eebd5
 
 name:           appm
 version:        0.0.0
@@ -58,9 +58,9 @@ test-suite blackbox-tests
   type: exitcode-stdio-1.0
   main-is: Main.hs
   other-modules:
-      TestParser
-      TestSolver
-      TestUtil
+      ParserTest
+      SolverTest
+      UtilTest
       Paths_appm
   hs-source-dirs:
       tests/BB
@@ -79,6 +79,7 @@ test-suite quickcheck-tests
   type: exitcode-stdio-1.0
   main-is: Main.hs
   other-modules:
+      Gen
       Properties
       Paths_appm
   hs-source-dirs:

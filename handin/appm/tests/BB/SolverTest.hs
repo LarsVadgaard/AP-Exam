@@ -1,4 +1,4 @@
-module TestSolver where
+module SolverTest where
 
 import Test.Tasty
 import Test.Tasty.HUnit

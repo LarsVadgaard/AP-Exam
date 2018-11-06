@@ -1,20 +1,16 @@
-module Main where
+module Gen where
 
 import Defs
-import Properties
-import Solver (install)
-import Utils (sortPkgs, merge)
-
 import Test.Tasty
 import Test.Tasty.QuickCheck
 
 import Control.Monad (foldM, (<=<))
+import Utils (sortPkgs, merge)
 
 import Data.List (nub,nubBy,delete)
 
--- The following is just a sample; feel free to replace with your
--- own structure
 
+-- characters
 lowers = ['a'..'z']
 uppers = ['A'..'Z']
 digits = ['1'..'9']
@@ -59,9 +55,9 @@ instance Arbitrary Version where
 instance Arbitrary Pkg where
   arbitrary = do
     v <- frequency [(4,arbitrary),(1,return stdV)]
-    desc <- frequency [ (5, return "")
+    desc <- frequency [ (3, return "")
                       , (1,take <$> choose (1,15)
-                                <*> listOf1 arbitrary) ]
+                                <*> listOf1 arbitraryASCIIChar) ]
     return $ Pkg (P "") v desc []
 
 
@@ -101,7 +97,7 @@ genAllDeps pkgs =
 
 genAvailDeps :: Pkg -> [Pkg] -> Gen Constrs
 genAvailDeps pkg pkgs = do
-      n <- choose (0,3)
+      n <- choose (0,4)
       pkgs' <- take n <$> sublistOf (filter (\pkg' -> name pkg' /= name pkg) pkgs)
       cs <- mapM (\pkg' -> do
           b <- arbitrary
@@ -118,35 +114,9 @@ mergeMultiple [] = Just []
 mergeMultiple (c:cs) = foldM (\cs' c' -> merge cs' [c']) [] cs
 
 -- generate version range
-genRange v = do
-    vmin <- suchThat arbitrary (<= v)
-    vmax <- suchThat arbitrary (> v)
-    return (vmin,vmax)
-
-
-----------
--- Testing
-----------
-
-prop_install_a (DB db) = let pkg = head db in install_a (DB db) (name pkg) (install (DB db) $ name pkg)
-prop_install_b (DB db) = let pkg = head db in install_b (DB db) (name pkg) (install (DB db) $ name pkg)
-prop_install_c (DB db) = let pkg = head db in install_c (DB db) (name pkg) (install (DB db) $ name pkg)
-prop_install_d (DB db) = let pkg = head db in install_d (DB db) (name pkg) (install (DB db) $ name pkg)
-prop_install_e (DB db) = let pkg = head db in install_e (DB db) (name pkg) (install (DB db) $ name pkg)
-prop_install_f (DB db) = let pkg = head db in install_f (DB db) (name pkg) (install (DB db) $ name pkg)
-prop_install_g (DB db) = let pkg = head db in install_g (DB db) (name pkg) (install (DB db) $ name pkg)
-
-prop_parse_db  = parses_db
-
-tests = testGroup "QC tests"
-          [ testProperty "prop a"  prop_install_a
-          , testProperty "prop b"  prop_install_b
-          , testProperty "prop c"  prop_install_c
-          , testProperty "prop d"  prop_install_d
-          , testProperty "prop e"  prop_install_e
-          , testProperty "prop f"  prop_install_f
-          , testProperty "prop g"  prop_install_g
-          , testProperty "parsing" prop_parse_db
-          ]
-
-main = defaultMain tests
+genRange :: Version -> Gen (Version, Version)
+genRange v = frequency [(4,do
+      vmin <- suchThat arbitrary (<= v)
+      vmax <- suchThat arbitrary (> v)
+      return (vmin,vmax))
+    , (1, suchThat arbitrary (uncurry (<)))]
