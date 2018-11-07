@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 59b41316dbe171a425d949bbc4f9488229e2ff0d7a9f01c2eac3165e966eebd5
+-- hash: 1c0d91e33ee149095f63f2ad60bdeaefe70b79be520dcffaed2bce5a2be3df35
 
 name:           appm
 version:        0.0.0
@@ -25,7 +25,6 @@ library
   build-depends:
       QuickCheck
     , base
-    , containers
     , parsec
     , tasty
     , tasty-hunit
@@ -47,7 +46,6 @@ executable appm
   build-depends:
       QuickCheck
     , base
-    , containers
     , parsec
     , tasty
     , tasty-hunit
@@ -68,7 +66,6 @@ test-suite blackbox-tests
       QuickCheck
     , appm
     , base
-    , containers
     , parsec
     , tasty
     , tasty-hunit
@@ -88,7 +85,6 @@ test-suite quickcheck-tests
       QuickCheck
     , appm
     , base
-    , containers
     , parsec
     , tasty
     , tasty-hunit

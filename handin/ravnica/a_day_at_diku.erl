@@ -2,6 +2,13 @@
 -module(a_day_at_diku).
 -export([run_world/0]).
 
+
+% Print stuff
+-ifndef(PRINT).
+-define(PRINT(Var), io:format("DEBUG: ~p:~p - ~p~n~n ~p~n~n", [?MODULE, ?LINE, ??Var, Var])).
+-endif.
+
+
 make_drunker({CreateRef, Stats}) ->
     #{sobriety := CurSobriety} = Stats,
     {CreateRef, Stats#{sobriety := CurSobriety - 1}}.
@@ -46,7 +53,7 @@ generate_territory() ->
         district:create("The Coffee Machine at the end of the PLTC hallway"),
     {ok, Canteen} =
         district:create("The Canteen at the top floor of the DIKU building"),
-    {ok, Cafeen} = district:create("The student bar, \"Caféen?\""),
+    {ok, Cafeen} = district:create("The student bar, \"Cafeen?\""),
     {ok, Bathroom} = district:create("The bathroom at the student bar"),
     {ok, LilleUP1} =
         district:create("The smaller auditorium at the DIKU building"),
@@ -126,4 +133,5 @@ run_world() ->
     % =====| Following two lines changed in ver. 1.0.1 | =====
     {ok, _} = district:take_action(Canteen, hd(StudentRefs), have_courage),
     {ok, _} = district:take_action(CoffeeMachine, KenRef, surprise_attack),
+
     {KensOffice, AndrzejsOffice, Canteen}.

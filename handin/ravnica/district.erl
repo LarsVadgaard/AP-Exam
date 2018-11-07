@@ -16,7 +16,7 @@
 -export([init/1, callback_mode/0, code_change/4, terminate/3]).
 
 % State exports
--export([under_configuration/3, under_activation/3, active/3, shutting_down/3]).
+-export([under_configuration/3, active/3, shutting_down/3]).
 
 % types
 -type passage() :: pid().
@@ -27,71 +27,38 @@
                                                    -> {creature(), [creature()]}).
 
 
-%%%===================================================================
-%%% API (State must be a neighbors/creatures/triggers tuple)
-%%%===================================================================
 
-name() -> ?MODULE.
+%%%===================================================================
+%%% API (State must be a neighbours/creatures/triggers tuple)
+%%%===================================================================
 
 -spec create(string()) -> {ok, passage()} | {error, any()}.
-create(Desc) -> gen_statem:start(name(), Desc, []).
+create(Desc) -> gen_statem:start(?MODULE, Desc, []).
 
 -spec get_description(passage()) -> {ok, string()} | {error, any()}.
 get_description(District) -> gen_statem:call(District, get_description).
 
-% TODO: error from the state function if the action is used for another connection
-% and or the district is not under configuration
 -spec connect(passage(), atom(), passage()) -> ok | {error, any()}.
-connect(From, Action, To) -> gen_statem:call(From, {connect, Action, To}). % puts (Action, To) in the map state
+connect(From, Action, To) -> gen_statem:call(From, {connect, Action, To}).
 
-% TODO: handle ref in state function
 -spec activate(passage()) -> active | under_activation | impossible.
-activate(District) -> repeat([District]).
+activate(District) -> gen_statem:call(District, {activate, [District]}).
 
-repeat(N) ->
-      A = lists:map(fun (T) -> gen_statem:call(T, activate) end, N),
-      case lists:any(fun ({O,_}) -> O =:= impossible end, A) of
-        true ->
-          lists:foreach(fun (T) -> gen_statem:cast(T, cancel) end, N),
-          impossible;
-        false ->
-          M = lists:map(fun ({_,Ns}) -> Ns end, A),
-          Ns = lists:append(M),
-          NoDup = lists:usort(Ns),
-          case NoDup of
-            [] ->
-              lists:foreach(fun (T) -> gen_statem:cast(T, conclude) end, lists:usort(lists:append(N,Ns))),
-              active;
-            _  -> repeat(lists:append(N,NoDup))
-          end
-      end.
-
-
-% returns all actions of the connections (keys)
-% none if the district is shutting down
 -spec options(passage()) -> {ok, [atom()]} | none.
 options(District) -> gen_statem:call(District, options).
 
-% district must be active and the reference must be unique
 -spec enter(passage(), creature()) -> ok | {error, any()}.
 enter(District, Creature) -> gen_statem:call(District, {enter, Creature}).
 
-% from and to must be active, creature must be in from, and the creature can be moved to to
 -spec take_action(passage(), creature_ref(), atom()) -> {ok, passage()} | {error, any()}.
 take_action(From, CRef, Action) -> gen_statem:call(From, {take_action, CRef, Action}).
 
-% sender en (shutting_down, district, creatures) besked ud til NextPlane
-% lukker så ned for sine naboer
-% stopper når alle er shut down eller shutting down
-% simply returns okay if district is already shutting down
 -spec shutdown(passage(), pid()) -> ok.
-shutdown(District, NextPlane) -> gen_statem:call(District, {shutdown, NextPlane}).
+shutdown(District, NextPlane) ->
+  gen_statem:call(District, {shutdown, NextPlane, [District]}),
+  gen_statem:stop(District),
+  ok.
 
-% register trigger
-% a trigger is a function that is called everytime a creature enters or leaves the district
-% the trigger takes an even (entering|leaving), the creature that is entering/leaving, and
-% a list of all creatures in the district
-% only one trigger per district
 -spec trigger(passage(), trigger()) -> ok | {error, any()} | not_supported.
 trigger(District, Trigger) -> gen_statem:call(District, {trigger, Trigger}).
 
@@ -110,115 +77,171 @@ terminate(_Reason, _State, _Data) -> void.
 code_change(_Vsn, State, Data, _Extra) -> {ok, State, Data}.
 
 
+
 %%%===================================================================
 %%% State functions
 %%%===================================================================
 
-% under configuration
+% Under configuration
 
+% simply return the description
 under_configuration({call, From}, get_description, {N,C,T,D}) ->
   {keep_state, {N,C,T,D}, [{reply, From, {ok, D}}]};
 
+% insert the (atom,To) pair into the map over neighbours if possible
 under_configuration({call, From}, {connect, Action, To}, {N,C,T,D}) ->
   case maps:get(Action, N, none) of
     none -> {keep_state, {maps:put(Action, To, N),C,T,D}, [{reply, From, ok}]};
     _    -> {keep_state, {N,C,T,D}, [{reply, From, {error, action_already_exists}}]}
   end;
 
-% TODO: få det her til at virke
-% sæt hver nabo i gang, og gå så til under_activation
-% vent så på at de caster et kald tilbage
-under_configuration({call, From}, activate, {N,C,T,D}) ->
-  {next_state, under_activation, {N,C,T,D}, [{reply, From, {under_activation, maps:values(N)}}]};
+% activate each neighbour and wait for a response
+% if any response is impossible, don't activate
+under_configuration({call, From}, {activate, Visited}, {N,C,T,D}) ->
+  Ns = lists:filter(fun (To) -> not(lists:member(To,Visited)) end, lists:usort(maps:values(N))),
+  Act = lists:map(fun (To) -> gen_statem:call(To, {activate, [To|Visited]}) end, Ns),
+  case lists:any(fun (A) -> A == impossible end, Act) of
+    true  -> {keep_state, {N,C,T,D}, [{reply, From, impossible}]};
+    false -> {next_state, active, {N,C,T,D}, [{reply, From, active}]}
+  end;
 
+% simply return the keys of the (atom,To) pairs in the map over neighbours
 under_configuration({call, From}, options, {N,C,T,D}) ->
   {keep_state, {N,C,T,D}, [{reply, From, {ok, maps:keys(N)}}]};
 
-under_configuration({call, From}, {enter, _}, {N,C,T,D}) ->
-  {keep_state, {N,C,T,D}, [{reply, From, {error, not_active}}]};
-
+% replace the current trigger in the test data
 under_configuration({call, From}, {trigger, Trigger}, {N,C,_,D}) ->
-  {keep_state, {N,C,Trigger,D}, [{reply, From, ok}]}.
+  {keep_state, {N,C,Trigger,D}, [{reply, From, ok}]};
+
+% call the shut_down helper function, see below
+under_configuration({call, From}, {shutdown, NextPlane, Visited}, Data) ->
+  shut_down(From, NextPlane, Visited, Data);
+
+% handle other events generically
+under_configuration({call, From}, _, Data) ->
+  {keep_state, Data, [{reply, From, not_valid}]};
+under_configuration(_, _, _) ->
+  keep_state_and_data.
 
 
 
-% under activation
+% Active
 
-under_activation({call, From}, activate, {N,C,T,D}) ->
-  {keep_state, {N,C,T,D}, [{reply, From, {under_activation, []}}]};
-under_activation(cast, cancel, {N,C,T,D}) ->
-  {next_state, under_configuration, {N,C,T,D}};
-under_activation(cast, conclude, {N,C,T,D}) ->
-  {next_state, active, {N,C,T,D}};
-
-under_activation({call, From}, {enter, _}, {N,C,T,D}) ->
-  {keep_state, {N,C,T,D}, [{reply, From, {error, not_active}}]};
-
-under_activation({call, From}, {trigger, _}, {N,C,T,D}) ->
-  {keep_state, {N,C,T,D}, [{reply, From, {error, not_under_configuration}}]}.
-
-
-
-% active
-
-active({call, From}, activate, {N,C,T,D}) ->
+% if already active, simply return this atom
+active({call, From}, {activate,_}, {N,C,T,D}) ->
   {keep_state, {N,C,T,D}, [{reply, From, active}]};
 
+% same as in under_configuration
 active({call, From}, options, {N,C,T,D}) ->
   {keep_state, {N,C,T,D}, [{reply, From, {ok, maps:keys(N)}}]};
 
+% if the creature is not in the district, insert it and apply the trigger
 active({call, From}, {enter, {CRef,CStat}}, {N,C,T,D}) ->
-  case maps:get(CRef, C, none) of
-    none -> {keep_state, {N,maps:put(CRef,CStat,C),T,D}, [{reply, From, ok}]};
-    _    -> {keep_state, {N,C,T,D}, [{reply, From, {error, ref_already_exists}}]}
+  case maps:is_key(CRef, C) of
+    true  -> {keep_state, {N,C,T,D}, [{reply, From, {error, ref_already_exists}}]};
+    false ->
+      {{CRef,CStat1},Cs1} = apply_trigger(T,entering,{CRef,CStat},maps:to_list(C)),
+      {keep_state, {N,maps:put(CRef,CStat1,maps:from_list(Cs1)),T,D}, [{reply, From, ok}]}
   end;
 
+% check if the given action and the given creature exist
+% if so, apply the trigger and move it if possible
+% if it's a connection to the same district, apply the trigger locally
+% and return as to avoid blocking
 active({call, From}, {take_action, CRef, Action}, {N,C,T,D}) ->
-  % check if is in C
-  % delete from C
-  % check if action is avail
-  % enter through action
-  case maps:get(CRef, C, none) of
-    none  -> {keep_state, {N,C,T,D}, [{reply, From, {error, no_such_creature}}]};
-    CStat ->
-      C1 = maps:remove(CRef, C),
-      case maps:get(Action, N, none) of
-        none -> {keep_state, {N,C,T,D}, [{reply, From, {error, no_such_action}}]};
-        To   ->
-          case enter(To, {CRef,CStat}) of
-            {error, Reason} -> {keep_state, {N,C,T,D}, [{reply, From, {error, Reason}}]};
-            ok              -> {keep_state, {N,C1,T,D}, [{reply, From, {ok, To}}]}
-          end
-      end
+  case C of
+    #{CRef := CStat} ->
+      case N of
+        #{Action := To} ->
+          {C1,Cs1} = apply_trigger(T,leaving,{CRef,CStat},maps:to_list(maps:remove(CRef, C))),
+          case To == self() of
+            true -> % going back to the same district, simply apply the trigger locally
+              {{CRef,CStat2},Cs2} = apply_trigger(T,entering,C1,Cs1),
+              {keep_state, {N,maps:put(CRef, CStat2, maps:from_list(Cs2)),T,D}, [{reply, From, {ok, To}}]};
+            false -> % else, it will be handled when entering the other district
+              case enter(To, C1) of
+                {error, Reason} -> {keep_state, {N,C,T,D}, [{reply, From, {error, Reason}}]};
+                ok              -> {keep_state, {N,maps:from_list(Cs1),T,D}, [{reply, From, {ok, To}}]}
+              end
+          end;
+        #{} -> {keep_state, {N,C,T,D}, [{reply, From, {error, no_such_action}}]}
+      end;
+    #{}  -> {keep_state, {N,C,T,D}, [{reply, From, {error, no_such_creature}}]}
   end;
 
-% TODO: fix this also
-active({call, From}, {shutdown, NextPlane}, {N,C,T,D}) ->
-  NextPlane ! {shutting_down, self(), C},
-  case maps:size(N) of
-    0 -> {next_state, shutting_down, {#{},C,T,D}, [{reply, From, ok}]};
-    _ ->
-      maps:map(fun (To) -> shutdown(To, NextPlane) end, N),
-      {next_state, shutting_down, {N,C,T,D}, [{reply, From, ok}]}
-  end;
+% same as in under_configuration
+active({call, From}, {shutdown, NextPlane, Visited}, Data) ->
+  shut_down(From, NextPlane, Visited, Data);
 
-active({call, From}, {trigger, _}, {N,C,T,D}) ->
-  {keep_state, {N,C,T,D}, [{reply, From, {error, not_under_configuration}}]}.
+% handle other events generically
+active({call, From}, _, Data) ->
+  {keep_state, Data, [{reply, From, not_valid}]};
+active(_, _, _) ->
+  keep_state_and_data.
+
+% helper in order to avoid boilerplate code
+shut_down(From, NextPlane, Visited, {N,C,T,D}) ->
+  NextPlane ! {shutting_down, self(), maps:to_list(C)},
+  Ns  = lists:filter(fun (To) -> not(lists:member(To,Visited)) end, lists:usort(maps:values(N))),
+  lists:map(fun (To) -> gen_statem:call(To, {shutdown, NextPlane, [To|Visited]}) end, Ns),
+  {next_state, shutting_down, {N,C,T,D}, [{reply, From, ok}]}.
+
+% applying the trigger: spawn a process and await a response
+% if not well-formed, return the input data
+apply_trigger(T, Event, {CRef,CStat}, Cs) ->
+  Me = self(),
+  Pid = spawn(fun () -> Me ! {self(), check_trigger(T,Event,{CRef,CStat},Cs)} end),
+  receive
+    {Pid,{{CRef,CStat1},Cs1}} ->
+      case same_creatures(Cs1,Cs) of
+        true  -> {{CRef,CStat1},Cs1};
+        false -> {{CRef,CStat},Cs}
+      end;
+    {Pid, _} -> {{CRef,CStat},Cs}
+  after
+    2000 -> {{CRef,CStat}, Cs}
+  end.
+
+% checking the trigger
+check_trigger(T,Event,C,Cs) ->
+  try T(Event,C,Cs) of
+    Res -> Res
+  catch
+    _:_ -> error
+  end.
+
+% check if the creatures are the same
+same_creatures(Cs1, Cs2) ->
+  case is_list(Cs1) and is_list(Cs1) of
+    true ->
+      Cs11 = lists:map(fun ({Ref,_}) -> Ref;
+                           (Other) -> Other
+                       end, Cs1),
+      Cs22 = lists:map(fun ({Ref,_}) -> Ref;
+                           (Other) -> Other
+                       end, Cs2),
+      lists:sort(Cs11) == lists:sort(Cs22);
+    false -> false
+  end.
+
 
 
 % shutting down
 
-shutting_down({call, From}, activate, {N,C,T,D}) ->
+% impossible to active district that is shutting down
+shutting_down({call, From}, {activate,_}, {N,C,T,D}) ->
   {keep_state, {N,C,T,D}, [{reply, From, impossible}]};
 
+% no options when shutting down
 shutting_down({call, From}, options, {N,C,T,D}) ->
   {keep_state, {N,C,T,D}, [{reply, From, none}]};
 
-shutting_down({call, From}, {enter, _}, {N,C,T,D}) ->
-  {keep_state, {N,C,T,D}, [{reply, From, {error, not_active}}]};
-
+% already shutting down, so whatever
 shutting_down({call, From}, {shutdown, _, _}, {N,C,T,D}) ->
   {keep_state, {N,C,T,D}, [{reply, From, ok}]};
 
-shutting_down({call, From}, {trigger, _}, {N,C,T,D}) ->
-  {keep_state, {N,C,T,D}, [{reply, From, {error, not_under_configuration}}]}.
+% handle other events generically
+shutting_down({call, From}, _, Data) ->
+  {keep_state, Data, [{reply, From, not_valid}]};
+shutting_down(_, _, _) ->
+  keep_state_and_data.
