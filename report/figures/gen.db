@@ -1,68 +1,68 @@
 *Gen> generate (arbitrary :: Gen Database)
 package {
-  name or69g-rNt;
-  version 5.5.1.4apyh;
-  conflicts jH < 4.3.2yjf.2;
-  conflicts jH >= 5.3.2.2.5;
+  name w2u-9-b;
+  version 1u.5i.1.2r;
+  description "B";
 }
 
 package {
-  name lchs-37-Dk;
-  version 2;
-  description "hLm5
-                   =wJ1A";
-  requires jH >= 1fyht.3.1.4;
-  requires jH < 2.5acd;
-  requires l-LzJmK >= 2.4.4;
-  requires l-LzJmK < 4.1.5qw.3.1yp;
+  name vkr;
+  version 3.4.5.1;
+  requires lj >= 0;
+  requires lj < 5;
 }
 
 package {
-  name lchs-37-Dk;
-  requires jY2-XIF1P >= 1;
-  requires jY2-XIF1P < 5.5.4;
+  name vkr;
 }
 
 package {
-  name l-LzJmK;
-  version 4.1.5;
+  name tB7i1nw;
+  conflicts lj < 4;
+  conflicts lj >= 4.4.2.2;
+  conflicts q < 0;
+  conflicts q >= 4.5.3.5;
+  conflicts vkr < 0;
+  conflicts vkr >= 3c.1.5.2;
 }
 
 package {
-  name jY2-XIF1P;
-  version 1.3.4.5;
+  name sMx5Fn;
+  requires kGLSyl >= 0;
+  requires kGLSyl < 3un;
 }
 
 package {
-  name jY2-XIF1P;
-  version 1.2.5.3;
-  description "O8*kY'C*b7";
-  conflicts l-LzJmK < 1;
-  conflicts l-LzJmK >= 4.3.1.1.3;
+  name q;
+  version 3.3.5.5.2;
+  requires lj >= 2hq.1;
+  requires lj < 1000000;
 }
 
 package {
-  name jH;
-  version 4.4eh.5.1.5zm;
+  name q;
+  version 1.3uo.4.3.4;
+  description "?9g
+!q<%;2fv";
 }
 
 package {
-  name jH;
-  version 1.5.2.2.1;
-  description "Ny       ^`kzvI\";
+  name lj;
+  version 4.3;
 }
 
 package {
-  name jH;
+  name kGLSyl;
 }
 
 package {
-  name h;
-  version 5.3;
-  conflicts jY2-XIF1P < 1.2.2;
-  conflicts jY2-XIF1P >= 5;
-  conflicts lchs-37-Dk < 1.3.2.3;
-  conflicts lchs-37-Dk >= 3doo.2.5.5;
-  conflicts l-LzJmK < 2fk.5qt.4;
-  conflicts l-LzJmK >= 5;
+  name di;
+  version 5.2dxd.3.1.1;
+  description " kG^j^";
+  requires vkr >= 0;
+  requires vkr < 3.1.3;
+  conflicts sMx5Fn < 1.5.1.4;
+  conflicts sMx5Fn >= 5.5hn;
+  conflicts tB7i1nw < 0;
+  conflicts tB7i1nw >= 3mx.3yram;
 }

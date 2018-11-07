@@ -43,7 +43,7 @@ generate_territory() ->
     {ok, KensOffice} = district:create("Ken's office"),
     {ok, AndrzejsOffice} = district:create("Andrzej's office"),
     {ok, CoffeeMachine} =
-        district:create("The Coffee Machine at the end of the APL hallway"),
+        district:create("The Coffee Machine at the end of the PLTC hallway"),
     {ok, Canteen} =
         district:create("The Canteen at the top floor of the DIKU building"),
     {ok, Cafeen} = district:create("The student bar, \"Caféen?\""),
@@ -115,11 +115,15 @@ run_world() ->
                       ok = district:enter(Canteen, {StudentRef, StudentStats})
               end, StudentRefs),
 
-    ok = district:take_action(KensOffice, KenRef, restore_health),
-    ok = district:take_action(AndrzejsOffice, AndrzejRef, sneak),
+
+
+    % =====| Following two lines changed in ver. 1.0.1 | =====
+    {ok, _} = district:take_action(KensOffice, KenRef, restore_health),
+    {ok, _} = district:take_action(AndrzejsOffice, AndrzejRef, sneak),
 
     % That morning, Bob thought he could sneak into Lille UP1 before Andrzej,
     % but he was already too late
-    ok = district:take_action(Canteen, hd(StudentRefs), have_courage),
-    ok = district:take_action(CoffeeMachine, KenRef, surprise_attack),
+    % =====| Following two lines changed in ver. 1.0.1 | =====
+    {ok, _} = district:take_action(Canteen, hd(StudentRefs), have_courage),
+    {ok, _} = district:take_action(CoffeeMachine, KenRef, surprise_attack),
     {KensOffice, AndrzejsOffice, Canteen}.

@@ -38,7 +38,7 @@ data Pkg = Pkg {name :: PName,
   deriving (Eq, Show, Read)
 
 newtype Database = DB [Pkg]
-  deriving (Eq, Read)
+  deriving (Eq, Show, Read)
 
 type Sol = [(PName, Version)]
 
@@ -51,9 +51,10 @@ type Sol = [(PName, Version)]
 instance Ord Pkg where
   l <= r = (name l < name r) || (name l == name r && ver l <= ver r)
 
--- define the database to be pretty printed using show
-instance Show Database where
-  show = prettyDB
+-- uncomment to show database as pretty
+-- remember to not derive show in this case
+-- instance Show Database where
+--   show = prettyDB
 
 
 -------------------------------
@@ -97,7 +98,7 @@ prettyConstrs = concatMap prettyConstr
 prettyConstr :: (PName,PConstr) -> String
 prettyConstr (p,(b,vmin,vmax)) =
   (if b then "  requires " else "  conflicts ")  ++
-  prettyPName p ++ (if b && vmin > minV then " >= " else " < ") ++
+  prettyPName p ++ (if b && vmin >= minV then " >= " else " < ") ++
   prettyVer vmin ++ ";\n" ++
   (if b then "  requires " else "  conflicts ")  ++
   prettyPName p ++ (if b then " < " else " >= ") ++

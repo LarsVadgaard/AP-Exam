@@ -23,7 +23,6 @@ main = do
     "-p":dbfile:b ->
       do s <- readFile dbfile
          db <- check "Parsing" $ parseDatabase s
-         putStrLn . prettyDB $ db
          putStrLn . (if b == ["p"] then prettyDB else show) $ db
     "-n":dbfile:b ->
       do s <- readFile dbfile

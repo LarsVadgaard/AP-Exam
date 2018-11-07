@@ -8,7 +8,7 @@ import Text.Parsec.Char hiding (spaces)
 import Text.Parsec.String
 import Text.Parsec.Combinator
 
-import Control.Monad (when, foldM)
+import Control.Monad (when, unless, foldM)
 
 import Data.Functor (($>))
 import Data.Char (toLower, toUpper)
@@ -97,9 +97,15 @@ clauses = sepEndBy clause (symbol ";")
 
 clause :: Parser Clause
 clause = (keyword "name"        >> Name <$> pname   )
-     <|> (keyword "version"     >> Ver  <$> version )
+     <|> (keyword "version"     >> Ver  <$> (checkPkgVer =<< version) )
      <|> (keyword "description" >> Desc <$> str     )
      <|> (                         Deps <$> constr  )
+
+checkPkgVer :: Version -> Parser Version
+checkPkgVer v = do
+  unless (v < maxV) $
+    unexpected ("Version number of package (max " ++ show (maxVN - 1) ++ ")")
+  return v
 
 checkClauses :: [Clause] -> Parser [Clause]
 checkClauses cls = do
@@ -160,7 +166,7 @@ version = token $ V <$> sepBy1 vnum (char '.')
 vnum :: Parser VNum
 vnum = do
   num <- read <$> many1 digit
-  when (num < minVN || num > maxVN-1)
+  when (num < minVN || num > maxVN)
     $ unexpected $ "version number (allowed range: " ++ show minVN ++ "-" ++ show maxVN ++ ")"
   VN num <$> suffix
 

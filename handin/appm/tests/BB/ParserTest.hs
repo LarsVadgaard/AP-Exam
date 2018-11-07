@@ -49,6 +49,10 @@ tests = testGroup "Parser tests"
        isLeft (parseDatabase src16) @?= True
     , testCase "many letters in suffix" $
        isLeft (parseDatabase src17) @?= True
+    , testCase "allowed version" $
+       isLeft (parseDatabase src18) @?= True
+    , testCase "allowed version" $
+       parseDatabase src19 @?= Right db19
     ]
 
 
@@ -287,7 +291,7 @@ src16 =
   \  NAme \"This is a general name!!1 --- \n\"\"test\"\"\"; \n\
   \  dEScrIption \"LOL du; \"\"hej\"\" med dig\"; \n\
   \  requires bar < 3; \n\
-  \  requires bar > 7.9 \n\
+  \  requires bar >= 7.9 \n\
   \}"
 
 
@@ -297,6 +301,27 @@ src17 =
   \  NAme \"This is a general name!!1 --- \n\"\"test\"\"\"; \n\
   \  dEScrIption \"LOL du; \"\"hej\"\" med dig\"; \n\
   \  version 1.2abcde.3\n\
-  \  requires bar < 3; \n\
-  \  requires bar > 7.9 \n\
   \}"
+
+-- Test 18
+src18 =
+  "pAcKAge { \n\
+  \  NAme \"This is a general name!!1 --- \n\"\"test\"\"\"; \n\
+  \  dEScrIption \"LOL du; \"\"hej\"\" med dig\"; \n\
+  \  version 1000000\n\
+  \}"
+
+-- Test 18
+src19 =
+  "pAcKAge { \n\
+  \  NAme beef; \n\
+  \  version 999999;\n\
+  \  requires bar >= 3; \n\
+  \  requires bar < 1000000 \n\
+  \}"
+db19  = DB [ Pkg { name = P "beef"
+                , ver = V [VN 999999 ""]
+                , desc = ""
+                , deps = [(P "bar",(True,V [VN 3 ""],maxV))]
+            }
+          ]

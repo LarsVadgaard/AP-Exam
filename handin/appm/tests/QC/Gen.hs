@@ -59,6 +59,7 @@ instance Arbitrary Pkg where
                       , (1,take <$> choose (1,15)
                                 <*> listOf1 arbitraryASCIIChar) ]
     return $ Pkg (P "") v desc []
+  shrink (Pkg p v des dep) = Pkg p v des <$> shrink dep
 
 
 -- the database
@@ -83,7 +84,9 @@ genNames pkgs = do
 -- remove duplicates
 trimDatabase :: [Pkg] -> Gen [Pkg]
 trimDatabase (pkg:pkgs) =
-  let rest = filter (\pkg' -> name pkg /= name pkg' || ver pkg /= ver pkg') pkgs
+  let rest = filter (\pkg' -> name pkg /= name pkg' ||
+                              ver pkg /= ver pkg'
+                    ) pkgs
   in (:) pkg <$> trimDatabase rest
 trimDatabase [] = return []
 
@@ -116,7 +119,9 @@ mergeMultiple (c:cs) = foldM (\cs' c' -> merge cs' [c']) [] cs
 -- generate version range
 genRange :: Version -> Gen (Version, Version)
 genRange v = frequency [(4,do
-      vmin <- suchThat arbitrary (<= v)
-      vmax <- suchThat arbitrary (> v)
+      vmin <- oneof [return minV, suchThat arbitrary (\v' -> v' <= v && v' >= minV)]
+      vmax <- if vmin == minV then vmax' else oneof [return maxV, vmax']
       return (vmin,vmax))
     , (1, suchThat arbitrary (uncurry (<)))]
+
+    where vmax' = suchThat arbitrary (\v' -> v' > v && v' < maxV)
