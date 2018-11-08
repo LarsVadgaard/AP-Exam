@@ -30,7 +30,7 @@ The way the well-formedness of the trigger is checked is as follows. A new proce
 
 This solution may not be the most elegant since it repeats some code from \texttt{enter}. However, given the problems that arise when handling self loops, this solution is a very simple way to avoid blocking the process.
 
-\paragraph{Shutting down a district} This works much in the same way as \texttt{activate}. After sending the required message to the \texttt{NextPlane} argument, the district immediately goes to the \texttt{shutting\_down} state and forces an internal event that makes it shut down its neighbours. After they have all been visited, I use the \texttt{gen\_statem:stop}.
+\paragraph{Shutting down a district} This works much in the same way as \texttt{activate}. After sending the required message to the \texttt{NextPlane} argument, the district immediately goes to the \texttt{shutting\_down} state and forces an internal event that makes it shut down its neighbours. After they have all been visited, It uses the \texttt{gen\_statem:stop} to actually terminate the process.
 
 
 \subsection*{QuickCheck \texttt{district}}

@@ -5,6 +5,7 @@
 
 -include_lib("eqc/include/eqc.hrl").
 
+
 %%%===================================================================
 %%% Generators
 %%%===================================================================
@@ -56,11 +57,17 @@ prop_activate() ->
     ?FORALL(T, ?SUCHTHAT(T1, territory(), maps:size(T1) > 0),
     ?LET(T1, setup_territory(T),
     ?FORALL(D, elements(T1),
-    ?IMPLIES(
-         district:activate(D) == active
-       , is_active(D) %lists:all(fun is_active/1, neighbours(D))
-    )))).
+    ?IMPLIES(district:activate(D) == active,
+      ?LET({ok,O}, district:options(D),
+      ?IMPLIES(length(O) > 0,
+        ?FORALL(Act, elements(O),
+        ?LET({CRef,CStat}, creature(),
+        ?IMPLIES(district:enter(D,{CRef,CStat}) == ok,
+          ?LET({ok,To}, district:take_action(D,CRef,Act),
+          is_active(To)
+    )))))))))).
 
+% use system call to check if active
 is_active(D) ->
   case sys:get_state(D) of
     {active, _} -> true;
@@ -74,9 +81,8 @@ prop_shutdown() ->
     ?LET(T1, setup_territory(T),
     ?FORALL(D, elements(T1),
     ?IMPLIES(district:activate(D) == active,
-      ?IMPLIES(
-           district:shutdown(D,self()) == ok
-         , is_shut_down(D)
+      ?IMPLIES(district:shutdown(D,self()) == ok,
+        is_shut_down(D)
     ))))).
 
 is_shut_down(D) ->
@@ -90,21 +96,14 @@ is_shut_down(D) ->
 prop_take_action() ->
     ?FORALL(T, ?SUCHTHAT(T1, territory(), maps:size(T1) > 0),
     ?LET(T1, setup_territory(T),
-    ?LET(D, elements(T1),
+    ?FORALL(D, elements(T1),
     ?IMPLIES(district:activate(D) == active,
-      ?LET({CRef,CStat}, creature(),
-      ?IMPLIES(district:enter(D,{CRef,CStat}) == ok,
-        ?LET({ok,O}, district:options(D),
-        ?IMPLIES(length(O) > 0,
-          ?LET(Act, elements(O),
-          ?LET({ok,To}, district:take_action(D, CRef, Act),
-          ?IMPLIES(To =/= D,
-                   is_in_district(CRef, To) and not(is_in_district(CRef, D))
+      ?LET({ok,O}, district:options(D),
+      ?IMPLIES(length(O) > 0,
+        ?FORALL(Act, elements(O),
+        ?LET({CRef,CStat}, creature(),
+        ?IMPLIES(district:enter(D,{CRef,CStat}) == ok,
+          ?LET({ok,To}, district:take_action(D,CRef,Act),
+          ?IMPLIES(To /= D,
+            district:take_action(D,CRef,Act) /= ok
     ))))))))))).
-
-
-is_in_district(CRef,D) ->
-  case sys:get_state(D) of
-    {_, {_,C,_,_}} -> maps:is_key(CRef,C);
-    _ -> false
-  end.

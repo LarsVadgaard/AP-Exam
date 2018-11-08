@@ -115,9 +115,10 @@ under_configuration({call, From}, {shutdown, NextPlane, Visited}, {N,C,T,D}) ->
 
 % handle other events generically
 under_configuration({call, From}, _, Data) ->
-  {keep_state, Data, [{reply, From, not_valid}]};
+  {keep_state, Data, [{reply, From, {error, not_valid}}]};
 under_configuration(_, _, _) ->
   keep_state_and_data.
+
 
 
 % Under activation
@@ -136,9 +137,10 @@ under_activation(internal, {From, activate, Visited}, {N,C,T,D}) ->
 
 % handle other events generically
 under_activation({call, From}, _, Data) ->
-  {keep_state, Data, [{reply, From, not_valid}]};
+  {keep_state, Data, [{reply, From, {error, not_valid}}]};
 under_activation(_, _, _) ->
   keep_state_and_data.
+
 
 
 % Active
@@ -196,16 +198,9 @@ active({call, From}, {shutdown, NextPlane, Visited}, {N,C,T,D}) ->
 
 % handle other events generically
 active({call, From}, _, Data) ->
-  {keep_state, Data, [{reply, From, not_valid}]};
+  {keep_state, Data, [{reply, From, {error, not_valid}}]};
 active(_, _, _) ->
   keep_state_and_data.
-
-% % helper in order to avoid boilerplate code
-% shut_down(From, NextPlane, Visited, {N,C,T,D}) ->
-%   NextPlane ! {shutting_down, self(), maps:to_list(C)},
-%   Ns  = lists:filter(fun (To) -> not(lists:member(To,Visited)) end, lists:usort(maps:values(N))),
-%   lists:map(fun (To) -> gen_statem:cast(To, {shutdown, NextPlane, [To|Visited]}) end, Ns),
-%   {next_state, shutting_down, {N,C,T,D}, [{reply, From, ok}]}
 
 % applying the trigger: spawn a process and await a response
 % if not well-formed, return the input data
@@ -264,6 +259,7 @@ shutting_down({call, From}, options, {N,C,T,D}) ->
 % already shutting down, so whatever
 shutting_down({call, From}, {shutdown, _, _}, Data) ->
   {keep_state, Data, [{reply, From, ok}]};
+% shut down neighbours if they haven't already been stopped
 shutting_down(internal, {From, shutdown, NextPlane, Visited}, {N,C,T,D}) ->
   Ns = lists:filter(fun (To) -> not(lists:member(To,Visited)) end, maps:values(N)),
   lists:foreach(fun (To) ->
@@ -276,6 +272,6 @@ shutting_down(internal, {From, shutdown, NextPlane, Visited}, {N,C,T,D}) ->
 
 % handle other events generically
 shutting_down({call, From}, _, Data) ->
-  {keep_state, Data, [{reply, From, not_valid}]};
+  {keep_state, Data, [{reply, From, {error, not_valid}}]};
 shutting_down(_, _, _) ->
   keep_state_and_data.
