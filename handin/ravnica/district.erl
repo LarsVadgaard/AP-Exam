@@ -28,9 +28,9 @@
 
 
 
-%%%===================================================================
-%%% API (State must be a neighbours/creatures/triggers tuple)
-%%%===================================================================
+%%%=======================================================================
+%%% API (State must be a neighbours/creatures/triggers/description tuple)
+%%%=======================================================================
 
 -spec create(string()) -> {ok, passage()} | {error, any()}.
 create(Desc) -> gen_statem:start(?MODULE, Desc, []).
