@@ -16,7 +16,7 @@
 -export([init/1, callback_mode/0, code_change/4, terminate/3]).
 
 % State exports
--export([under_configuration/3, active/3, shutting_down/3]).
+-export([under_configuration/3, under_activation/3, active/3, shutting_down/3]).
 
 % types
 -type passage() :: pid().
@@ -27,9 +27,8 @@
                                                    -> {creature(), [creature()]}).
 
 
-
 %%%=======================================================================
-%%% API (State must be a neighbours/creatures/triggers/description tuple)
+%%% API (State must be a neighbours/creatures/trigger/description tuple)
 %%%=======================================================================
 
 -spec create(string()) -> {ok, passage()} | {error, any()}.
@@ -42,7 +41,8 @@ get_description(District) -> gen_statem:call(District, get_description).
 connect(From, Action, To) -> gen_statem:call(From, {connect, Action, To}).
 
 -spec activate(passage()) -> active | under_activation | impossible.
-activate(District) -> gen_statem:call(District, {activate, [District]}).
+activate(District) -> activate1(District, []).
+activate1(District, Visited) -> gen_statem:call(District, {activate, Visited}).
 
 -spec options(passage()) -> {ok, [atom()]} | none.
 options(District) -> gen_statem:call(District, options).
@@ -54,10 +54,10 @@ enter(District, Creature) -> gen_statem:call(District, {enter, Creature}).
 take_action(From, CRef, Action) -> gen_statem:call(From, {take_action, CRef, Action}).
 
 -spec shutdown(passage(), pid()) -> ok.
-shutdown(District, NextPlane) ->
-  gen_statem:call(District, {shutdown, NextPlane, [District]}),
-  gen_statem:stop(District),
-  ok.
+shutdown(District, NextPlane) -> shutdown1(District, NextPlane, []).
+shutdown1(District, NextPlane, Visited) ->
+  gen_statem:call(District, {shutdown, NextPlane, Visited}),
+  gen_statem:stop(District).
 
 -spec trigger(passage(), trigger()) -> ok | {error, any()} | not_supported.
 trigger(District, Trigger) -> gen_statem:call(District, {trigger, Trigger}).
@@ -90,20 +90,15 @@ under_configuration({call, From}, get_description, {N,C,T,D}) ->
 
 % insert the (atom,To) pair into the map over neighbours if possible
 under_configuration({call, From}, {connect, Action, To}, {N,C,T,D}) ->
-  case maps:get(Action, N, none) of
-    none -> {keep_state, {maps:put(Action, To, N),C,T,D}, [{reply, From, ok}]};
-    _    -> {keep_state, {N,C,T,D}, [{reply, From, {error, action_already_exists}}]}
+  case maps:is_key(Action, N) of
+    true  -> {keep_state, {N,C,T,D}, [{reply, From, {error, action_already_exists}}]};
+    false -> {keep_state, {maps:put(Action, To, N),C,T,D}, [{reply, From, ok}]}
   end;
 
 % activate each neighbour and wait for a response
 % if any response is impossible, don't activate
-under_configuration({call, From}, {activate, Visited}, {N,C,T,D}) ->
-  Ns = lists:filter(fun (To) -> not(lists:member(To,Visited)) end, lists:usort(maps:values(N))),
-  Act = lists:map(fun (To) -> gen_statem:call(To, {activate, [To|Visited]}) end, Ns),
-  case lists:any(fun (A) -> A == impossible end, Act) of
-    true  -> {keep_state, {N,C,T,D}, [{reply, From, impossible}]};
-    false -> {next_state, active, {N,C,T,D}, [{reply, From, active}]}
-  end;
+under_configuration({call, From}, {activate, Visited}, Data) ->
+  {next_state, under_activation, Data, [{next_event, internal, {From, activate,[self()|Visited]}}]};
 
 % simply return the keys of the (atom,To) pairs in the map over neighbours
 under_configuration({call, From}, options, {N,C,T,D}) ->
@@ -114,8 +109,9 @@ under_configuration({call, From}, {trigger, Trigger}, {N,C,_,D}) ->
   {keep_state, {N,C,Trigger,D}, [{reply, From, ok}]};
 
 % call the shut_down helper function, see below
-under_configuration({call, From}, {shutdown, NextPlane, Visited}, Data) ->
-  shut_down(From, NextPlane, Visited, Data);
+under_configuration({call, From}, {shutdown, NextPlane, Visited}, {N,C,T,D}) ->
+  NextPlane ! {shutting_down, self(), maps:to_list(C)},
+  {next_state, shutting_down, {N,C,T,D}, [{next_event, internal, {From, shutdown, NextPlane, [self()|Visited]}}]};
 
 % handle other events generically
 under_configuration({call, From}, _, Data) ->
@@ -124,8 +120,32 @@ under_configuration(_, _, _) ->
   keep_state_and_data.
 
 
+% Under activation
+
+% simply return the state
+under_activation({call, From}, {activate,_}, Data) ->
+  {keep_state, Data, [{reply, From, under_activation}]};
+% activate neighbours that haven't been visited
+under_activation(internal, {From, activate, Visited}, {N,C,T,D}) ->
+  Ns = lists:filter(fun (To) -> not(lists:member(To,Visited)) end, maps:values(N)),
+  Act = lists:map(fun (To) -> activate1(To,Visited) end, Ns),
+  case lists:any(fun (A) -> A == impossible end, Act) of
+    true  -> {next_state, under_configuration, {N,C,T,D}, [{reply, From, impossible}]};
+    false -> {next_state, active, {N,C,T,D}, [{reply, From, active}]}
+  end;
+
+% handle other events generically
+under_activation({call, From}, _, Data) ->
+  {keep_state, Data, [{reply, From, not_valid}]};
+under_activation(_, _, _) ->
+  keep_state_and_data.
+
 
 % Active
+
+% same as in under_configuration
+active({call, From}, get_description, {N,C,T,D}) ->
+  {keep_state, {N,C,T,D}, [{reply, From, {ok, D}}]};
 
 % if already active, simply return this atom
 active({call, From}, {activate,_}, {N,C,T,D}) ->
@@ -170,8 +190,9 @@ active({call, From}, {take_action, CRef, Action}, {N,C,T,D}) ->
   end;
 
 % same as in under_configuration
-active({call, From}, {shutdown, NextPlane, Visited}, Data) ->
-  shut_down(From, NextPlane, Visited, Data);
+active({call, From}, {shutdown, NextPlane, Visited}, {N,C,T,D}) ->
+  NextPlane ! {shutting_down, self(), maps:to_list(C)},
+  {next_state, shutting_down, {N,C,T,D}, [{next_event, internal, {From, shutdown, NextPlane, [self()|Visited]}}]};
 
 % handle other events generically
 active({call, From}, _, Data) ->
@@ -179,12 +200,12 @@ active({call, From}, _, Data) ->
 active(_, _, _) ->
   keep_state_and_data.
 
-% helper in order to avoid boilerplate code
-shut_down(From, NextPlane, Visited, {N,C,T,D}) ->
-  NextPlane ! {shutting_down, self(), maps:to_list(C)},
-  Ns  = lists:filter(fun (To) -> not(lists:member(To,Visited)) end, lists:usort(maps:values(N))),
-  lists:map(fun (To) -> gen_statem:call(To, {shutdown, NextPlane, [To|Visited]}) end, Ns),
-  {next_state, shutting_down, {N,C,T,D}, [{reply, From, ok}]}.
+% % helper in order to avoid boilerplate code
+% shut_down(From, NextPlane, Visited, {N,C,T,D}) ->
+%   NextPlane ! {shutting_down, self(), maps:to_list(C)},
+%   Ns  = lists:filter(fun (To) -> not(lists:member(To,Visited)) end, lists:usort(maps:values(N))),
+%   lists:map(fun (To) -> gen_statem:cast(To, {shutdown, NextPlane, [To|Visited]}) end, Ns),
+%   {next_state, shutting_down, {N,C,T,D}, [{reply, From, ok}]}
 
 % applying the trigger: spawn a process and await a response
 % if not well-formed, return the input data
@@ -228,16 +249,29 @@ same_creatures(Cs1, Cs2) ->
 
 % shutting down
 
+% same as in under_configuration
+shutting_down({call, From}, get_description, {N,C,T,D}) ->
+  {keep_state, {N,C,T,D}, [{reply, From, {ok, D}}]};
+
 % impossible to active district that is shutting down
-shutting_down({call, From}, {activate,_}, {N,C,T,D}) ->
-  {keep_state, {N,C,T,D}, [{reply, From, impossible}]};
+shutting_down({call, From}, {activate,_}, Data) ->
+  {keep_state, Data, [{reply, From, impossible}]};
 
 % no options when shutting down
 shutting_down({call, From}, options, {N,C,T,D}) ->
   {keep_state, {N,C,T,D}, [{reply, From, none}]};
 
 % already shutting down, so whatever
-shutting_down({call, From}, {shutdown, _, _}, {N,C,T,D}) ->
+shutting_down({call, From}, {shutdown, _, _}, Data) ->
+  {keep_state, Data, [{reply, From, ok}]};
+shutting_down(internal, {From, shutdown, NextPlane, Visited}, {N,C,T,D}) ->
+  Ns = lists:filter(fun (To) -> not(lists:member(To,Visited)) end, maps:values(N)),
+  lists:foreach(fun (To) ->
+                    case process_info(To) of
+                      undefined -> ok;
+                      _ -> shutdown1(To,NextPlane,Visited)
+                    end
+                end, Ns),
   {keep_state, {N,C,T,D}, [{reply, From, ok}]};
 
 % handle other events generically

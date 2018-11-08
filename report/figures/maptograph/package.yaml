@@ -1,0 +1,17 @@
+name: maptograph
+
+# The packages we depend on
+dependencies:
+- base             # For built-in functions like `length`
+- parsec           # Uncomment this if you use Parsec for the parser
+
+# The basic library
+library:
+  source-dirs: src
+  exposed-modules:
+    - Parser
+
+# A simple command-line driver, that uses the library
+executable:
+  main: Main.hs
+  source-dirs: src

@@ -13,17 +13,13 @@ atom()     -> elements([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,x,y,z]).
 key()      -> ?SIZED(Size,choose(0,Size)).
 creature() -> {make_ref(), #{}}.
 
--ifndef(PRINT).
--define(PRINT(Var), io:format("DEBUG: ~p:~p - ~p~n~n ~p~n~n", [?MODULE, ?LINE, ??Var, Var])).
--endif.
-
 % Generating the map
 territory() ->
   ?LET(L, list({key(),list({atom(),key()})}),
-       maps:from_list(L)).
+       make_nonexisting_neighbours(maps:from_list(L))).
 
-% Setting up the territory
-setup_territory(Map) ->
+% Make sure that all neighbours exist
+make_nonexisting_neighbours(Map) ->
   NMap = maps:map(fun (_,V) -> maps:from_list(V) end, Map),
   Fun = fun (_,V,Acc) -> case maps:is_key(V,NMap) of
                            true -> Acc;
@@ -34,16 +30,20 @@ setup_territory(Map) ->
                            lists:append( Acc
                                        , maps:fold(Fun, [], V))
                        end, [], NMap),
-  NNMap = lists:foldl(fun (K,Acc) -> maps:put(K, #{}, Acc) end, NMap, NotInMap),
+  lists:foldl(fun (K,Acc) -> maps:put(K, #{}, Acc) end, NMap, NotInMap).
+
+
+% Setting up the territory
+setup_territory(Map) ->
   Ds = maps:map(fun (K,_) ->
                     {ok, District} = district:create(integer_to_list(K)),
                     District
-                end, NNMap),
+                end, Map),
   maps:map(fun (K,V) ->
                maps:map(fun (K1,V1) ->
                             district:connect(maps:get(K,Ds),K1,maps:get(V1,Ds))
                         end, V)
-           end, NNMap),
+           end, Map),
   maps:values(Ds).
 
 
@@ -80,12 +80,9 @@ prop_shutdown() ->
     ))))).
 
 is_shut_down(D) ->
-  try sys:get_state(D) of
-    {shutting_down,_} -> true;
-    _ -> false
-  catch
-    _   -> true;
-    _:_ -> true
+  case process_info(D) of
+    undefined -> true;
+    _         -> false
   end.
 
 
