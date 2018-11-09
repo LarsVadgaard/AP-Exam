@@ -1,0 +1,1696 @@
+
+==================== FINAL INTERFACE ====================
+2018-11-05 09:10:44.769906496 UTC
+
+interface main:TestSolver 8043
+  interface hash: bde6d3c345d5ffab0d96e985f7ccb487
+  ABI hash: 84756b6342fe4c7506b565d91b08c53e
+  export-list hash: 8e1e6c0b08c539ef511c453f0652f95a
+  orphan hash: 16ca75e8a1ada8aeb236d860a387ab63
+  flag hash: f87cfccf301c75dfb4e52ead32b7e8b1
+  opt_hash: 14e536840aca4e889cad654e6f9b79c1
+  hpc_hash: 93b885adfe0da089cdf634904fd59f71
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  TestSolver.db1
+  TestSolver.db2
+  TestSolver.db3
+  TestSolver.db4
+  TestSolver.db5
+  TestSolver.db6
+  TestSolver.db7
+  TestSolver.db8
+  TestSolver.out2
+  TestSolver.out3
+  TestSolver.out4
+  TestSolver.out7
+  TestSolver.out8
+  TestSolver.pname1
+  TestSolver.pname2
+  TestSolver.pname3
+  TestSolver.pname6
+  TestSolver.pname7
+  TestSolver.tests
+  TestSolver.ver1
+module dependencies:
+package dependencies: ansi-terminal-0.8.0.4 ansi-wl-pprint-0.6.8.2
+                      appm-0.0.0 array-0.5.2.0 async-2.2.1 base-4.11.1.0 binary-0.8.5.1
+                      bytestring-0.10.8.2 call-stack-0.1.0 clock-0.7.2 colour-2.3.4
+                      containers-0.5.11.0 deepseq-1.4.3.0 ghc-prim-0.5.2.0
+                      hashable-1.2.7.0 integer-gmp-1.0.2.0 mtl-2.2.2
+                      optparse-applicative-0.14.2.0 process-1.6.3.0 stm-2.4.5.0
+                      tagged-0.8.5 tasty-1.1.0.3 tasty-hunit-0.10.0.1 text-1.2.3.0
+                      transformers-0.5.5.0 unbounded-delays-0.1.1.0 unix-2.7.2.2
+                      wcwidth-0.0.2
+orphans: stm-2.4.5.0:Control.Monad.STM
+         hashable-1.2.7.0:Data.Hashable.Generic text-1.2.3.0:Data.Text.Lazy
+         text-1.2.3.0:Data.Text binary-0.8.5.1:Data.Binary.Generic
+         bytestring-0.10.8.2:Data.ByteString.Builder
+         text-1.2.3.0:Data.Text.Show
+         transformers-0.5.5.0:Control.Monad.Trans.Error
+         colour-2.3.4:Data.Colour base-4.11.1.0:GHC.Float
+         base-4.11.1.0:GHC.Base
+family instance modules: base-4.11.1.0:Control.Applicative
+                         base-4.11.1.0:Data.Complex base-4.11.1.0:Data.Functor.Compose
+                         base-4.11.1.0:Data.Functor.Const
+                         base-4.11.1.0:Data.Functor.Identity
+                         base-4.11.1.0:Data.Functor.Product base-4.11.1.0:Data.Functor.Sum
+                         base-4.11.1.0:Data.Monoid base-4.11.1.0:Data.Semigroup
+                         base-4.11.1.0:Data.Semigroup.Internal base-4.11.1.0:Data.Version
+                         base-4.11.1.0:Data.Void base-4.11.1.0:GHC.Exts
+                         base-4.11.1.0:GHC.Generics base-4.11.1.0:GHC.IO.Exception
+                         clock-0.7.2:System.Clock containers-0.5.11.0:Data.IntMap.Internal
+                         containers-0.5.11.0:Data.IntSet.Internal
+                         containers-0.5.11.0:Data.Map.Internal
+                         containers-0.5.11.0:Data.Sequence.Internal
+                         containers-0.5.11.0:Data.Set.Internal containers-0.5.11.0:Data.Tree
+                         tagged-0.8.5:Data.Tagged tasty-1.1.0.3:Test.Tasty.Core
+                         text-1.2.3.0:Data.Text text-1.2.3.0:Data.Text.Lazy
+import  -/  appm-0.0.0:Defs 33704ed0d96c186bd2b1ffcf2d3c5e21
+import  -/  appm-0.0.0:Solver b1272b863643bca228023a2cfc5165eb
+import  -/  appm-0.0.0:SolverImpl 37041eaf1b368993062e4573a24ebe9f
+import  -/  base-4.11.1.0:Prelude 0750c25585e2b797cd78291d423d39dd
+import  -/  tasty-1.1.0.3:Test.Tasty 3aee3445f1ab857a6b68dde2f15a99f9
+import  -/  tasty-1.1.0.3:Test.Tasty.Core c12f1e13f1a16d28e3df29c23937c462
+import  -/  tasty-hunit-0.10.0.1:Test.Tasty.HUnit 6c91261a2c27cb83a268b6d3017c9a06
+import  -/  tasty-hunit-0.10.0.1:Test.Tasty.HUnit.Orig eaa0b10673ab6d8aa2d32b170f906247
+135c8e38cc44a98cd90564a510639a3a
+  $s$fEq(,) :: GHC.Classes.Eq (Defs.PName, Defs.Version)
+  {- HasNoCafRefs, Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ (Defs.PName, Defs.Version)
+                  (GHC.Classes.$fEq(,)_$c==
+                     @ Defs.PName
+                     @ Defs.Version
+                     Defs.$fEqPName
+                     Defs.$fEqVersion)
+                  TestSolver.$s$fEq(,)_$s$fEq(,)_$c/= -}
+c8932c4e94fa118d0cfb24d8f7f9a240
+  $s$fEq(,)_$s$fEq(,)_$c/= ::
+    (Defs.PName, Defs.Version)
+    -> (Defs.PName, Defs.Version) -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SL),1*U(1*U,1*U)><S(SL),1*U(1*U,1*U)>,
+     Inline: (sat-args=2),
+     Unfolding: InlineRule (2, False, False)
+                (\ (x :: (Defs.PName, Defs.Version))
+                   (y :: (Defs.PName, Defs.Version)) ->
+                 case x of wild { (,) a1 a2 ->
+                 case y of wild1 { (,) b1 b2 ->
+                 case GHC.Base.eqString
+                        a1 `cast` (Defs.N:PName[0])
+                        b1 `cast` (Defs.N:PName[0]) of wild2 {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True
+                   -> case GHC.Classes.$fEq[]_$c==
+                             @ Defs.VNum
+                             Defs.$fEqVNum
+                             a2 `cast` (Defs.N:Version[0])
+                             b2 `cast` (Defs.N:Version[0]) of wild3 {
+                        GHC.Types.False -> GHC.Types.True
+                        GHC.Types.True -> GHC.Types.False } } } }) -}
+ef9feabef9ceedf1e660d84da916233b
+  $s$fShowMaybe ::
+    GHC.Show.Show (GHC.Base.Maybe [(Defs.PName, Defs.Version)])
+  {- Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ (GHC.Base.Maybe [(Defs.PName, Defs.Version)])
+                  (GHC.Show.$fShowMaybe_$cshowsPrec
+                     @ [(Defs.PName, Defs.Version)]
+                     TestSolver.$s$fShowMaybe_$s$fShow[])
+                  (\ (x :: GHC.Base.Maybe [(Defs.PName, Defs.Version)]) ->
+                   case x of wild {
+                     GHC.Base.Nothing -> GHC.Show.$fShowMaybe4
+                     GHC.Base.Just b1
+                     -> GHC.Base.augment
+                          @ GHC.Types.Char
+                          (\ @ b
+                             (c :: GHC.Types.Char -> b -> b)[OneShot]
+                             (n :: b)[OneShot] ->
+                           GHC.Base.foldr @ GHC.Types.Char @ b c n GHC.Show.$fShowMaybe1)
+                          (case b1 of wild1 {
+                             []
+                             -> GHC.CString.unpackAppendCString#
+                                  GHC.Show.showList__4
+                                  (GHC.Types.[] @ GHC.Types.Char)
+                             : x1 xs
+                             -> GHC.Types.:
+                                  @ GHC.Types.Char
+                                  GHC.Show.showList__3
+                                  (GHC.Show.$fShow(,)_$cshowsPrec
+                                     @ Defs.PName
+                                     @ Defs.Version
+                                     Defs.$fShowPName
+                                     Defs.$fShowVersion
+                                     GHC.Show.$fShow(,)1
+                                     x1
+                                     (let {
+                                        lvl55 :: [GHC.Types.Char]
+                                        = GHC.Types.:
+                                            @ GHC.Types.Char
+                                            GHC.Show.showList__2
+                                            (GHC.Types.[] @ GHC.Types.Char)
+                                      } in
+                                      letrec {
+                                        showl1 :: [(Defs.PName, Defs.Version)] -> GHC.Base.String
+                                          {- Arity: 1, Strictness: <S,1*U> -}
+                                        = \ (ds2 :: [(Defs.PName, Defs.Version)]) ->
+                                          case ds2 of wild2 {
+                                            [] -> lvl55
+                                            : y ys
+                                            -> GHC.Types.:
+                                                 @ GHC.Types.Char
+                                                 GHC.Show.showList__1
+                                                 (GHC.Show.$fShow(,)_$cshowsPrec
+                                                    @ Defs.PName
+                                                    @ Defs.Version
+                                                    Defs.$fShowPName
+                                                    Defs.$fShowVersion
+                                                    GHC.Show.$fShow(,)1
+                                                    y
+                                                    (showl1 ys)) }
+                                      } in
+                                      showl1 xs)) }) })
+                  (\ (ls :: [GHC.Base.Maybe [(Defs.PName, Defs.Version)]])
+                     (s :: GHC.Base.String) ->
+                   GHC.Show.showList__
+                     @ (GHC.Base.Maybe [(Defs.PName, Defs.Version)])
+                     (GHC.Show.$fShowMaybe_$cshowsPrec
+                        @ [(Defs.PName, Defs.Version)]
+                        TestSolver.$s$fShowMaybe_$s$fShow[]
+                        GHC.Show.$fShow(,)1)
+                     ls
+                     s) -}
+355d77d9212d46f5f84aa30ea1181e01
+  $s$fShowMaybe_$s$fShow[] ::
+    GHC.Show.Show [(Defs.PName, Defs.Version)]
+  {- Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ [(Defs.PName, Defs.Version)]
+                  (\ (ds :: GHC.Types.Int)
+                     (ls :: [(Defs.PName, Defs.Version)])
+                     (s :: GHC.Base.String) ->
+                   GHC.Show.showList__
+                     @ (Defs.PName, Defs.Version)
+                     (GHC.Show.$fShow(,)_$cshowsPrec
+                        @ Defs.PName
+                        @ Defs.Version
+                        Defs.$fShowPName
+                        Defs.$fShowVersion
+                        GHC.Show.$fShow(,)1)
+                     ls
+                     s)
+                  (\ (x :: [(Defs.PName, Defs.Version)]) ->
+                   GHC.Show.showList__
+                     @ (Defs.PName, Defs.Version)
+                     (GHC.Show.$fShow(,)_$cshowsPrec
+                        @ Defs.PName
+                        @ Defs.Version
+                        Defs.$fShowPName
+                        Defs.$fShowVersion
+                        GHC.Show.$fShow(,)1)
+                     x
+                     (GHC.Types.[] @ GHC.Types.Char))
+                  (\ (ls :: [[(Defs.PName, Defs.Version)]]) (s :: GHC.Base.String) ->
+                   GHC.Show.showList__
+                     @ [(Defs.PName, Defs.Version)]
+                     (\ (ls1 :: [(Defs.PName, Defs.Version)])
+                        (s1 :: GHC.Base.String)[OneShot] ->
+                      GHC.Show.showList__
+                        @ (Defs.PName, Defs.Version)
+                        (GHC.Show.$fShow(,)_$cshowsPrec
+                           @ Defs.PName
+                           @ Defs.Version
+                           Defs.$fShowPName
+                           Defs.$fShowVersion
+                           GHC.Show.$fShow(,)1)
+                        ls1
+                        s1)
+                     ls
+                     s) -}
+45be5d77d3f07784976385a273578df5
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module
+                   TestSolver.$trModule3
+                   TestSolver.$trModule1) -}
+df6794f95661fd92dcfe66e5e78bf4be
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS TestSolver.$trModule2) -}
+a56057ad9a1d425a8812c6c9055bff03
+  $trModule2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("TestSolver"#) -}
+b9e2cb8fcb6d61c9936b96bc5ab4d68d
+  $trModule3 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS TestSolver.$trModule4) -}
+ba36e40a4a86a87710b8e265c2852f61
+  $trModule4 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("main"#) -}
+940b5dabbe1902f56511a2e3e352d589
+  db1 :: Defs.Database
+  {- Strictness: m2,
+     Unfolding: InlineRule (0, True, True)
+                TestSolver.db11 `cast` (Sym (Defs.N:Database[0])) -}
+0490e22e21fe56eb8652c8c1b8bb9ce2
+  db100 :: Defs.VNum
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (Defs.VN
+                   TestSolver.db101
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+82b9e4e84b045abf66a1c0cb5fc93331
+  db101 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 11#) -}
+e11e051b1c20ecafed9e907977c1790a
+  db102 :: Defs.Pkg
+  {- Strictness: m,
+     Unfolding: (Defs.Pkg
+                   TestSolver.db16 `cast` (Sym (Defs.N:PName[0]))
+                   TestSolver.db74 `cast` (Sym (Defs.N:Version[0]))
+                   TestSolver.db72
+                   TestSolver.db103) -}
+a8472088180ec65fd8138e34cc25eaaf
+  db103 :: [(Defs.PName, Defs.PConstr)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Defs.PName, Defs.PConstr)
+                   TestSolver.db107
+                   TestSolver.db104) -}
+645fccee7bf53482561f654074a8a630
+  db104 :: [(Defs.PName, Defs.PConstr)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Defs.PName, Defs.PConstr)
+                   TestSolver.db105
+                   (GHC.Types.[] @ (Defs.PName, Defs.PConstr))) -}
+935614afcca9373ae17828858780003b
+  db105 :: (Defs.PName, (GHC.Types.Bool, Defs.Version, Defs.Version))
+  {- Strictness: m,
+     Unfolding: ((TestSolver.db28 `cast` (Sym (Defs.N:PName[0])),
+                  TestSolver.db106)) -}
+32c3659256098c32f43312e631edb482
+  db106 :: (GHC.Types.Bool, Defs.Version, Defs.Version)
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: ((GHC.Types.True,
+                  Defs.minV1 `cast` (Sym (Defs.N:Version[0])),
+                  Defs.maxV1 `cast` (Sym (Defs.N:Version[0])))) -}
+3a5f2edaf181e67bee0e22324ac078fb
+  db107 :: (Defs.PName, (GHC.Types.Bool, Defs.Version, Defs.Version))
+  {- Strictness: m,
+     Unfolding: ((TestSolver.db88 `cast` (Sym (Defs.N:PName[0])),
+                  TestSolver.db108)) -}
+ceeb931c50cba71c7e6324976f16beba
+  db108 :: (GHC.Types.Bool, Defs.Version, Defs.Version)
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: ((GHC.Types.False,
+                  Defs.minV1 `cast` (Sym (Defs.N:Version[0])),
+                  TestSolver.db109 `cast` (Sym (Defs.N:Version[0])))) -}
+0d88599b184c1bc034baca485c8896a3
+  db109 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db86
+                   TestSolver.db52) -}
+49ad971c64b76d0f584a8b3609100b3f
+  db11 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db12
+                   (GHC.Types.[] @ Defs.Pkg)) -}
+570729b8916fa9bcda4b944a5f5545e4
+  db110 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db121
+                   TestSolver.db111) -}
+72a6b8d311ada16978cad6bce24f89b0
+  db111 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db65
+                   TestSolver.db112) -}
+b5616a7ffe41ebdfc62e0467460c870a
+  db112 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db120
+                   TestSolver.db113) -}
+d3b9967dccc48b004c5daea78f0ef550
+  db113 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db55
+                   TestSolver.db114) -}
+371dee01456c600214ed5bce9e5c2455
+  db114 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db119
+                   TestSolver.db115) -}
+d10a44f6d8f8b7a60f8e651636393b82
+  db115 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db116
+                   TestSolver.db23) -}
+c6535d725b06e006acf2d30312120261
+  db116 :: Defs.Pkg
+  {- Strictness: m,
+     Unfolding: (Defs.Pkg
+                   TestSolver.db53 `cast` (Sym (Defs.N:PName[0]))
+                   TestSolver.db51 `cast` (Sym (Defs.N:Version[0]))
+                   TestSolver.db49
+                   TestSolver.db117) -}
+c6f6e2a8e16e661f38ae016a39c1e5ce
+  db117 :: [(Defs.PName, Defs.PConstr)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Defs.PName, Defs.PConstr)
+                   TestSolver.db118
+                   (GHC.Types.[] @ (Defs.PName, Defs.PConstr))) -}
+789754625ccbad57063b58aaf478d5cf
+  db118 :: (Defs.PName, (GHC.Types.Bool, Defs.Version, Defs.Version))
+  {- Strictness: m,
+     Unfolding: ((TestSolver.db88 `cast` (Sym (Defs.N:PName[0])),
+                  TestSolver.db84)) -}
+31f2acbba6c54e12c1e3c6816e43c9e4
+  db119 :: Defs.Pkg
+  {- Strictness: m,
+     Unfolding: (Defs.Pkg
+                   TestSolver.db88 `cast` (Sym (Defs.N:PName[0]))
+                   TestSolver.db93 `cast` (Sym (Defs.N:Version[0]))
+                   (GHC.Types.[] @ GHC.Types.Char)
+                   TestSolver.db91) -}
+16d4f502ad6c50774f2dd133820bac33
+  db12 :: Defs.Pkg
+  {- Strictness: m,
+     Unfolding: (Defs.Pkg
+                   TestSolver.db16 `cast` (Sym (Defs.N:PName[0]))
+                   TestSolver.db13 `cast` (Sym (Defs.N:Version[0]))
+                   (GHC.Types.[] @ GHC.Types.Char)
+                   (GHC.Types.[] @ (Defs.PName, Defs.PConstr))) -}
+ba929f9ac45846e455fa881ad944033c
+  db120 :: Defs.Pkg
+  {- Strictness: m,
+     Unfolding: (Defs.Pkg
+                   TestSolver.db88 `cast` (Sym (Defs.N:PName[0]))
+                   TestSolver.db99 `cast` (Sym (Defs.N:Version[0]))
+                   TestSolver.db97
+                   TestSolver.db91) -}
+293386a7391db96867d90a5e0734bc37
+  db121 :: Defs.Pkg
+  {- Strictness: m,
+     Unfolding: (Defs.Pkg
+                   TestSolver.db16 `cast` (Sym (Defs.N:PName[0]))
+                   TestSolver.db74 `cast` (Sym (Defs.N:Version[0]))
+                   TestSolver.db72
+                   TestSolver.db122) -}
+904f3efcc2a0426c161c145347242f48
+  db122 :: [(Defs.PName, Defs.PConstr)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Defs.PName, Defs.PConstr)
+                   TestSolver.db123
+                   TestSolver.db104) -}
+a0e36005577f0e7825d60351034ff9e4
+  db123 :: (Defs.PName, (GHC.Types.Bool, Defs.Version, Defs.Version))
+  {- Strictness: m,
+     Unfolding: ((TestSolver.db88 `cast` (Sym (Defs.N:PName[0])),
+                  TestSolver.db124)) -}
+1d091f40b212d8ca672cc0258f488c9d
+  db124 :: (GHC.Types.Bool, Defs.Version, Defs.Version)
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: ((GHC.Types.False,
+                  Defs.minV1 `cast` (Sym (Defs.N:Version[0])),
+                  TestSolver.db125 `cast` (Sym (Defs.N:Version[0])))) -}
+a977d2543a185430feff31b36b6c260c
+  db125 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db126
+                   TestSolver.db52) -}
+c7ce0e0bb3caa0689b9665b865e24e92
+  db126 :: Defs.VNum
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (Defs.VN
+                   TestSolver.db127
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+f876ed074233e631c285a6b6b3357562
+  db127 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 12#) -}
+2e759d2fe87d8274261be3d4d4c98699
+  db128 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db121
+                   TestSolver.db129) -}
+0b826f52b1a13363ee5fceaeb1e83c27
+  db129 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db133
+                   TestSolver.db130) -}
+7f20e03b40f7919963567d69d641ccef
+  db13 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db14
+                   (GHC.Types.[] @ Defs.VNum)) -}
+f01450027fb8d9619950cb7ba73314dd
+  db130 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db120
+                   TestSolver.db131) -}
+746a77a836593c26e312968c04980c91
+  db131 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db132
+                   TestSolver.db114) -}
+9108e2a7a6f19a0497c5063fbcf68dd3
+  db132 :: Defs.Pkg
+  {- Strictness: m,
+     Unfolding: (Defs.Pkg
+                   TestSolver.db47 `cast` (Sym (Defs.N:PName[0]))
+                   TestSolver.db60 `cast` (Sym (Defs.N:Version[0]))
+                   (GHC.Types.[] @ GHC.Types.Char)
+                   TestSolver.db56) -}
+c227f37c3ca08952c25be921c12c52e0
+  db133 :: Defs.Pkg
+  {- Strictness: m,
+     Unfolding: (Defs.Pkg
+                   TestSolver.db28 `cast` (Sym (Defs.N:PName[0]))
+                   TestSolver.db134 `cast` (Sym (Defs.N:Version[0]))
+                   TestSolver.db25
+                   (GHC.Types.[] @ (Defs.PName, Defs.PConstr))) -}
+7891047e37a9bca4e73d516137e23b23
+  db134 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db135
+                   TestSolver.db13) -}
+2ac74e98be63b884f077b0084dabfc39
+  db135 :: Defs.VNum
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (Defs.VN
+                   TestSolver.db136
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+3d7eb133692437f430286ff8a9b34a90
+  db136 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 7#) -}
+20e95d92857aba4ab7eca9dcf606c123
+  db14 :: Defs.VNum
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (Defs.VN
+                   TestSolver.db15
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+41dae952245b4c7d62bdf9b994136e92
+  db15 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 1#) -}
+6724581618e7fbb076dc36f8f6cc1559
+  db16 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.db17) -}
+065c42cf9cc7cbca909d4c4077af0438
+  db17 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("foo"#) -}
+d2d5096b83b2e46a4d40d95ddc1ed483
+  db18 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db71
+                   TestSolver.db19) -}
+5c2a26af061933504749e93a9fa9b37f
+  db19 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db67
+                   TestSolver.db20) -}
+d3e4fc2fb467141575c5975c5125bb2b
+  db2 :: Defs.Database
+  {- Strictness: m2,
+     Unfolding: InlineRule (0, True, True)
+                TestSolver.db18 `cast` (Sym (Defs.N:Database[0])) -}
+fb34dad1f782ec14fec14841bc5d8531
+  db20 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db65
+                   TestSolver.db21) -}
+976f89c9200601e29bf3e936ebc74e53
+  db21 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db55
+                   TestSolver.db22) -}
+ac441c06a2802d980283a4af63677f3f
+  db22 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db30
+                   TestSolver.db23) -}
+c80b9b7187771e69e2c6b85dafe20e7d
+  db23 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db24
+                   (GHC.Types.[] @ Defs.Pkg)) -}
+4c24f88b25d63805bbdd45616aff4caf
+  db24 :: Defs.Pkg
+  {- Strictness: m,
+     Unfolding: (Defs.Pkg
+                   TestSolver.db28 `cast` (Sym (Defs.N:PName[0]))
+                   TestSolver.db27 `cast` (Sym (Defs.N:Version[0]))
+                   TestSolver.db25
+                   (GHC.Types.[] @ (Defs.PName, Defs.PConstr))) -}
+d084d247f903b9047e530e691cbc3585
+  db25 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.db26) -}
+2e05a316badedc0ff6571e0ccfc58836
+  db26 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("The bar library, new API"#) -}
+a01edd51a6bfc18b931ccb3a1c55bfa3
+  db27 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db14
+                   TestSolver.db13) -}
+4c120e563e506f011c69fe9d02a0c0fa
+  db28 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.db29) -}
+dbda4a8e7930dbe22a554767de7f867d
+  db29 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("bar"#) -}
+ca484691a1c8c1a659b69f8747c47185
+  db3 :: Defs.Database
+  {- Strictness: m2,
+     Unfolding: InlineRule (0, True, True)
+                TestSolver.db75 `cast` (Sym (Defs.N:Database[0])) -}
+fba7870692be7237924f0f20a7c3d5c3
+  db30 :: Defs.Pkg
+  {- Strictness: m,
+     Unfolding: (Defs.Pkg
+                   TestSolver.db53 `cast` (Sym (Defs.N:PName[0]))
+                   TestSolver.db51 `cast` (Sym (Defs.N:Version[0]))
+                   TestSolver.db49
+                   TestSolver.db31) -}
+28f48be0fd25082b0981b6bf784cb92d
+  db31 :: [(Defs.PName, Defs.PConstr)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Defs.PName, Defs.PConstr)
+                   TestSolver.db32
+                   (GHC.Types.[] @ (Defs.PName, Defs.PConstr))) -}
+1fa5729a04d5372591a5a477d9c1b599
+  db32 :: (Defs.PName, (GHC.Types.Bool, Defs.Version, Defs.Version))
+  {- Strictness: m,
+     Unfolding: ((TestSolver.db47 `cast` (Sym (Defs.N:PName[0])),
+                  TestSolver.db33)) -}
+23f90422063c0a2b570c3d4527657140
+  db33 :: (GHC.Types.Bool, Defs.Version, Defs.Version)
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: ((GHC.Types.True,
+                  TestSolver.db43 `cast` (Sym (Defs.N:Version[0])),
+                  TestSolver.db34 `cast` (Sym (Defs.N:Version[0])))) -}
+3c4813e843b47fe03744fc9b3299491a
+  db34 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db41
+                   TestSolver.db35) -}
+40949ce214e97bcc2df81af2cb2975c7
+  db35 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db39
+                   TestSolver.db36) -}
+d8fe170447f03cba884bc66cc503b3c2
+  db36 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db37
+                   (GHC.Types.[] @ Defs.VNum)) -}
+c7e54fb0b7ee8acadf4bfb00886eb846
+  db37 :: Defs.VNum
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (Defs.VN
+                   TestSolver.db38
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+dc29c9c4e3de7d95bbafb474f646bc67
+  db38 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 3#) -}
+f60f93a7e5f35bd49d2cf8302f462952
+  db39 :: Defs.VNum
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (Defs.VN
+                   TestSolver.db40
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+f6aca9721da6ad4a2a6bde658b57c18e
+  db4 :: Defs.Database
+  {- Strictness: m2,
+     Unfolding: InlineRule (0, True, True)
+                TestSolver.db110 `cast` (Sym (Defs.N:Database[0])) -}
+b633d3db4c0509f7f426c84ccd32d3ae
+  db40 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 0#) -}
+ad62383141fd317649b832544cf08465
+  db41 :: Defs.VNum
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (Defs.VN
+                   TestSolver.db42
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+ae1f2ae7f237129823da930012bbe344
+  db42 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 5#) -}
+09e9e24037ae37b503b1c6d77139314e
+  db43 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db37
+                   TestSolver.db44) -}
+a534c889ed3c8e108b46b3cacabf13b7
+  db44 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db45
+                   (GHC.Types.[] @ Defs.VNum)) -}
+8d10ea69a0a8c5677b1b5d00ee66f78d
+  db45 :: Defs.VNum
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (Defs.VN
+                   TestSolver.db46
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+b1a5a43a2ca590fb300e3abc01401ee9
+  db46 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 4#) -}
+03441f7e0eef92591ff8a62f5d2b763a
+  db47 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.db48) -}
+784f9ebb8f8ef13185ab599ecd47d1d2
+  db48 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("baz"#) -}
+f416b16a9044cfa18e1b6e387b243e33
+  db49 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.db50) -}
+7226cbeb61fa746a7398cc9adceaeed1
+  db5 :: Defs.Database
+  {- HasNoCafRefs,
+     Unfolding: InlineRule (0, True, True)
+                (GHC.Types.[] @ Defs.Pkg) `cast` (Sym (Defs.N:Database[0])) -}
+a1edbc82c4ec9a5fa5d96eb6db3cff1d
+  db50 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("The beef library"#) -}
+dcd48e47bcc7888cd237ef96886397e3
+  db51 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db14
+                   TestSolver.db52) -}
+fd3181371f41d2ad6b18b5b69e1bb814
+  db52 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db39
+                   (GHC.Types.[] @ Defs.VNum)) -}
+861e8bc7f3fad78ad303761cc62bb358
+  db53 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.db54) -}
+16d1407e41bbe7a6255e59367931a1a7
+  db54 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("beef"#) -}
+7ad02cd2a2a9b3719f81d530ee53a1a7
+  db55 :: Defs.Pkg
+  {- Strictness: m,
+     Unfolding: (Defs.Pkg
+                   TestSolver.db47 `cast` (Sym (Defs.N:PName[0]))
+                   TestSolver.db60 `cast` (Sym (Defs.N:Version[0]))
+                   (GHC.Types.[] @ GHC.Types.Char)
+                   TestSolver.db56) -}
+21c957a2281917393779113a34d6ee53
+  db56 :: [(Defs.PName, Defs.PConstr)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Defs.PName, Defs.PConstr)
+                   TestSolver.db57
+                   (GHC.Types.[] @ (Defs.PName, Defs.PConstr))) -}
+cf82326dfaf84c9a4c6a369ee72a755b
+  db57 :: (Defs.PName, (GHC.Types.Bool, Defs.Version, Defs.Version))
+  {- Strictness: m,
+     Unfolding: ((TestSolver.db28 `cast` (Sym (Defs.N:PName[0])),
+                  TestSolver.db58)) -}
+12e84ac26a9ad26bb88cd7df2d751232
+  db58 :: (GHC.Types.Bool, Defs.Version, Defs.Version)
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: ((GHC.Types.True,
+                  TestSolver.db59 `cast` (Sym (Defs.N:Version[0])),
+                  TestSolver.db34 `cast` (Sym (Defs.N:Version[0])))) -}
+2b8517806f78fda2193682bf0fb3a65e
+  db59 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db39
+                   TestSolver.db44) -}
+76eb5b617730b09df8b5cafe89cafb3b
+  db6 :: Defs.Database
+  {- Strictness: m2,
+     Unfolding: InlineRule (0, True, True)
+                TestSolver.db110 `cast` (Sym (Defs.N:Database[0])) -}
+4b9ee08c2dc8fb69e6ab5367f5abce0d
+  db60 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db45
+                   TestSolver.db61) -}
+29e09b0b06d44a7cce732547913cfd06
+  db61 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db14
+                   TestSolver.db62) -}
+832886dffe79848965328b50ea8bb357
+  db62 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db63
+                   (GHC.Types.[] @ Defs.VNum)) -}
+52570947d72a812c3d9eb167509fa5b4
+  db63 :: Defs.VNum
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (Defs.VN
+                   TestSolver.db64
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+65328db9bf21f4386832f8f4e57772cb
+  db64 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 2#) -}
+f860c6f789de8470fb1dfc36fb4e13b8
+  db65 :: Defs.Pkg
+  {- Strictness: m,
+     Unfolding: (Defs.Pkg
+                   TestSolver.db28 `cast` (Sym (Defs.N:PName[0]))
+                   TestSolver.db66 `cast` (Sym (Defs.N:Version[0]))
+                   TestSolver.db25
+                   (GHC.Types.[] @ (Defs.PName, Defs.PConstr))) -}
+d7d18edf938760b4e879ec0c413bf63f
+  db66 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db63
+                   TestSolver.db13) -}
+56a5cbfb98cd5537232ffac714a21be9
+  db67 :: Defs.Pkg
+  {- Strictness: m,
+     Unfolding: (Defs.Pkg
+                   TestSolver.db53 `cast` (Sym (Defs.N:PName[0]))
+                   TestSolver.db70 `cast` (Sym (Defs.N:Version[0]))
+                   TestSolver.db68
+                   TestSolver.db31) -}
+9c59617432d6432ece134eab3cfc136d
+  db68 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.db69) -}
+e63aa6de132ee3316bc23bedcb36ea49
+  db69 :: GHC.Prim.Addr#
+  {- HasNoCafRefs,
+     Unfolding: ("The beef library - new API, same dependencies"#) -}
+ecaa330247ff6d9e79859bfaed5b6747
+  db7 :: Defs.Database
+  {- Strictness: m2,
+     Unfolding: InlineRule (0, True, True)
+                TestSolver.db110 `cast` (Sym (Defs.N:Database[0])) -}
+7408fa12c2011cbd017f820a3d02600a
+  db70 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db63
+                   TestSolver.db52) -}
+4904268427931aad2bcbda47a887c0af
+  db71 :: Defs.Pkg
+  {- Strictness: m,
+     Unfolding: (Defs.Pkg
+                   TestSolver.db16 `cast` (Sym (Defs.N:PName[0]))
+                   TestSolver.db74 `cast` (Sym (Defs.N:Version[0]))
+                   TestSolver.db72
+                   (GHC.Types.[] @ (Defs.PName, Defs.PConstr))) -}
+18bf825eeb313545a48d3b63c7b70d30
+  db72 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.db73) -}
+2ebbf93748b7c9567140b12037725f4d
+  db73 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("The foo application"#) -}
+60ee6adb723b4e2ece5ade0bec6430df
+  db74 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db63
+                   TestSolver.db36) -}
+03de7f83b8e28bcab72ed5f576250cdd
+  db75 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db102
+                   TestSolver.db76) -}
+770b4011e5099c1b684626ec97b615f5
+  db76 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db65
+                   TestSolver.db77) -}
+0575be3b390d56fa47ef748f11aa1235
+  db77 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db96
+                   TestSolver.db78) -}
+6db3446a2980fd0a6598b83aed94c781
+  db78 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db55
+                   TestSolver.db79) -}
+c3a1b22173a6145b993a71be3388f5f5
+  db79 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db90
+                   TestSolver.db80) -}
+e4f4a54232ce78a542882269665fd4f2
+  db8 :: Defs.Database
+  {- Strictness: m2,
+     Unfolding: InlineRule (0, True, True)
+                TestSolver.db128 `cast` (Sym (Defs.N:Database[0])) -}
+8f1fbce5c39f568b13faf9afaae88134
+  db80 :: [Defs.Pkg]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.Pkg
+                   TestSolver.db81
+                   TestSolver.db23) -}
+a60de81bde4d0356419d59dce4aac05a
+  db81 :: Defs.Pkg
+  {- Strictness: m,
+     Unfolding: (Defs.Pkg
+                   TestSolver.db53 `cast` (Sym (Defs.N:PName[0]))
+                   TestSolver.db51 `cast` (Sym (Defs.N:Version[0]))
+                   TestSolver.db49
+                   TestSolver.db82) -}
+bce2a570e0ba4bf0a55bd4f73a755e5b
+  db82 :: [(Defs.PName, Defs.PConstr)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Defs.PName, Defs.PConstr)
+                   TestSolver.db83
+                   (GHC.Types.[] @ (Defs.PName, Defs.PConstr))) -}
+da30d66229cdb7ca0e31ebd5a38f8a7d
+  db83 :: (Defs.PName, (GHC.Types.Bool, Defs.Version, Defs.Version))
+  {- Strictness: m,
+     Unfolding: ((TestSolver.db88 `cast` (Sym (Defs.N:PName[0])),
+                  TestSolver.db84)) -}
+8211c016c0d3a8cd426aa57ee9ef0199
+  db84 :: (GHC.Types.Bool, Defs.Version, Defs.Version)
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: ((GHC.Types.True,
+                  TestSolver.db43 `cast` (Sym (Defs.N:Version[0])),
+                  TestSolver.db85 `cast` (Sym (Defs.N:Version[0])))) -}
+b59ab4cfff085363fee9cffad474493b
+  db85 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db86
+                   TestSolver.db35) -}
+98b2cb87bb26081b583c48d232c069b5
+  db86 :: Defs.VNum
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (Defs.VN
+                   TestSolver.db87
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+8090da6db0249d01433ef41ce8a275ca
+  db87 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 9#) -}
+e4df0e764c1121dc4cc44407807f9eb1
+  db88 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.db89) -}
+ee6b1063bb0d9abff2b80f7eb713a091
+  db89 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("vim"#) -}
+c48c0e578f24f2a4e48ce55111062a74
+  db90 :: Defs.Pkg
+  {- Strictness: m,
+     Unfolding: (Defs.Pkg
+                   TestSolver.db88 `cast` (Sym (Defs.N:PName[0]))
+                   TestSolver.db93 `cast` (Sym (Defs.N:Version[0]))
+                   (GHC.Types.[] @ GHC.Types.Char)
+                   TestSolver.db91) -}
+7d2c6761742b907394d60688e1ed7438
+  db91 :: [(Defs.PName, Defs.PConstr)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Defs.PName, Defs.PConstr)
+                   TestSolver.db92
+                   (GHC.Types.[] @ (Defs.PName, Defs.PConstr))) -}
+bea38199c8ffd65642abb6b4e5f42ff3
+  db92 :: (Defs.PName, (GHC.Types.Bool, Defs.Version, Defs.Version))
+  {- Strictness: m,
+     Unfolding: ((TestSolver.db16 `cast` (Sym (Defs.N:PName[0])),
+                  TestSolver.db58)) -}
+50750e41877178ff9b4ebcf12c540650
+  db93 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db94
+                   TestSolver.db61) -}
+b14099713a1d0809dba55cd1e0eb790f
+  db94 :: Defs.VNum
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (Defs.VN
+                   TestSolver.db95
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+8e422991cad8a1ef663cdd84103b4f72
+  db95 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 8#) -}
+b367a6d915d3ab657e41d0c9db9506e2
+  db96 :: Defs.Pkg
+  {- Strictness: m,
+     Unfolding: (Defs.Pkg
+                   TestSolver.db88 `cast` (Sym (Defs.N:PName[0]))
+                   TestSolver.db99 `cast` (Sym (Defs.N:Version[0]))
+                   TestSolver.db97
+                   TestSolver.db91) -}
+e4e6e680dd3911a9485b249de42214b4
+  db97 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.db98) -}
+bc16e93eecf22ddcb32ac4bc08d12ba9
+  db98 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("neovim"#) -}
+19cd1cd3ddc4d608100cd555b51fb227
+  db99 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   TestSolver.db100
+                   TestSolver.db61) -}
+72ee7002732e28fe8f006c95694e3231
+  out1 :: [(Defs.PName, Defs.Version)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Defs.PName, Defs.Version)
+                   TestSolver.out5
+                   (GHC.Types.[] @ (Defs.PName, Defs.Version))) -}
+a0faa911bd53da2a1000e1f0048aefa2
+  out10 :: (Defs.PName, Defs.Version)
+  {- Strictness: m,
+     Unfolding: ((TestSolver.db53 `cast` (Sym (Defs.N:PName[0])),
+                  TestSolver.db70 `cast` (Sym (Defs.N:Version[0])))) -}
+350cc630ca12037ec3ea543b44d83384
+  out11 :: [(Defs.PName, Defs.Version)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Defs.PName, Defs.Version)
+                   TestSolver.out12
+                   TestSolver.out1) -}
+2bf9df9f77baf9cad1c1207e7c6fcd0d
+  out12 :: (Defs.PName, Defs.Version)
+  {- Strictness: m,
+     Unfolding: ((TestSolver.db16 `cast` (Sym (Defs.N:PName[0])),
+                  TestSolver.db74 `cast` (Sym (Defs.N:Version[0])))) -}
+730c080f4b29ff3c91e47b0310c53c03
+  out13 :: (Defs.PName, Defs.Version)
+  {- Strictness: m,
+     Unfolding: ((TestSolver.db88 `cast` (Sym (Defs.N:PName[0])),
+                  TestSolver.db93 `cast` (Sym (Defs.N:Version[0])))) -}
+e74dbd5fbfacb921d7b37d4e4a2bdb12
+  out14 :: (Defs.PName, Defs.Version)
+  {- Strictness: m,
+     Unfolding: ((TestSolver.db88 `cast` (Sym (Defs.N:PName[0])),
+                  TestSolver.db99 `cast` (Sym (Defs.N:Version[0])))) -}
+1a5083943adb657b9d2dd3c156874257
+  out15 :: [(Defs.PName, Defs.Version)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Defs.PName, Defs.Version)
+                   TestSolver.out16
+                   (GHC.Types.[] @ (Defs.PName, Defs.Version))) -}
+5e1e49d7faa9b25a574d42e04b1385a3
+  out16 :: (Defs.PName, Defs.Version)
+  {- Strictness: m,
+     Unfolding: ((TestSolver.db28 `cast` (Sym (Defs.N:PName[0])),
+                  TestSolver.db27 `cast` (Sym (Defs.N:Version[0])))) -}
+ad351956af194717aefbb70ffdf7cded
+  out2 :: [(Defs.PName, Defs.Version)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Defs.PName, Defs.Version)
+                   TestSolver.out10
+                   TestSolver.out7) -}
+9313d86e75c73227a75008382b49c59e
+  out3 :: [(Defs.PName, Defs.Version)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Defs.PName, Defs.Version)
+                   TestSolver.out13
+                   TestSolver.out11) -}
+45d1f1f91bcf64cd44cd85b73a735a0f
+  out4 :: [(Defs.PName, Defs.Version)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Defs.PName, Defs.Version)
+                   TestSolver.out14
+                   TestSolver.out11) -}
+ff45e8fcb4fb08867e6ce3134eb365a8
+  out5 :: (Defs.PName, Defs.Version)
+  {- Strictness: m,
+     Unfolding: ((TestSolver.db28 `cast` (Sym (Defs.N:PName[0])),
+                  TestSolver.db66 `cast` (Sym (Defs.N:Version[0])))) -}
+4ecc2355c3e397c64570de326216e96b
+  out6 :: (Defs.PName, Defs.Version)
+  {- Strictness: m,
+     Unfolding: ((TestSolver.db47 `cast` (Sym (Defs.N:PName[0])),
+                  TestSolver.db60 `cast` (Sym (Defs.N:Version[0])))) -}
+8ea6dc3b1a0508b4221b34613271607c
+  out7 :: [(Defs.PName, Defs.Version)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Defs.PName, Defs.Version)
+                   TestSolver.out6
+                   TestSolver.out1) -}
+aeffc13126886069e7223518911a05a0
+  out8 :: [(Defs.PName, Defs.Version)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Defs.PName, Defs.Version)
+                   TestSolver.out6
+                   TestSolver.out15) -}
+41f6fcc14fa76f6df7c0d186197e9a9f
+  pname1 :: Defs.PName
+  {- Unfolding: InlineRule (0, True, True)
+                TestSolver.db16 `cast` (Sym (Defs.N:PName[0])) -}
+187954836a848d410367099b347806c5
+  pname2 :: Defs.PName
+  {- Unfolding: InlineRule (0, True, True)
+                TestSolver.db53 `cast` (Sym (Defs.N:PName[0])) -}
+fd3812c84e6949e43005873e809592c3
+  pname3 :: Defs.PName
+  {- Unfolding: InlineRule (0, True, True)
+                TestSolver.db88 `cast` (Sym (Defs.N:PName[0])) -}
+c517d5bb159d442d1306e34ca971e08e
+  pname4 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.pname5) -}
+15e65df311b39adcb8b4bae9e96b7e52
+  pname5 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("none"#) -}
+bf02f5de6942641a0fd2496ecffd5886
+  pname6 :: Defs.PName
+  {- Unfolding: InlineRule (0, True, True)
+                TestSolver.pname4 `cast` (Sym (Defs.N:PName[0])) -}
+e5fc17d3b99c3b8ea4aa72a855917ecd
+  pname7 :: Defs.PName
+  {- Unfolding: InlineRule (0, True, True)
+                TestSolver.db47 `cast` (Sym (Defs.N:PName[0])) -}
+339d2a004e66b6e2b3b63c441fb0144f
+  tests :: Test.Tasty.Core.TestTree
+  {- Strictness: m2,
+     Unfolding: (Test.Tasty.Core.TestGroup
+                   TestSolver.tests51
+                   TestSolver.tests1) -}
+0fe37a375a197c227531ce2775ae657a
+  tests1 :: [Test.Tasty.Core.TestTree]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Test.Tasty.Core.TestTree
+                   TestSolver.tests44
+                   TestSolver.tests2) -}
+f2743c5f0ca2ddc62a862f226115e807
+  tests10 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case TestSolver.tests_eta of wild {
+                   GHC.Base.Nothing
+                   -> case TestSolver.tests11 s
+                      ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+                      of {}
+                   GHC.Base.Just a1
+                   -> case GHC.Classes.$fEq[]_$c==
+                             @ (Defs.PName, Defs.Version)
+                             TestSolver.$s$fEq(,)
+                             a1
+                             TestSolver.out8 of wild1 {
+                        GHC.Types.False
+                        -> case TestSolver.tests11 s
+                           ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+                           of {}
+                        GHC.Types.True -> (# s, GHC.Types.[] @ GHC.Types.Char #) } }) -}
+fdbc1f0f929bb29bb52eb8bb8c5623d4
+  tests11 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, Strictness: <B,U>x -}
+d1a6b500c90fbee5ccd15e390d9ceb7e
+  tests12 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.tests13) -}
+c8fefbe0f902c3f44d6e18600e935e9c
+  tests13 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("conflict with newer version"#) -}
+ba09403be759c613e9eecb57527d7372
+  tests14 :: Test.Tasty.Core.TestTree
+  {- Unfolding: (Test.Tasty.Core.SingleTest
+                   @ Test.Tasty.HUnit.TestCase
+                   Test.Tasty.HUnit.$fIsTestTestCase
+                   TestSolver.tests17
+                   TestSolver.tests15
+                     `cast`
+                   (Sym (GHC.Types.N:IO[0]
+                             <[GHC.Types.Char]>_R) ; Sym (Test.Tasty.HUnit.N:TestCase[0]))) -}
+58b462c6a1c13c9e59b8482c1285d596
+  tests15 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case TestSolver.tests_eta1 of wild {
+                   GHC.Base.Nothing
+                   -> case TestSolver.tests16 s
+                      ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+                      of {}
+                   GHC.Base.Just a1
+                   -> case GHC.Classes.$fEq[]_$c==
+                             @ (Defs.PName, Defs.Version)
+                             TestSolver.$s$fEq(,)
+                             a1
+                             TestSolver.out7 of wild1 {
+                        GHC.Types.False
+                        -> case TestSolver.tests16 s
+                           ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+                           of {}
+                        GHC.Types.True -> (# s, GHC.Types.[] @ GHC.Types.Char #) } }) -}
+1729f2a0586c4e675eb7ddae6412530e
+  tests16 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, Strictness: <B,U>x -}
+0f64eecc7b9e8a567ac1bb8829bdfe77
+  tests17 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.tests18) -}
+13f85b8a63e02fe7b1f86ffded9af5f9
+  tests18 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("newer version"#) -}
+dd2fb6e0e324566689ab5015c9c7b77b
+  tests19 :: Test.Tasty.Core.TestTree
+  {- Unfolding: (Test.Tasty.Core.SingleTest
+                   @ Test.Tasty.HUnit.TestCase
+                   Test.Tasty.HUnit.$fIsTestTestCase
+                   TestSolver.tests22
+                   TestSolver.tests20
+                     `cast`
+                   (Sym (GHC.Types.N:IO[0]
+                             <[GHC.Types.Char]>_R) ; Sym (Test.Tasty.HUnit.N:TestCase[0]))) -}
+6d7d144a02c45e412e2a4f873377d257
+  tests2 :: [Test.Tasty.Core.TestTree]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Test.Tasty.Core.TestTree
+                   TestSolver.tests39
+                   TestSolver.tests3) -}
+89cb95fa60477367056f4103c5186780
+  tests20 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case TestSolver.tests_eta2 of wild {
+                   GHC.Base.Nothing -> (# s, GHC.Types.[] @ GHC.Types.Char #)
+                   GHC.Base.Just a1
+                   -> case TestSolver.tests21 s
+                      ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+                      of {} }) -}
+e393ac4914a15e62910359cb5f6af18c
+  tests21 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, Strictness: <B,U>x -}
+f0d86e146a3f5a29d057c069ba49f9ba
+  tests22 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.tests23) -}
+310c410fbc3abb9ec3d61c141c345ddf
+  tests23 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("doesn't exist"#) -}
+e674a377a76728cb6a3c2c376f34765d
+  tests24 :: Test.Tasty.Core.TestTree
+  {- Unfolding: (Test.Tasty.Core.SingleTest
+                   @ Test.Tasty.HUnit.TestCase
+                   Test.Tasty.HUnit.$fIsTestTestCase
+                   TestSolver.tests27
+                   TestSolver.tests25
+                     `cast`
+                   (Sym (GHC.Types.N:IO[0]
+                             <[GHC.Types.Char]>_R) ; Sym (Test.Tasty.HUnit.N:TestCase[0]))) -}
+99e74817a09839924e89a1543f949fb1
+  tests25 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case TestSolver.tests_eta3 of wild {
+                   GHC.Base.Nothing -> (# s, GHC.Types.[] @ GHC.Types.Char #)
+                   GHC.Base.Just a1
+                   -> case TestSolver.tests26 s
+                      ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+                      of {} }) -}
+aa5916bbc2e81ad3ee6f8ec61213ed13
+  tests26 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, Strictness: <B,U>x -}
+cdbb933ab55a4671b7fd395d34d84890
+  tests27 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.tests28) -}
+44931e22fa088600612955c0e5dab460
+  tests28 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("empty database"#) -}
+ab64a1f94e341567d76171c3ece37670
+  tests29 :: Test.Tasty.Core.TestTree
+  {- Unfolding: (Test.Tasty.Core.SingleTest
+                   @ Test.Tasty.HUnit.TestCase
+                   Test.Tasty.HUnit.$fIsTestTestCase
+                   TestSolver.tests32
+                   TestSolver.tests30
+                     `cast`
+                   (Sym (GHC.Types.N:IO[0]
+                             <[GHC.Types.Char]>_R) ; Sym (Test.Tasty.HUnit.N:TestCase[0]))) -}
+f2ab5be39d174872ae1ad2f8e2706732
+  tests3 :: [Test.Tasty.Core.TestTree]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Test.Tasty.Core.TestTree
+                   TestSolver.tests34
+                   TestSolver.tests4) -}
+d7102f408b142a88615ae9189471605b
+  tests30 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case TestSolver.tests_eta4 of wild {
+                   GHC.Base.Nothing
+                   -> case TestSolver.tests31 s
+                      ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+                      of {}
+                   GHC.Base.Just a1
+                   -> case GHC.Classes.$fEq[]_$c==
+                             @ (Defs.PName, Defs.Version)
+                             TestSolver.$s$fEq(,)
+                             a1
+                             TestSolver.out4 of wild1 {
+                        GHC.Types.False
+                        -> case TestSolver.tests31 s
+                           ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+                           of {}
+                        GHC.Types.True -> (# s, GHC.Types.[] @ GHC.Types.Char #) } }) -}
+54531ec68397a16bf93278b1280c46c7
+  tests31 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, Strictness: <B,U>x -}
+5bd8872c6b87169aa36a923d999c2cdc
+  tests32 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.tests33) -}
+cdd7375b55e2ee242267cf9a95223b52
+  tests33 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("vim new version"#) -}
+b77767ff1cd949b39f945985065d4c4e
+  tests34 :: Test.Tasty.Core.TestTree
+  {- Unfolding: (Test.Tasty.Core.SingleTest
+                   @ Test.Tasty.HUnit.TestCase
+                   Test.Tasty.HUnit.$fIsTestTestCase
+                   TestSolver.tests37
+                   TestSolver.tests35
+                     `cast`
+                   (Sym (GHC.Types.N:IO[0]
+                             <[GHC.Types.Char]>_R) ; Sym (Test.Tasty.HUnit.N:TestCase[0]))) -}
+31e5decf8622b2212612b0437163d411
+  tests35 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case TestSolver.tests_eta5 of wild {
+                   GHC.Base.Nothing
+                   -> case TestSolver.tests36 s
+                      ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+                      of {}
+                   GHC.Base.Just a1
+                   -> case GHC.Classes.$fEq[]_$c==
+                             @ (Defs.PName, Defs.Version)
+                             TestSolver.$s$fEq(,)
+                             a1
+                             TestSolver.out3 of wild1 {
+                        GHC.Types.False
+                        -> case TestSolver.tests36 s
+                           ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+                           of {}
+                        GHC.Types.True -> (# s, GHC.Types.[] @ GHC.Types.Char #) } }) -}
+b8f45e00e89b21cd2dd1de927485a96a
+  tests36 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, Strictness: <B,U>x -}
+86c5a8f0a8439d903f9c2beddd332a2f
+  tests37 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.tests38) -}
+5994e3a00577432c2db3f4a903973e52
+  tests38 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("vim old version"#) -}
+fdbdaa2e164da073e643fd45b39a8683
+  tests39 :: Test.Tasty.Core.TestTree
+  {- Unfolding: (Test.Tasty.Core.SingleTest
+                   @ Test.Tasty.HUnit.TestCase
+                   Test.Tasty.HUnit.$fIsTestTestCase
+                   TestSolver.tests42
+                   TestSolver.tests40
+                     `cast`
+                   (Sym (GHC.Types.N:IO[0]
+                             <[GHC.Types.Char]>_R) ; Sym (Test.Tasty.HUnit.N:TestCase[0]))) -}
+92f22a8f6bd57c6cf0c4f058bcaecb6b
+  tests4 :: [Test.Tasty.Core.TestTree]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Test.Tasty.Core.TestTree
+                   TestSolver.tests29
+                   TestSolver.tests5) -}
+2042d2269ce1b9b70db9539192d76230
+  tests40 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case TestSolver.tests_eta6 of wild {
+                   GHC.Base.Nothing
+                   -> case TestSolver.tests41 s
+                      ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+                      of {}
+                   GHC.Base.Just a1
+                   -> case GHC.Classes.$fEq[]_$c==
+                             @ (Defs.PName, Defs.Version)
+                             TestSolver.$s$fEq(,)
+                             a1
+                             TestSolver.out2 of wild1 {
+                        GHC.Types.False
+                        -> case TestSolver.tests41 s
+                           ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+                           of {}
+                        GHC.Types.True -> (# s, GHC.Types.[] @ GHC.Types.Char #) } }) -}
+65871533c2b71e697a8de3e18fd97c89
+  tests41 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, Strictness: <B,U>x -}
+ffc064bca76b25a9c1df87daee54894e
+  tests42 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.tests43) -}
+0d900a48ad59438a55b9052942eacb8f
+  tests43 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("larger"#) -}
+736cfa57569e45c96bf22732db4c3aab
+  tests44 :: Test.Tasty.Core.TestTree
+  {- Unfolding: (Test.Tasty.Core.SingleTest
+                   @ Test.Tasty.HUnit.TestCase
+                   Test.Tasty.HUnit.$fIsTestTestCase
+                   TestSolver.tests49
+                   TestSolver.tests45
+                     `cast`
+                   (Sym (GHC.Types.N:IO[0]
+                             <[GHC.Types.Char]>_R) ; Sym (Test.Tasty.HUnit.N:TestCase[0]))) -}
+43d5d759248262d377dfe0ffac73142a
+  tests45 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case TestSolver.tests_eta7 of wild {
+                   GHC.Base.Nothing
+                   -> case TestSolver.tests48 s
+                      ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+                      of {}
+                   GHC.Base.Just a1
+                   -> case GHC.Classes.$fEq[]_$c==
+                             @ (Defs.PName, Defs.Version)
+                             TestSolver.$s$fEq(,)
+                             a1
+                             TestSolver.tests46 of wild1 {
+                        GHC.Types.False
+                        -> case TestSolver.tests48 s
+                           ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.Types.Char] #)
+                           of {}
+                        GHC.Types.True -> (# s, GHC.Types.[] @ GHC.Types.Char #) } }) -}
+464dd33df72b9003d7fb938728a403cd
+  tests46 :: [(Defs.PName, Defs.Version)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Defs.PName, Defs.Version)
+                   TestSolver.tests47
+                   (GHC.Types.[] @ (Defs.PName, Defs.Version))) -}
+7a6f0635c8ff42750c58f479d7462563
+  tests47 :: (Defs.PName, Defs.Version)
+  {- Strictness: m,
+     Unfolding: ((TestSolver.db16 `cast` (Sym (Defs.N:PName[0])),
+                  TestSolver.db13 `cast` (Sym (Defs.N:Version[0])))) -}
+2496a9e5dd522c5882a6b9d8a2d4007c
+  tests48 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, Strictness: <B,U>x -}
+79a686a72e63377de230f5abc3fc0ce8
+  tests49 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.tests50) -}
+74fb90bccf8029df72c19f1b95d81050
+  tests5 :: [Test.Tasty.Core.TestTree]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Test.Tasty.Core.TestTree
+                   TestSolver.tests24
+                   TestSolver.tests6) -}
+a1e8c6afb89a064abaa85a3169656fb1
+  tests50 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("tiny"#) -}
+f21f1be13ab20f282b2e3be19e759519
+  tests51 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# TestSolver.tests52) -}
+c53150b7713539c9ee30b52c30b457ba
+  tests52 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Solver tests"#) -}
+7537a85430ec1a3471404cdd05579378
+  tests6 :: [Test.Tasty.Core.TestTree]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Test.Tasty.Core.TestTree
+                   TestSolver.tests19
+                   TestSolver.tests7) -}
+370e7c937e2012c2f7841b112462ec5a
+  tests7 :: [Test.Tasty.Core.TestTree]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Test.Tasty.Core.TestTree
+                   TestSolver.tests14
+                   TestSolver.tests8) -}
+8042db79c9a9bd88f803321905ed3a7e
+  tests8 :: [Test.Tasty.Core.TestTree]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Test.Tasty.Core.TestTree
+                   TestSolver.tests9
+                   (GHC.Types.[] @ Test.Tasty.Core.TestTree)) -}
+3f3ed5a80b02b6c9e5ac2ebc0f6f3b33
+  tests9 :: Test.Tasty.Core.TestTree
+  {- Unfolding: (Test.Tasty.Core.SingleTest
+                   @ Test.Tasty.HUnit.TestCase
+                   Test.Tasty.HUnit.$fIsTestTestCase
+                   TestSolver.tests12
+                   TestSolver.tests10
+                     `cast`
+                   (Sym (GHC.Types.N:IO[0]
+                             <[GHC.Types.Char]>_R) ; Sym (Test.Tasty.HUnit.N:TestCase[0]))) -}
+a52a769878ca89c0a9059d96a5f6b73a
+  tests_eta :: GHC.Base.Maybe Defs.Sol
+  {- Unfolding: (case SolverImpl.getPkgs
+                        TestSolver.db47 `cast` (Sym (Defs.N:PName[0]))
+                        TestSolver.db128 `cast` (Sym (Defs.N:Database[0])) of wild {
+                   GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                   GHC.Base.Just x
+                   -> case SolverImpl.getSols
+                             TestSolver.db128 `cast` (Sym (Defs.N:Database[0]))
+                             x of wild1 {
+                        GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                        GHC.Base.Just x1
+                        -> GHC.Base.Just @ Defs.Sol (GHC.List.head @ Defs.Sol x1) } }) -}
+eedd700100b343c432dc69a5e871dc06
+  tests_eta1 :: GHC.Base.Maybe Defs.Sol
+  {- Unfolding: (case SolverImpl.getPkgs
+                        TestSolver.db47 `cast` (Sym (Defs.N:PName[0]))
+                        TestSolver.db110 `cast` (Sym (Defs.N:Database[0])) of wild {
+                   GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                   GHC.Base.Just x
+                   -> case SolverImpl.getSols
+                             TestSolver.db110 `cast` (Sym (Defs.N:Database[0]))
+                             x of wild1 {
+                        GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                        GHC.Base.Just x1
+                        -> GHC.Base.Just @ Defs.Sol (GHC.List.head @ Defs.Sol x1) } }) -}
+95312c28bcde2fd46aa25f98022021e1
+  tests_eta2 :: GHC.Base.Maybe Defs.Sol
+  {- Unfolding: (case SolverImpl.getPkgs
+                        TestSolver.pname4 `cast` (Sym (Defs.N:PName[0]))
+                        TestSolver.db110 `cast` (Sym (Defs.N:Database[0])) of wild {
+                   GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                   GHC.Base.Just x
+                   -> case SolverImpl.getSols
+                             TestSolver.db110 `cast` (Sym (Defs.N:Database[0]))
+                             x of wild1 {
+                        GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                        GHC.Base.Just x1
+                        -> GHC.Base.Just @ Defs.Sol (GHC.List.head @ Defs.Sol x1) } }) -}
+e7ab7cc80a03ba5c7ec88ead99593c52
+  tests_eta3 :: GHC.Base.Maybe Defs.Sol
+  {- Unfolding: (case SolverImpl.getPkgs
+                        TestSolver.db88 `cast` (Sym (Defs.N:PName[0]))
+                        (GHC.Types.[] @ Defs.Pkg)
+                          `cast`
+                        (Sym (Defs.N:Database[0])) of wild {
+                   GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                   GHC.Base.Just x
+                   -> case SolverImpl.getSols
+                             (GHC.Types.[] @ Defs.Pkg) `cast` (Sym (Defs.N:Database[0]))
+                             x of wild1 {
+                        GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                        GHC.Base.Just x1
+                        -> GHC.Base.Just @ Defs.Sol (GHC.List.head @ Defs.Sol x1) } }) -}
+01aa91fc93b879c23fd418bfef3ef87a
+  tests_eta4 :: GHC.Base.Maybe Defs.Sol
+  {- Unfolding: (case SolverImpl.getPkgs
+                        TestSolver.db88 `cast` (Sym (Defs.N:PName[0]))
+                        TestSolver.db110 `cast` (Sym (Defs.N:Database[0])) of wild {
+                   GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                   GHC.Base.Just x
+                   -> case SolverImpl.getSols
+                             TestSolver.db110 `cast` (Sym (Defs.N:Database[0]))
+                             x of wild1 {
+                        GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                        GHC.Base.Just x1
+                        -> GHC.Base.Just @ Defs.Sol (GHC.List.head @ Defs.Sol x1) } }) -}
+a4661af0f8e437724b8a7d54c38f2e25
+  tests_eta5 :: GHC.Base.Maybe Defs.Sol
+  {- Unfolding: (case SolverImpl.getPkgs
+                        TestSolver.db88 `cast` (Sym (Defs.N:PName[0]))
+                        TestSolver.db75 `cast` (Sym (Defs.N:Database[0])) of wild {
+                   GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                   GHC.Base.Just x
+                   -> case SolverImpl.getSols
+                             TestSolver.db75 `cast` (Sym (Defs.N:Database[0]))
+                             x of wild1 {
+                        GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                        GHC.Base.Just x1
+                        -> GHC.Base.Just @ Defs.Sol (GHC.List.head @ Defs.Sol x1) } }) -}
+70c569da56db22377d764bf1beb236b8
+  tests_eta6 :: GHC.Base.Maybe Defs.Sol
+  {- Unfolding: (case SolverImpl.getPkgs
+                        TestSolver.db53 `cast` (Sym (Defs.N:PName[0]))
+                        TestSolver.db18 `cast` (Sym (Defs.N:Database[0])) of wild {
+                   GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                   GHC.Base.Just x
+                   -> case SolverImpl.getSols
+                             TestSolver.db18 `cast` (Sym (Defs.N:Database[0]))
+                             x of wild1 {
+                        GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                        GHC.Base.Just x1
+                        -> GHC.Base.Just @ Defs.Sol (GHC.List.head @ Defs.Sol x1) } }) -}
+1cb3404bf88530d692f2baba35dbe69b
+  tests_eta7 :: GHC.Base.Maybe Defs.Sol
+  {- Unfolding: (case SolverImpl.getPkgs
+                        TestSolver.db16 `cast` (Sym (Defs.N:PName[0]))
+                        TestSolver.db11 `cast` (Sym (Defs.N:Database[0])) of wild {
+                   GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                   GHC.Base.Just x
+                   -> case SolverImpl.getSols
+                             TestSolver.db11 `cast` (Sym (Defs.N:Database[0]))
+                             x of wild1 {
+                        GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                        GHC.Base.Just x1
+                        -> GHC.Base.Just @ Defs.Sol (GHC.List.head @ Defs.Sol x1) } }) -}
+543da39e3a423f94e8d7ea1d29cb8dcf
+  ver1 :: Defs.Version
+  {- Strictness: m2,
+     Unfolding: InlineRule (0, True, True)
+                TestSolver.db13 `cast` (Sym (Defs.N:Version[0])) -}
+"SPEC/TestSolver $fEq(,) @ PName @ Version" [orphan] forall (v1 :: GHC.Classes.Eq
+                                                                     Defs.Version)
+                                                            (v :: GHC.Classes.Eq Defs.PName)
+  GHC.Classes.$fEq(,) @ Defs.PName @ Defs.Version v v1
+  = TestSolver.$s$fEq(,)
+"SPEC/TestSolver $fEq(,)_$c/= @ PName @ Version" [orphan] forall ($dEq1 :: GHC.Classes.Eq
+                                                                             Defs.Version)
+                                                                 ($dEq :: GHC.Classes.Eq Defs.PName)
+  GHC.Classes.$fEq(,)_$c/= @ Defs.PName @ Defs.Version $dEq $dEq1
+  = TestSolver.$s$fEq(,)_$s$fEq(,)_$c/=
+"SPEC/TestSolver $fShowMaybe @ [(PName, Version)]" [orphan] forall (v :: GHC.Show.Show
+                                                                           [(Defs.PName,
+                                                                             Defs.Version)])
+  GHC.Show.$fShowMaybe @ [(Defs.PName, Defs.Version)] v
+  = TestSolver.$s$fShowMaybe
+"SPEC/TestSolver $fShow[] @ (PName, Version)" [orphan] forall (v :: GHC.Show.Show
+                                                                      (Defs.PName, Defs.Version))
+  GHC.Show.$fShow[] @ (Defs.PName, Defs.Version) v
+  = TestSolver.$s$fShowMaybe_$s$fShow[]
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: none
+require own pkg trusted: False
+

@@ -1,0 +1,2903 @@
+
+==================== FINAL INTERFACE ====================
+2018-11-05 01:23:50.685808093 UTC
+
+interface appm-0.0.0-bBoXP3Z3yF8cAWvQVfHOK:Defs 8043
+  interface hash: f712b4be96096b853d3bbe4f2537e7f5
+  ABI hash: 33704ed0d96c186bd2b1ffcf2d3c5e21
+  export-list hash: d483d9f9fac845ad0d3d1b6b82a00958
+  orphan hash: c0cead90eccec2df83b8774b6a69004b
+  flag hash: 1f596daf84c7527444ae092b33472386
+  opt_hash: 14e536840aca4e889cad654e6f9b79c1
+  hpc_hash: 93b885adfe0da089cdf634904fd59f71
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Defs.maxV
+  Defs.minV
+  Defs.prettyConstr
+  Defs.prettyConstrs
+  Defs.prettyPName
+  Defs.prettyPkg
+  Defs.prettyPkgs
+  Defs.prettyVNum
+  Defs.prettyVer
+  Defs.stdV
+  Defs.Constrs
+  Defs.Database{Defs.DB}
+  Defs.ErrMsg
+  Defs.PConstr
+  Defs.PName{Defs.P}
+  Defs.Pkg{Defs.Pkg deps desc name ver}
+  Defs.Sol
+  Defs.VNum{Defs.VN}
+  Defs.Version{Defs.V}
+module dependencies:
+package dependencies: base-4.11.1.0* ghc-prim-0.5.2.0
+                      integer-gmp-1.0.2.0
+orphans: base-4.11.1.0:GHC.Float base-4.11.1.0:GHC.Base
+family instance modules: base-4.11.1.0:Control.Applicative
+                         base-4.11.1.0:Data.Functor.Const
+                         base-4.11.1.0:Data.Functor.Identity base-4.11.1.0:Data.Monoid
+                         base-4.11.1.0:Data.Semigroup.Internal base-4.11.1.0:GHC.Generics
+                         base-4.11.1.0:GHC.IO.Exception
+import  -/  base-4.11.1.0:Data.Foldable 8ed35c38958063956af33c935ea03444
+import  -/  base-4.11.1.0:Data.List 83dc843e47bfc0c5af51e19c6f3476d5
+import  -/  base-4.11.1.0:Data.OldList 1b35aa3c6805ff7c8887a35a866fe006
+import  -/  base-4.11.1.0:GHC.Base 604111500e81281298777e721c75643b
+import  -/  base-4.11.1.0:GHC.Read b9e6d20d40da8c8a12b566d22e1160e0
+import  -/  base-4.11.1.0:GHC.Show 73be67392447c974f19c3befd83c46c0
+import  -/  base-4.11.1.0:Prelude 0750c25585e2b797cd78291d423d39dd
+import  -/  base-4.11.1.0:Text.ParserCombinators.ReadPrec d0ebf984ed486435a97481288b73febb
+import  -/  base-4.11.1.0:Text.Read.Lex f8ad6f9ae74ae325ba69a4fa5c82aaca
+import  -/  ghc-prim-0.5.2.0:GHC.Classes 122abfcd7450c6c11602933c9ca5f80d
+import  -/  ghc-prim-0.5.2.0:GHC.Types d9b3023de7feae4a5308d643da5543f7
+72116789c94c7310ad831055c34dc36c
+  $fEqDatabase :: GHC.Classes.Eq Defs.Database
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.Database
+                  Defs.$fEqDatabase1
+                    `cast`
+                  (Sym (Defs.N:Database[0])
+                   ->_R Sym (Defs.N:Database[0])
+                   ->_R <GHC.Types.Bool>_R)
+                  Defs.$fEqDatabase_$s$fEq[]_$c/=
+                    `cast`
+                  (Sym (Defs.N:Database[0])
+                   ->_R Sym (Defs.N:Database[0])
+                   ->_R <GHC.Types.Bool>_R) -}
+9fb3323811e16b60c6440839661e8d7f
+  $fEqDatabase1 :: [Defs.Pkg] -> [Defs.Pkg] -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Unfolding: (GHC.Classes.$fEq[]_$c== @ Defs.Pkg Defs.$fEqPkg) -}
+62bc1f3e2474bc2717ab01e8fae4e15d
+  $fEqDatabase_$s$fEq[]_$c/= ::
+    [Defs.Pkg] -> [Defs.Pkg] -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Inline: (sat-args=2),
+     Unfolding: InlineRule (2, False, False)
+                (\ (x :: [Defs.Pkg]) (y :: [Defs.Pkg]) ->
+                 case GHC.Classes.$fEq[]_$c== @ Defs.Pkg Defs.$fEqPkg x y of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True -> GHC.Types.False }) -}
+5f19c9b9fbea2b2b9245083ff941c0d5
+  $fEqPName :: GHC.Classes.Eq Defs.PName
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.PName
+                  GHC.Base.eqString
+                    `cast`
+                  (Sym (Defs.N:PName[0])
+                   ->_R Sym (Defs.N:PName[0])
+                   ->_R <GHC.Types.Bool>_R)
+                  GHC.Classes.$fEq[]_$s$c/=1
+                    `cast`
+                  (Sym (Defs.N:PName[0])
+                   ->_R Sym (Defs.N:PName[0])
+                   ->_R <GHC.Types.Bool>_R) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fEqPkg :: GHC.Classes.Eq Defs.Pkg
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:. @ Defs.Pkg Defs.$fEqPkg_$c== Defs.$fEqPkg_$c/= -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fEqPkg_$c/= :: Defs.Pkg -> Defs.Pkg -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),1*U(1*U,1*U,1*U,1*U)><S(SLLL),1*U(1*U,1*U,1*U,1*U)>,
+     Inline: (sat-args=2),
+     Unfolding: InlineRule (2, False, False)
+                (\ (x :: Defs.Pkg) (y :: Defs.Pkg) ->
+                 case Defs.$fEqPkg_$c== x y of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True -> GHC.Types.False }) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fEqPkg_$c== :: Defs.Pkg -> Defs.Pkg -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),1*U(1*U,1*U,1*U,1*U)><S(SLLL),1*U(1*U,1*U,1*U,1*U)>,
+     Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Defs.Pkg) (w1 :: Defs.Pkg) ->
+                 case w of ww { Defs.Pkg ww1 ww2 ww3 ww4 ->
+                 case w1 of ww5 { Defs.Pkg ww6 ww7 ww8 ww9 ->
+                 Defs.$w$c== ww1 ww2 ww3 ww4 ww6 ww7 ww8 ww9 } }) -}
+b8af347c29518f1c786f8bd9f844a94d
+  $fEqPkg_$s$fEq(,) ::
+    GHC.Classes.Eq
+      (Defs.PName, (GHC.Types.Bool, Defs.Version, Defs.Version))
+  {- HasNoCafRefs, Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ (Defs.PName, (GHC.Types.Bool, Defs.Version, Defs.Version))
+                  (GHC.Classes.$fEq(,)_$c==
+                     @ Defs.PName
+                     @ (GHC.Types.Bool, Defs.Version, Defs.Version)
+                     Defs.$fEqPName
+                     Defs.$fEqPkg_$s$fEq(,,))
+                  Defs.$fEqPkg_$s$fEq(,)_$c/= -}
+54a7b8023f4c506926bbf794140324ec
+  $fEqPkg_$s$fEq(,)_$c/= ::
+    (Defs.PName, (GHC.Types.Bool, Defs.Version, Defs.Version))
+    -> (Defs.PName, (GHC.Types.Bool, Defs.Version, Defs.Version))
+    -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SL),1*U(1*U,1*U(1*U,1*U,1*U))><S(SL),1*U(1*U,1*U(1*U,1*U,1*U))>,
+     Inline: (sat-args=2),
+     Unfolding: InlineRule (2, False, False)
+                (\ (x :: (Defs.PName,
+                          (GHC.Types.Bool, Defs.Version, Defs.Version)))
+                   (y :: (Defs.PName,
+                          (GHC.Types.Bool, Defs.Version, Defs.Version))) ->
+                 case x of wild { (,) a1 a2 ->
+                 case y of wild1 { (,) b1 b2 ->
+                 case GHC.Base.eqString
+                        a1 `cast` (Defs.N:PName[0])
+                        b1 `cast` (Defs.N:PName[0]) of wild2 {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True
+                   -> case GHC.Classes.$fEq(,,)_$c==
+                             @ GHC.Types.Bool
+                             @ Defs.Version
+                             @ Defs.Version
+                             GHC.Classes.$fEqBool
+                             Defs.$fEqVersion
+                             Defs.$fEqVersion
+                             a2
+                             b2 of wild3 {
+                        GHC.Types.False -> GHC.Types.True
+                        GHC.Types.True -> GHC.Types.False } } } }) -}
+78965d663c40adad2deaccd7344ea27e
+  $fEqPkg_$s$fEq(,,) ::
+    GHC.Classes.Eq (GHC.Types.Bool, Defs.Version, Defs.Version)
+  {- HasNoCafRefs, Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ (GHC.Types.Bool, Defs.Version, Defs.Version)
+                  (GHC.Classes.$fEq(,,)_$c==
+                     @ GHC.Types.Bool
+                     @ Defs.Version
+                     @ Defs.Version
+                     GHC.Classes.$fEqBool
+                     Defs.$fEqVersion
+                     Defs.$fEqVersion)
+                  Defs.$fEqPkg_$s$fEq(,,)_$c/= -}
+4975b5535d87689a42bb9e861d08b602
+  $fEqPkg_$s$fEq(,,)_$c/= ::
+    (GHC.Types.Bool, Defs.Version, Defs.Version)
+    -> (GHC.Types.Bool, Defs.Version, Defs.Version) -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLL),1*U(1*U,1*U,1*U)><S(SLL),1*U(1*U,1*U,1*U)>,
+     Inline: (sat-args=2),
+     Unfolding: InlineRule (2, False, False)
+                (\ (x :: (GHC.Types.Bool, Defs.Version, Defs.Version))
+                   (y :: (GHC.Types.Bool, Defs.Version, Defs.Version)) ->
+                 case GHC.Classes.$fEq(,,)_$c==
+                        @ GHC.Types.Bool
+                        @ Defs.Version
+                        @ Defs.Version
+                        GHC.Classes.$fEqBool
+                        Defs.$fEqVersion
+                        Defs.$fEqVersion
+                        x
+                        y of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True -> GHC.Types.False }) -}
+9f624f421752e49159a078fe8b02f46a
+  $fEqVNum :: GHC.Classes.Eq Defs.VNum
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.VNum Defs.$fEqVNum_$c== Defs.$fEqVNum_$c/= -}
+9f624f421752e49159a078fe8b02f46a
+  $fEqVNum_$c/= :: Defs.VNum -> Defs.VNum -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(S(S)L),1*U(1*U(U),1*U)><S(S(S)L),1*U(1*U(U),1*U)>,
+     Inline: (sat-args=2),
+     Unfolding: InlineRule (2, False, False)
+                (\ (x :: Defs.VNum) (y :: Defs.VNum) ->
+                 case x of wild { Defs.VN a1 a2 ->
+                 case y of wild1 { Defs.VN b1 b2 ->
+                 case GHC.Classes.eqInt a1 b1 of wild2 {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True
+                   -> case GHC.Base.eqString a2 b2 of wild3 {
+                        GHC.Types.False -> GHC.Types.True
+                        GHC.Types.True -> GHC.Types.False } } } }) -}
+9f624f421752e49159a078fe8b02f46a
+  $fEqVNum_$c== :: Defs.VNum -> Defs.VNum -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(S(S)L),1*U(1*U(U),1*U)><S(S(S)L),1*U(1*U(U),1*U)>,
+     Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Defs.VNum) (w1 :: Defs.VNum) ->
+                 case w of ww { Defs.VN ww1 ww2 ->
+                 case ww1 of ww3 { GHC.Types.I# ww4 ->
+                 case w1 of ww5 { Defs.VN ww6 ww7 ->
+                 case ww6 of ww8 { GHC.Types.I# ww9 ->
+                 Defs.$w$c==1 ww4 ww2 ww9 ww7 } } } }) -}
+3329419535fec99edec0e43ff47f12ba
+  $fEqVersion :: GHC.Classes.Eq Defs.Version
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.Version
+                  Defs.$fEqVersion1
+                    `cast`
+                  (Sym (Defs.N:Version[0])
+                   ->_R Sym (Defs.N:Version[0])
+                   ->_R <GHC.Types.Bool>_R)
+                  Defs.$fEqVersion_$s$fEq[]_$c/=
+                    `cast`
+                  (Sym (Defs.N:Version[0])
+                   ->_R Sym (Defs.N:Version[0])
+                   ->_R <GHC.Types.Bool>_R) -}
+08bd09878795b6b06c6d86dd992398d5
+  $fEqVersion1 :: [Defs.VNum] -> [Defs.VNum] -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Unfolding: (GHC.Classes.$fEq[]_$c== @ Defs.VNum Defs.$fEqVNum) -}
+d6c12c8816ae7fd7f835f6a44c994b65
+  $fEqVersion_$s$fEq[]_$c/= ::
+    [Defs.VNum] -> [Defs.VNum] -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Inline: (sat-args=2),
+     Unfolding: InlineRule (2, False, False)
+                (\ (x :: [Defs.VNum]) (y :: [Defs.VNum]) ->
+                 case GHC.Classes.$fEq[]_$c==
+                        @ Defs.VNum
+                        Defs.$fEqVNum
+                        x
+                        y of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True -> GHC.Types.False }) -}
+5f19c9b9fbea2b2b9245083ff941c0d5
+  $fOrdPName :: GHC.Classes.Ord Defs.PName
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.PName
+                  Defs.$fEqPName
+                  GHC.Classes.$fOrd[]_$s$ccompare1
+                    `cast`
+                  (Sym (Defs.N:PName[0])
+                   ->_R Sym (Defs.N:PName[0])
+                   ->_R <GHC.Types.Ordering>_R)
+                  GHC.Classes.$fOrd[]_$s$c<1
+                    `cast`
+                  (Sym (Defs.N:PName[0])
+                   ->_R Sym (Defs.N:PName[0])
+                   ->_R <GHC.Types.Bool>_R)
+                  GHC.Classes.$fOrd[]_$s$c<=1
+                    `cast`
+                  (Sym (Defs.N:PName[0])
+                   ->_R Sym (Defs.N:PName[0])
+                   ->_R <GHC.Types.Bool>_R)
+                  GHC.Classes.$fOrd[]_$s$c>1
+                    `cast`
+                  (Sym (Defs.N:PName[0])
+                   ->_R Sym (Defs.N:PName[0])
+                   ->_R <GHC.Types.Bool>_R)
+                  GHC.Classes.$fOrd[]_$s$c>=1
+                    `cast`
+                  (Sym (Defs.N:PName[0])
+                   ->_R Sym (Defs.N:PName[0])
+                   ->_R <GHC.Types.Bool>_R)
+                  GHC.Classes.$fOrd[]_$s$cmax1
+                    `cast`
+                  (Sym (Defs.N:PName[0])
+                   ->_R Sym (Defs.N:PName[0])
+                   ->_R Sym (Defs.N:PName[0]))
+                  GHC.Classes.$fOrd[]_$s$cmin1
+                    `cast`
+                  (Sym (Defs.N:PName[0])
+                   ->_R Sym (Defs.N:PName[0])
+                   ->_R Sym (Defs.N:PName[0])) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fOrdPkg :: GHC.Classes.Ord Defs.Pkg
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.Pkg
+                  Defs.$fEqPkg
+                  Defs.$fOrdPkg_$ccompare
+                  Defs.$fOrdPkg_$c<
+                  Defs.$fOrdPkg_$c<=
+                  Defs.$fOrdPkg_$c>
+                  Defs.$fOrdPkg_$c>=
+                  Defs.$fOrdPkg_$cmax
+                  Defs.$fOrdPkg_$cmin -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fOrdPkg_$c< :: Defs.Pkg -> Defs.Pkg -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),1*U(U,U,1*U,1*U)><S(SLLL),1*U(U,U,1*U,1*U)>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (x :: Defs.Pkg) (y :: Defs.Pkg) ->
+                 case Defs.$fEqPkg_$c== x y of wild {
+                   GHC.Types.False -> Defs.$fOrdPkg_$c<= x y
+                   GHC.Types.True -> GHC.Types.False }) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fOrdPkg_$c<= :: Defs.Pkg -> Defs.Pkg -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),1*U(U,1*U,A,A)><S(SLLL),1*U(U,1*U,A,A)>,
+     Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Defs.Pkg) (w1 :: Defs.Pkg) ->
+                 case w of ww { Defs.Pkg ww1 ww2 ww3 ww4 ->
+                 case w1 of ww5 { Defs.Pkg ww6 ww7 ww8 ww9 ->
+                 Defs.$w$c<= ww1 ww2 ww6 ww7 } }) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fOrdPkg_$c> :: Defs.Pkg -> Defs.Pkg -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),1*U(U,U,1*U,1*U)><S(SLLL),1*U(U,U,1*U,1*U)>,
+     Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Defs.Pkg) (w1 :: Defs.Pkg) ->
+                 case w of ww { Defs.Pkg ww1 ww2 ww3 ww4 ->
+                 case w1 of ww5 { Defs.Pkg ww6 ww7 ww8 ww9 ->
+                 Defs.$w$c> ww1 ww2 ww3 ww4 ww6 ww7 ww8 ww9 } }) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fOrdPkg_$c>= :: Defs.Pkg -> Defs.Pkg -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),1*U(U,U,1*U,1*U)><S(SLLL),1*U(U,U,1*U,1*U)>,
+     Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Defs.Pkg) (w1 :: Defs.Pkg) ->
+                 case w of ww { Defs.Pkg ww1 ww2 ww3 ww4 ->
+                 case w1 of ww5 { Defs.Pkg ww6 ww7 ww8 ww9 ->
+                 Defs.$w$c>=1 ww1 ww2 ww3 ww4 ww6 ww7 ww8 ww9 } }) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fOrdPkg_$ccompare :: Defs.Pkg -> Defs.Pkg -> GHC.Types.Ordering
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),1*U(U,U,1*U,1*U)><S(SLLL),1*U(U,U,1*U,1*U)>,
+     Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Defs.Pkg) (w1 :: Defs.Pkg) ->
+                 case w of ww { Defs.Pkg ww1 ww2 ww3 ww4 ->
+                 case w1 of ww5 { Defs.Pkg ww6 ww7 ww8 ww9 ->
+                 Defs.$w$ccompare1 ww1 ww2 ww3 ww4 ww6 ww7 ww8 ww9 } }) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fOrdPkg_$cmax :: Defs.Pkg -> Defs.Pkg -> Defs.Pkg
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),1*U(U,U,U,U)><S(SLLL),1*U(U,U,U,U)>m,
+     Unfolding: InlineRule (2, True, False)
+                (\ (x :: Defs.Pkg) (y :: Defs.Pkg) ->
+                 case Defs.$fOrdPkg_$c<= x y of wild {
+                   GHC.Types.False -> x GHC.Types.True -> y }) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fOrdPkg_$cmin :: Defs.Pkg -> Defs.Pkg -> Defs.Pkg
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),1*U(U,U,U,U)><S(SLLL),1*U(U,U,U,U)>m,
+     Unfolding: InlineRule (2, True, False)
+                (\ (x :: Defs.Pkg) (y :: Defs.Pkg) ->
+                 case Defs.$fOrdPkg_$c<= x y of wild {
+                   GHC.Types.False -> y GHC.Types.True -> x }) -}
+9f624f421752e49159a078fe8b02f46a
+  $fOrdVNum :: GHC.Classes.Ord Defs.VNum
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.VNum
+                  Defs.$fEqVNum
+                  Defs.$fOrdVNum_$ccompare
+                  Defs.$fOrdVNum_$c<
+                  Defs.$fOrdVNum_$c<=
+                  Defs.$fOrdVNum_$c>
+                  Defs.$fOrdVNum_$c>=
+                  Defs.$fOrdVNum_$cmax
+                  Defs.$fOrdVNum_$cmin -}
+9f624f421752e49159a078fe8b02f46a
+  $fOrdVNum_$c< :: Defs.VNum -> Defs.VNum -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(S(S)L),1*U(1*U(U),1*U)><S(S(S)L),1*U(1*U(U),1*U)>,
+     Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Defs.VNum) (w1 :: Defs.VNum) ->
+                 case w of ww { Defs.VN ww1 ww2 ->
+                 case ww1 of ww3 { GHC.Types.I# ww4 ->
+                 case w1 of ww5 { Defs.VN ww6 ww7 ->
+                 case ww6 of ww8 { GHC.Types.I# ww9 ->
+                 Defs.$w$c< ww4 ww2 ww9 ww7 } } } }) -}
+9f624f421752e49159a078fe8b02f46a
+  $fOrdVNum_$c<= :: Defs.VNum -> Defs.VNum -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(S(S)L),1*U(1*U(U),1*U)><S(S(S)L),1*U(1*U(U),1*U)>,
+     Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Defs.VNum) (w1 :: Defs.VNum) ->
+                 case w of ww { Defs.VN ww1 ww2 ->
+                 case ww1 of ww3 { GHC.Types.I# ww4 ->
+                 case w1 of ww5 { Defs.VN ww6 ww7 ->
+                 case ww6 of ww8 { GHC.Types.I# ww9 ->
+                 Defs.$w$c<=1 ww4 ww2 ww9 ww7 } } } }) -}
+9f624f421752e49159a078fe8b02f46a
+  $fOrdVNum_$c> :: Defs.VNum -> Defs.VNum -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(S(S)L),1*U(1*U(U),1*U)><S(S(S)L),1*U(1*U(U),1*U)>,
+     Unfolding: InlineRule (2, True, True)
+                (\ (a :: Defs.VNum) (b :: Defs.VNum) -> Defs.$fOrdVNum_$c< b a) -}
+9f624f421752e49159a078fe8b02f46a
+  $fOrdVNum_$c>= :: Defs.VNum -> Defs.VNum -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(S(S)L),1*U(1*U(U),1*U)><S(S(S)L),1*U(1*U(U),1*U)>,
+     Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Defs.VNum) (w1 :: Defs.VNum) ->
+                 case w of ww { Defs.VN ww1 ww2 ->
+                 case ww1 of ww3 { GHC.Types.I# ww4 ->
+                 case w1 of ww5 { Defs.VN ww6 ww7 ->
+                 case ww6 of ww8 { GHC.Types.I# ww9 ->
+                 Defs.$w$c>= ww4 ww2 ww9 ww7 } } } }) -}
+9f624f421752e49159a078fe8b02f46a
+  $fOrdVNum_$ccompare :: Defs.VNum -> Defs.VNum -> GHC.Types.Ordering
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(S(S)L),1*U(1*U(U),1*U)><S(S(S)L),1*U(1*U(U),1*U)>,
+     Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Defs.VNum) (w1 :: Defs.VNum) ->
+                 case w of ww { Defs.VN ww1 ww2 ->
+                 case ww1 of ww3 { GHC.Types.I# ww4 ->
+                 case w1 of ww5 { Defs.VN ww6 ww7 ->
+                 case ww6 of ww8 { GHC.Types.I# ww9 ->
+                 Defs.$w$ccompare ww4 ww2 ww9 ww7 } } } }) -}
+9f624f421752e49159a078fe8b02f46a
+  $fOrdVNum_$cmax :: Defs.VNum -> Defs.VNum -> Defs.VNum
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(S(S)L),1*U(U(U),U)><S(S(S)L),1*U(U(U),U)>m,
+     Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Defs.VNum) (w1 :: Defs.VNum) ->
+                 case w of ww { Defs.VN ww1 ww2 ->
+                 case ww1 of ww3 { GHC.Types.I# ww4 ->
+                 case w1 of ww5 { Defs.VN ww6 ww7 ->
+                 case ww6 of ww8 { GHC.Types.I# ww9 ->
+                 case GHC.Prim.<# ww9 ww4 of lwild {
+                   DEFAULT
+                   -> case GHC.Prim.==# ww9 ww4 of lwild1 {
+                        DEFAULT -> Defs.VN (GHC.Types.I# ww9) ww7
+                        1#
+                        -> case GHC.Classes.$fOrd[]_$s$ccompare1 ww7 ww2 of wild {
+                             DEFAULT -> Defs.VN (GHC.Types.I# ww9) ww7
+                             GHC.Types.LT -> Defs.VN (GHC.Types.I# ww4) ww2 } }
+                   1# -> Defs.VN (GHC.Types.I# ww4) ww2 } } } } }) -}
+9f624f421752e49159a078fe8b02f46a
+  $fOrdVNum_$cmin :: Defs.VNum -> Defs.VNum -> Defs.VNum
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(S(S)L),1*U(U(U),U)><S(S(S)L),1*U(U(U),U)>m,
+     Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Defs.VNum) (w1 :: Defs.VNum) ->
+                 case w of ww { Defs.VN ww1 ww2 ->
+                 case ww1 of ww3 { GHC.Types.I# ww4 ->
+                 case w1 of ww5 { Defs.VN ww6 ww7 ->
+                 case ww6 of ww8 { GHC.Types.I# ww9 ->
+                 case GHC.Prim.<# ww9 ww4 of lwild {
+                   DEFAULT
+                   -> case GHC.Prim.==# ww9 ww4 of lwild1 {
+                        DEFAULT -> Defs.VN (GHC.Types.I# ww4) ww2
+                        1#
+                        -> case GHC.Classes.$fOrd[]_$s$ccompare1 ww7 ww2 of wild {
+                             DEFAULT -> Defs.VN (GHC.Types.I# ww4) ww2
+                             GHC.Types.LT -> Defs.VN (GHC.Types.I# ww9) ww7 } }
+                   1# -> Defs.VN (GHC.Types.I# ww9) ww7 } } } } }) -}
+3329419535fec99edec0e43ff47f12ba
+  $fOrdVersion :: GHC.Classes.Ord Defs.Version
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.Version
+                  Defs.$fEqVersion
+                  Defs.$fOrdVersion7
+                    `cast`
+                  (Sym (Defs.N:Version[0])
+                   ->_R Sym (Defs.N:Version[0])
+                   ->_R <GHC.Types.Ordering>_R)
+                  Defs.$fOrdVersion6
+                    `cast`
+                  (Sym (Defs.N:Version[0])
+                   ->_R Sym (Defs.N:Version[0])
+                   ->_R <GHC.Types.Bool>_R)
+                  Defs.$fOrdVersion5
+                    `cast`
+                  (Sym (Defs.N:Version[0])
+                   ->_R Sym (Defs.N:Version[0])
+                   ->_R <GHC.Types.Bool>_R)
+                  Defs.$fOrdVersion4
+                    `cast`
+                  (Sym (Defs.N:Version[0])
+                   ->_R Sym (Defs.N:Version[0])
+                   ->_R <GHC.Types.Bool>_R)
+                  Defs.$fOrdVersion3
+                    `cast`
+                  (Sym (Defs.N:Version[0])
+                   ->_R Sym (Defs.N:Version[0])
+                   ->_R <GHC.Types.Bool>_R)
+                  Defs.$fOrdVersion2
+                    `cast`
+                  (Sym (Defs.N:Version[0])
+                   ->_R Sym (Defs.N:Version[0])
+                   ->_R Sym (Defs.N:Version[0]))
+                  Defs.$fOrdVersion1
+                    `cast`
+                  (Sym (Defs.N:Version[0])
+                   ->_R Sym (Defs.N:Version[0])
+                   ->_R Sym (Defs.N:Version[0])) -}
+c12aede45eae7eb4c0660a63a45a18f4
+  $fOrdVersion1 :: [Defs.VNum] -> [Defs.VNum] -> [Defs.VNum]
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,U><S,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (x :: [Defs.VNum]) (y :: [Defs.VNum]) ->
+                 case GHC.Classes.$fOrd[]_$ccompare
+                        @ Defs.VNum
+                        Defs.$fOrdVNum
+                        x
+                        y of wild {
+                   DEFAULT -> x GHC.Types.GT -> y }) -}
+3be8da416377b5c38495b8edfb9cdc22
+  $fOrdVersion2 :: [Defs.VNum] -> [Defs.VNum] -> [Defs.VNum]
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,U><S,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (x :: [Defs.VNum]) (y :: [Defs.VNum]) ->
+                 case GHC.Classes.$fOrd[]_$ccompare
+                        @ Defs.VNum
+                        Defs.$fOrdVNum
+                        x
+                        y of wild {
+                   DEFAULT -> y GHC.Types.GT -> x }) -}
+0edd99490de8441b24e675fae95c9178
+  $fOrdVersion3 :: [Defs.VNum] -> [Defs.VNum] -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (x :: [Defs.VNum]) (y :: [Defs.VNum]) ->
+                 case GHC.Classes.$fOrd[]_$ccompare
+                        @ Defs.VNum
+                        Defs.$fOrdVNum
+                        x
+                        y of wild {
+                   DEFAULT -> GHC.Types.True GHC.Types.LT -> GHC.Types.False }) -}
+775702af970cb8104c6bd08642660f3f
+  $fOrdVersion4 :: [Defs.VNum] -> [Defs.VNum] -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (x :: [Defs.VNum]) (y :: [Defs.VNum]) ->
+                 case GHC.Classes.$fOrd[]_$ccompare
+                        @ Defs.VNum
+                        Defs.$fOrdVNum
+                        x
+                        y of wild {
+                   DEFAULT -> GHC.Types.False GHC.Types.GT -> GHC.Types.True }) -}
+b296846764c0cdf69536ef618d060764
+  $fOrdVersion5 :: [Defs.VNum] -> [Defs.VNum] -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (x :: [Defs.VNum]) (y :: [Defs.VNum]) ->
+                 case GHC.Classes.$fOrd[]_$ccompare
+                        @ Defs.VNum
+                        Defs.$fOrdVNum
+                        x
+                        y of wild {
+                   DEFAULT -> GHC.Types.True GHC.Types.GT -> GHC.Types.False }) -}
+306bcb2ec8950b024cbe09038408daa9
+  $fOrdVersion6 :: [Defs.VNum] -> [Defs.VNum] -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (x :: [Defs.VNum]) (y :: [Defs.VNum]) ->
+                 case GHC.Classes.$fOrd[]_$ccompare
+                        @ Defs.VNum
+                        Defs.$fOrdVNum
+                        x
+                        y of wild {
+                   DEFAULT -> GHC.Types.False GHC.Types.LT -> GHC.Types.True }) -}
+39f44bfce4ad5e92d0e12e23727b690e
+  $fOrdVersion7 :: [Defs.VNum] -> [Defs.VNum] -> GHC.Types.Ordering
+  {- Arity: 2, HasNoCafRefs,
+     Unfolding: (GHC.Classes.$fOrd[]_$ccompare
+                   @ Defs.VNum
+                   Defs.$fOrdVNum) -}
+72116789c94c7310ad831055c34dc36c
+  $fReadDatabase :: GHC.Read.Read Defs.Database
+  DFunId
+  {- Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.Database
+                  Defs.$fReadDatabase_$creadsPrec
+                  Defs.$fReadDatabase_$creadList
+                  Defs.$fReadDatabase1
+                    `cast`
+                  ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                    ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                  <Defs.Database>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                                 <Defs.Database>_R))
+                  Defs.$fReadDatabase_$creadListPrec -}
+72116789c94c7310ad831055c34dc36c
+  $fReadDatabase1 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> forall b.
+       (Defs.Database -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2,
+     Unfolding: (GHC.Read.$fRead()6
+                   @ Defs.Database
+                   Defs.$fReadDatabase2
+                     `cast`
+                   ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                     ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                   <Defs.Database>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                                  <Defs.Database>_R))) -}
+72116789c94c7310ad831055c34dc36c
+  $fReadDatabase2 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> forall b.
+       (Defs.Database -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S(S),1*U(U)><L,C(U)>, Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Text.ParserCombinators.ReadPrec.Prec)
+                   @ b
+                   (w1 :: Defs.Database -> Text.ParserCombinators.ReadP.P b) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 Defs.$w$creadPrec ww1 @ b w1 }) -}
+6b2317476313b33f49e7c9a753724b53
+  $fReadDatabase3 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Defs.$fReadDatabase4) -}
+d34e52d545fe60945d6281b014bd8039
+  $fReadDatabase4 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("DB"#) -}
+34985ff1597850d05de3213223300464
+  $fReadDatabase5 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 11#) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fReadDatabase6 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> forall b.
+       (Defs.Pkg -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2,
+     Unfolding: (GHC.Read.$fRead()6
+                   @ Defs.Pkg
+                   Defs.$fReadDatabase7
+                     `cast`
+                   ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                     ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                   <Defs.Pkg>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                             <Defs.Pkg>_R))) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fReadDatabase7 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> forall b.
+       (Defs.Pkg -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S(S),1*U(U)><L,C(U)>, Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Text.ParserCombinators.ReadPrec.Prec)
+                   @ b
+                   (w1 :: Defs.Pkg -> Text.ParserCombinators.ReadP.P b) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 Defs.$w$creadPrec1 ww1 @ b w1 }) -}
+72116789c94c7310ad831055c34dc36c
+  $fReadDatabase8 :: Text.ParserCombinators.ReadP.P [Defs.Database]
+  {- Unfolding: ((Defs.$fReadDatabase_$creadListPrec
+                    `cast`
+                  (Text.ParserCombinators.ReadPrec.N:ReadPrec[0] <[Defs.Database]>_R)
+                    GHC.Read.$fRead()8)
+                   `cast`
+                 (Text.ParserCombinators.ReadP.N:ReadP[0] <[Defs.Database]>_R)
+                   @ [Defs.Database]
+                   (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                      @ [Defs.Database])) -}
+72116789c94c7310ad831055c34dc36c
+  $fReadDatabase_$creadList ::
+    Text.ParserCombinators.ReadP.ReadS [Defs.Database]
+  {- Arity: 1,
+     Unfolding: (Text.ParserCombinators.ReadP.run
+                   @ [Defs.Database]
+                   Defs.$fReadDatabase8) -}
+72116789c94c7310ad831055c34dc36c
+  $fReadDatabase_$creadListPrec ::
+    Text.ParserCombinators.ReadPrec.ReadPrec [Defs.Database]
+  {- Unfolding: (GHC.Read.list
+                   @ Defs.Database
+                   Defs.$fReadDatabase1
+                     `cast`
+                   ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                     ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                   <Defs.Database>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                                  <Defs.Database>_R))) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fReadDatabase_$creadListPrec1 ::
+    Text.ParserCombinators.ReadPrec.ReadPrec [Defs.Pkg]
+  {- Unfolding: (GHC.Read.list
+                   @ Defs.Pkg
+                   Defs.$fReadDatabase6
+                     `cast`
+                   ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                     ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                   <Defs.Pkg>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                             <Defs.Pkg>_R))) -}
+72116789c94c7310ad831055c34dc36c
+  $fReadDatabase_$creadsPrec ::
+    GHC.Types.Int -> Text.ParserCombinators.ReadP.ReadS Defs.Database
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (n :: GHC.Types.Int) ->
+                 Text.ParserCombinators.ReadP.run
+                   @ Defs.Database
+                   (GHC.Read.$fRead()6
+                      @ Defs.Database
+                      Defs.$fReadDatabase2
+                        `cast`
+                      ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                        ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                      <Defs.Database>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                                     <Defs.Database>_R))
+                      n
+                      @ Defs.Database
+                      (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                         @ Defs.Database))) -}
+5f19c9b9fbea2b2b9245083ff941c0d5
+  $fReadPName :: GHC.Read.Read Defs.PName
+  DFunId
+  {- Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.PName
+                  Defs.$fReadPName_$creadsPrec
+                  Defs.$fReadPName_$creadList
+                  Defs.$fReadPName1
+                    `cast`
+                  ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                    ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                  <Defs.PName>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                              <Defs.PName>_R))
+                  Defs.$fReadPName_$creadListPrec -}
+5f19c9b9fbea2b2b9245083ff941c0d5
+  $fReadPName1 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> forall b.
+       (Defs.PName -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2,
+     Unfolding: (GHC.Read.$fRead()6
+                   @ Defs.PName
+                   Defs.$fReadPName2
+                     `cast`
+                   ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                     ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                   <Defs.PName>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                               <Defs.PName>_R))) -}
+5f19c9b9fbea2b2b9245083ff941c0d5
+  $fReadPName2 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> forall b.
+       (Defs.PName -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S(S),1*U(U)><L,C(U)>, Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Text.ParserCombinators.ReadPrec.Prec)
+                   @ b
+                   (w1 :: Defs.PName -> Text.ParserCombinators.ReadP.P b) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 Defs.$w$creadPrec2 ww1 @ b w1 }) -}
+fd2220cee394b69067dadfd89b2afe4d
+  $fReadPName3 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Defs.$fReadPName4) -}
+07ee78148613a60fbbe78bc45edcec94
+  $fReadPName4 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("P"#) -}
+5f19c9b9fbea2b2b9245083ff941c0d5
+  $fReadPName5 :: Text.ParserCombinators.ReadP.P [Defs.PName]
+  {- Unfolding: ((Defs.$fReadPName_$creadListPrec
+                    `cast`
+                  (Text.ParserCombinators.ReadPrec.N:ReadPrec[0] <[Defs.PName]>_R)
+                    GHC.Read.$fRead()8)
+                   `cast`
+                 (Text.ParserCombinators.ReadP.N:ReadP[0] <[Defs.PName]>_R)
+                   @ [Defs.PName]
+                   (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                      @ [Defs.PName])) -}
+5f19c9b9fbea2b2b9245083ff941c0d5
+  $fReadPName_$creadList ::
+    Text.ParserCombinators.ReadP.ReadS [Defs.PName]
+  {- Arity: 1,
+     Unfolding: (Text.ParserCombinators.ReadP.run
+                   @ [Defs.PName]
+                   Defs.$fReadPName5) -}
+5f19c9b9fbea2b2b9245083ff941c0d5
+  $fReadPName_$creadListPrec ::
+    Text.ParserCombinators.ReadPrec.ReadPrec [Defs.PName]
+  {- Unfolding: (GHC.Read.list
+                   @ Defs.PName
+                   Defs.$fReadPName1
+                     `cast`
+                   ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                     ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                   <Defs.PName>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                               <Defs.PName>_R))) -}
+5f19c9b9fbea2b2b9245083ff941c0d5
+  $fReadPName_$creadsPrec ::
+    GHC.Types.Int -> Text.ParserCombinators.ReadP.ReadS Defs.PName
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (n :: GHC.Types.Int) ->
+                 Text.ParserCombinators.ReadP.run
+                   @ Defs.PName
+                   (GHC.Read.$fRead()6
+                      @ Defs.PName
+                      Defs.$fReadPName2
+                        `cast`
+                      ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                        ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                      <Defs.PName>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                                  <Defs.PName>_R))
+                      n
+                      @ Defs.PName
+                      (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                         @ Defs.PName))) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fReadPkg :: GHC.Read.Read Defs.Pkg
+  DFunId
+  {- Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.Pkg
+                  Defs.$fReadPkg_$creadsPrec
+                  Defs.$fReadPkg_$creadList
+                  Defs.$fReadDatabase6
+                    `cast`
+                  ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                    ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                  <Defs.Pkg>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                            <Defs.Pkg>_R))
+                  Defs.$fReadDatabase_$creadListPrec1 -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fReadPkg1 :: Text.ParserCombinators.ReadP.P [Defs.Pkg]
+  {- Unfolding: ((Defs.$fReadDatabase_$creadListPrec1
+                    `cast`
+                  (Text.ParserCombinators.ReadPrec.N:ReadPrec[0] <[Defs.Pkg]>_R)
+                    GHC.Read.$fRead()8)
+                   `cast`
+                 (Text.ParserCombinators.ReadP.N:ReadP[0] <[Defs.Pkg]>_R)
+                   @ [Defs.Pkg]
+                   (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                      @ [Defs.Pkg])) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fReadPkg_$creadList ::
+    Text.ParserCombinators.ReadP.ReadS [Defs.Pkg]
+  {- Arity: 1,
+     Unfolding: (Text.ParserCombinators.ReadP.run
+                   @ [Defs.Pkg]
+                   Defs.$fReadPkg1) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fReadPkg_$creadsPrec ::
+    GHC.Types.Int -> Text.ParserCombinators.ReadP.ReadS Defs.Pkg
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (n :: GHC.Types.Int) ->
+                 Text.ParserCombinators.ReadP.run
+                   @ Defs.Pkg
+                   (GHC.Read.$fRead()6
+                      @ Defs.Pkg
+                      Defs.$fReadDatabase7
+                        `cast`
+                      ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                        ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                      <Defs.Pkg>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                                <Defs.Pkg>_R))
+                      n
+                      @ Defs.Pkg
+                      (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                         @ Defs.Pkg))) -}
+9f624f421752e49159a078fe8b02f46a
+  $fReadVNum :: GHC.Read.Read Defs.VNum
+  DFunId
+  {- Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.VNum
+                  Defs.$fReadVNum_$creadsPrec
+                  Defs.$fReadVNum_$creadList
+                  Defs.$fReadVNum1
+                    `cast`
+                  ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                    ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                  <Defs.VNum>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                             <Defs.VNum>_R))
+                  Defs.$fReadVNum_$creadListPrec -}
+9f624f421752e49159a078fe8b02f46a
+  $fReadVNum1 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> forall b.
+       (Defs.VNum -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2,
+     Unfolding: (GHC.Read.$fRead()6
+                   @ Defs.VNum
+                   Defs.$fReadVNum2
+                     `cast`
+                   ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                     ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                   <Defs.VNum>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                              <Defs.VNum>_R))) -}
+9f624f421752e49159a078fe8b02f46a
+  $fReadVNum2 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> forall b.
+       (Defs.VNum -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S(S),1*U(U)><L,C(U)>, Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Text.ParserCombinators.ReadPrec.Prec)
+                   @ b
+                   (w1 :: Defs.VNum -> Text.ParserCombinators.ReadP.P b) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 Defs.$w$creadPrec3 ww1 @ b w1 }) -}
+5e1aca29da7dc4a2348657815fcc9fe0
+  $fReadVNum3 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Defs.$fReadVNum4) -}
+05dab5894cc09572c4e8db966c498b97
+  $fReadVNum4 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("VN"#) -}
+9f624f421752e49159a078fe8b02f46a
+  $fReadVNum5 :: Text.ParserCombinators.ReadP.P [Defs.VNum]
+  {- Unfolding: ((Defs.$fReadVNum_$creadListPrec
+                    `cast`
+                  (Text.ParserCombinators.ReadPrec.N:ReadPrec[0] <[Defs.VNum]>_R)
+                    GHC.Read.$fRead()8)
+                   `cast`
+                 (Text.ParserCombinators.ReadP.N:ReadP[0] <[Defs.VNum]>_R)
+                   @ [Defs.VNum]
+                   (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                      @ [Defs.VNum])) -}
+9f624f421752e49159a078fe8b02f46a
+  $fReadVNum_$creadList ::
+    Text.ParserCombinators.ReadP.ReadS [Defs.VNum]
+  {- Arity: 1,
+     Unfolding: (Text.ParserCombinators.ReadP.run
+                   @ [Defs.VNum]
+                   Defs.$fReadVNum5) -}
+9f624f421752e49159a078fe8b02f46a
+  $fReadVNum_$creadListPrec ::
+    Text.ParserCombinators.ReadPrec.ReadPrec [Defs.VNum]
+  {- Unfolding: (GHC.Read.list
+                   @ Defs.VNum
+                   Defs.$fReadVNum1
+                     `cast`
+                   ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                     ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                   <Defs.VNum>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                              <Defs.VNum>_R))) -}
+9f624f421752e49159a078fe8b02f46a
+  $fReadVNum_$creadsPrec ::
+    GHC.Types.Int -> Text.ParserCombinators.ReadP.ReadS Defs.VNum
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (n :: GHC.Types.Int) ->
+                 Text.ParserCombinators.ReadP.run
+                   @ Defs.VNum
+                   (GHC.Read.$fRead()6
+                      @ Defs.VNum
+                      Defs.$fReadVNum2
+                        `cast`
+                      ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                        ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                      <Defs.VNum>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                                 <Defs.VNum>_R))
+                      n
+                      @ Defs.VNum
+                      (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                         @ Defs.VNum))) -}
+3329419535fec99edec0e43ff47f12ba
+  $fReadVersion :: GHC.Read.Read Defs.Version
+  DFunId
+  {- Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.Version
+                  Defs.$fReadVersion_$creadsPrec
+                  Defs.$fReadVersion_$creadList
+                  Defs.$fReadVersion1
+                    `cast`
+                  ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                    ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                  <Defs.Version>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                                <Defs.Version>_R))
+                  Defs.$fReadVersion_$creadListPrec -}
+3329419535fec99edec0e43ff47f12ba
+  $fReadVersion1 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> forall b.
+       (Defs.Version -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2,
+     Unfolding: (GHC.Read.$fRead()6
+                   @ Defs.Version
+                   Defs.$fReadVersion2
+                     `cast`
+                   ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                     ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                   <Defs.Version>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                                 <Defs.Version>_R))) -}
+3329419535fec99edec0e43ff47f12ba
+  $fReadVersion2 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> forall b.
+       (Defs.Version -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S(S),1*U(U)><L,C(U)>, Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Text.ParserCombinators.ReadPrec.Prec)
+                   @ b
+                   (w1 :: Defs.Version -> Text.ParserCombinators.ReadP.P b) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 Defs.$w$creadPrec4 ww1 @ b w1 }) -}
+212faba4bf537b31cf6e91f258589a5f
+  $fReadVersion3 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Defs.$fReadVersion4) -}
+5624fffe5493f7d1217b18b115b87aa3
+  $fReadVersion4 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("V"#) -}
+3329419535fec99edec0e43ff47f12ba
+  $fReadVersion5 :: Text.ParserCombinators.ReadP.P [Defs.Version]
+  {- Unfolding: ((Defs.$fReadVersion_$creadListPrec
+                    `cast`
+                  (Text.ParserCombinators.ReadPrec.N:ReadPrec[0] <[Defs.Version]>_R)
+                    GHC.Read.$fRead()8)
+                   `cast`
+                 (Text.ParserCombinators.ReadP.N:ReadP[0] <[Defs.Version]>_R)
+                   @ [Defs.Version]
+                   (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                      @ [Defs.Version])) -}
+3329419535fec99edec0e43ff47f12ba
+  $fReadVersion_$creadList ::
+    Text.ParserCombinators.ReadP.ReadS [Defs.Version]
+  {- Arity: 1,
+     Unfolding: (Text.ParserCombinators.ReadP.run
+                   @ [Defs.Version]
+                   Defs.$fReadVersion5) -}
+3329419535fec99edec0e43ff47f12ba
+  $fReadVersion_$creadListPrec ::
+    Text.ParserCombinators.ReadPrec.ReadPrec [Defs.Version]
+  {- Unfolding: (GHC.Read.list
+                   @ Defs.Version
+                   Defs.$fReadVersion1
+                     `cast`
+                   ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                     ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                   <Defs.Version>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                                 <Defs.Version>_R))) -}
+3329419535fec99edec0e43ff47f12ba
+  $fReadVersion_$creadsPrec ::
+    GHC.Types.Int -> Text.ParserCombinators.ReadP.ReadS Defs.Version
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (n :: GHC.Types.Int) ->
+                 Text.ParserCombinators.ReadP.run
+                   @ Defs.Version
+                   (GHC.Read.$fRead()6
+                      @ Defs.Version
+                      Defs.$fReadVersion2
+                        `cast`
+                      ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                        ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                      <Defs.Version>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                                    <Defs.Version>_R))
+                      n
+                      @ Defs.Version
+                      (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                         @ Defs.Version))) -}
+72116789c94c7310ad831055c34dc36c
+  $fShowDatabase :: GHC.Show.Show Defs.Database
+  DFunId
+  {- Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.Database
+                  Defs.$fShowDatabase_$cshowsPrec
+                  Defs.prettyPkgs
+                    `cast`
+                  (Sym (Defs.N:Database[0]) ->_R <GHC.Base.String>_R)
+                  Defs.$fShowDatabase_$cshowList -}
+72116789c94c7310ad831055c34dc36c
+  $fShowDatabase1 ::
+    Defs.Database -> GHC.Base.String -> [GHC.Types.Char]
+  {- Arity: 2, Strictness: <S,1*U><L,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (x :: Defs.Database) (s :: GHC.Base.String)[OneShot] ->
+                 GHC.Base.augment
+                   @ GHC.Types.Char
+                   (\ @ b
+                      (c :: GHC.Types.Char -> b -> b)[OneShot]
+                      (n :: b)[OneShot] ->
+                    GHC.Base.foldr
+                      @ GHC.Types.Char
+                      @ b
+                      c
+                      n
+                      (Defs.prettyPkgs x `cast` (Defs.N:Database[0])))
+                   s) -}
+72116789c94c7310ad831055c34dc36c
+  $fShowDatabase_$cshowList :: [Defs.Database] -> GHC.Show.ShowS
+  {- Arity: 2, Strictness: <S,1*U><L,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (ls :: [Defs.Database]) (s :: GHC.Base.String) ->
+                 GHC.Show.showList__ @ Defs.Database Defs.$fShowDatabase1 ls s) -}
+72116789c94c7310ad831055c34dc36c
+  $fShowDatabase_$cshowsPrec ::
+    GHC.Types.Int -> Defs.Database -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <L,A><S,1*U><L,1*U>,
+     Unfolding: InlineRule (3, True, False)
+                (\ (ds3 :: GHC.Types.Int)
+                   (x :: Defs.Database)
+                   (s :: GHC.Base.String) ->
+                 GHC.Base.augment
+                   @ GHC.Types.Char
+                   (\ @ b
+                      (c :: GHC.Types.Char -> b -> b)[OneShot]
+                      (n :: b)[OneShot] ->
+                    GHC.Base.foldr
+                      @ GHC.Types.Char
+                      @ b
+                      c
+                      n
+                      (Defs.prettyPkgs x `cast` (Defs.N:Database[0])))
+                   s) -}
+5f19c9b9fbea2b2b9245083ff941c0d5
+  $fShowPName :: GHC.Show.Show Defs.PName
+  DFunId
+  {- Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.PName
+                  Defs.$fShowPName_$cshowsPrec
+                  Defs.$fShowPName_$cshow
+                  Defs.$fShowPName_$cshowList -}
+5f19c9b9fbea2b2b9245083ff941c0d5
+  $fShowPName1 :: Defs.PName -> GHC.Show.ShowS
+  {- Arity: 2, Strictness: <L,1*U><L,U>,
+     Unfolding: (\ (w :: Defs.PName) (w1 :: GHC.Base.String) ->
+                 Defs.$w$cshowsPrec 0# w w1) -}
+c71be2c779f23f2c5115758f89370865
+  $fShowPName2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("P "#) -}
+5f19c9b9fbea2b2b9245083ff941c0d5
+  $fShowPName_$cshow :: Defs.PName -> GHC.Base.String
+  {- Arity: 1, Strictness: <L,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (x :: Defs.PName) ->
+                 GHC.CString.unpackAppendCString#
+                   Defs.$fShowPName2
+                   (GHC.Types.:
+                      @ GHC.Types.Char
+                      GHC.Show.$fShow(,)3
+                      (GHC.Show.showLitString
+                         x `cast` (Defs.N:PName[0])
+                         (GHC.Types.:
+                            @ GHC.Types.Char
+                            GHC.Show.$fShow(,)3
+                            (GHC.Types.[] @ GHC.Types.Char))))) -}
+5f19c9b9fbea2b2b9245083ff941c0d5
+  $fShowPName_$cshowList :: [Defs.PName] -> GHC.Show.ShowS
+  {- Arity: 2, Strictness: <S,1*U><L,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (ls :: [Defs.PName]) (s :: GHC.Base.String) ->
+                 GHC.Show.showList__ @ Defs.PName Defs.$fShowPName1 ls s) -}
+5f19c9b9fbea2b2b9245083ff941c0d5
+  $fShowPName_$cshowsPrec ::
+    GHC.Types.Int -> Defs.PName -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <S(S),1*U(U)><L,1*U><L,U>, Inline: [0],
+     Unfolding: InlineRule (3, True, False)
+                (\ (w :: GHC.Types.Int)
+                   (w1 :: Defs.PName)
+                   (w2 :: GHC.Base.String) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 Defs.$w$cshowsPrec ww1 w1 w2 }) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fShowPkg :: GHC.Show.Show Defs.Pkg
+  DFunId
+  {- Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.Pkg
+                  Defs.$fShowPkg_$cshowsPrec
+                  Defs.$fShowPkg_$cshow
+                  Defs.$fShowPkg_$cshowList -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fShowPkg1 :: Defs.Pkg -> GHC.Show.ShowS
+  {- Arity: 2, Strictness: <S,1*U(1*U,1*U,1*U,1*U)><L,U>,
+     Unfolding: (\ (w :: Defs.Pkg) (w1 :: GHC.Base.String) ->
+                 case w of ww { Defs.Pkg ww1 ww2 ww3 ww4 ->
+                 Defs.$w$cshowsPrec1 0# ww1 ww2 ww3 ww4 w1 }) -}
+71fc930177d04b2fb628dd3f5fcda3c8
+  $fShowPkg2 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 0#) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fShowPkg_$cshow :: Defs.Pkg -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U(1*U,1*U,1*U,1*U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (x :: Defs.Pkg) ->
+                 Defs.$fShowPkg_$cshowsPrec
+                   Defs.$fShowPkg2
+                   x
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fShowPkg_$cshowList :: [Defs.Pkg] -> GHC.Show.ShowS
+  {- Arity: 2, Strictness: <S,1*U><L,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (ls :: [Defs.Pkg]) (s :: GHC.Base.String) ->
+                 GHC.Show.showList__ @ Defs.Pkg Defs.$fShowPkg1 ls s) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $fShowPkg_$cshowsPrec ::
+    GHC.Types.Int -> Defs.Pkg -> GHC.Show.ShowS
+  {- Arity: 3,
+     Strictness: <S(S),1*U(U)><S,1*U(1*U,1*U,1*U,1*U)><L,U>,
+     Inline: [0],
+     Unfolding: InlineRule (3, True, False)
+                (\ (w :: GHC.Types.Int) (w1 :: Defs.Pkg) (w2 :: GHC.Base.String) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 case w1 of ww2 { Defs.Pkg ww3 ww4 ww5 ww6 ->
+                 Defs.$w$cshowsPrec1 ww1 ww3 ww4 ww5 ww6 w2 } }) -}
+9f624f421752e49159a078fe8b02f46a
+  $fShowVNum :: GHC.Show.Show Defs.VNum
+  DFunId
+  {- Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.VNum
+                  Defs.$fShowVNum_$cshowsPrec
+                  Defs.$fShowVNum_$cshow
+                  Defs.$fShowVNum_$cshowList -}
+9f624f421752e49159a078fe8b02f46a
+  $fShowVNum1 :: Defs.VNum -> GHC.Show.ShowS
+  {- Arity: 2, Strictness: <S,1*U(1*U(U),1*U)><L,U>,
+     Unfolding: (\ (w :: Defs.VNum) (w1 :: GHC.Base.String) ->
+                 case w of ww { Defs.VN ww1 ww2 ->
+                 Defs.$w$cshowsPrec2 0# ww1 ww2 w1 }) -}
+0bb57b4f18f314e89758f8ef6c863475
+  $fShowVNum2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("VN "#) -}
+8bd10584b3aec7ca1abf51d175294798
+  $fShowVNum3 :: [GHC.Types.Char]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Types.Char
+                   GHC.Show.$fShow(,)3
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+9f624f421752e49159a078fe8b02f46a
+  $fShowVNum_$cshow :: Defs.VNum -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U(1*U(U),1*U)>, Inline: [0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: Defs.VNum) ->
+                 case w of ww { Defs.VN ww1 ww2 -> Defs.$w$cshow ww1 ww2 }) -}
+9f624f421752e49159a078fe8b02f46a
+  $fShowVNum_$cshowList :: [Defs.VNum] -> GHC.Show.ShowS
+  {- Arity: 2, Strictness: <S,1*U><L,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (ls :: [Defs.VNum]) (s :: GHC.Base.String) ->
+                 GHC.Show.showList__ @ Defs.VNum Defs.$fShowVNum1 ls s) -}
+9f624f421752e49159a078fe8b02f46a
+  $fShowVNum_$cshowsPrec ::
+    GHC.Types.Int -> Defs.VNum -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <S(S),1*U(U)><S,1*U(1*U(U),1*U)><L,U>,
+     Inline: [0],
+     Unfolding: InlineRule (3, True, False)
+                (\ (w :: GHC.Types.Int)
+                   (w1 :: Defs.VNum)
+                   (w2 :: GHC.Base.String) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 case w1 of ww2 { Defs.VN ww3 ww4 ->
+                 Defs.$w$cshowsPrec2 ww1 ww3 ww4 w2 } }) -}
+3329419535fec99edec0e43ff47f12ba
+  $fShowVersion :: GHC.Show.Show Defs.Version
+  DFunId
+  {- Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Defs.Version
+                  Defs.$fShowVersion_$cshowsPrec
+                  Defs.$fShowVersion_$cshow
+                  Defs.$fShowVersion_$cshowList -}
+3329419535fec99edec0e43ff47f12ba
+  $fShowVersion1 :: Defs.Version -> GHC.Show.ShowS
+  {- Arity: 2, Strictness: <L,1*U><L,U>,
+     Unfolding: (\ (w :: Defs.Version) (w1 :: GHC.Base.String) ->
+                 Defs.$w$cshowsPrec3 0# w w1) -}
+67cef065e9391b84e401dbfe9cc5cadf
+  $fShowVersion2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("V "#) -}
+d749617441f381383f37cb21149d4492
+  $fShowVersion3 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   GHC.Show.showList__4
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+3329419535fec99edec0e43ff47f12ba
+  $fShowVersion_$cshow :: Defs.Version -> GHC.Base.String
+  {- Arity: 1, Strictness: <L,1*U>,
+     Unfolding: (\ (x :: Defs.Version) ->
+                 GHC.CString.unpackAppendCString#
+                   Defs.$fShowVersion2
+                   (case x `cast` (Defs.N:Version[0]) of wild {
+                      [] -> Defs.$fShowVersion3
+                      : x1 xs
+                      -> GHC.Types.:
+                           @ GHC.Types.Char
+                           GHC.Show.showList__3
+                           (case x1 of wild1 { Defs.VN b1 b2 ->
+                            GHC.CString.unpackAppendCString#
+                              Defs.$fShowVNum2
+                              (case b1 of ww2 { GHC.Types.I# ww3 ->
+                               case GHC.Show.$wshowSignedInt
+                                      11#
+                                      ww3
+                                      (GHC.Types.:
+                                         @ GHC.Types.Char
+                                         GHC.Show.showSpace1
+                                         (GHC.Types.:
+                                            @ GHC.Types.Char
+                                            GHC.Show.$fShow(,)3
+                                            (GHC.Show.showLitString
+                                               b2
+                                               (GHC.Types.:
+                                                  @ GHC.Types.Char
+                                                  GHC.Show.$fShow(,)3
+                                                  (Defs.$fShowVersion_showl
+                                                     xs))))) of ww4 { (#,#) ww5 ww6 ->
+                               GHC.Types.: @ GHC.Types.Char ww5 ww6 } }) }) })) -}
+3329419535fec99edec0e43ff47f12ba
+  $fShowVersion_$cshowList :: [Defs.Version] -> GHC.Show.ShowS
+  {- Arity: 2, Strictness: <S,1*U><L,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (ls :: [Defs.Version]) (s :: GHC.Base.String) ->
+                 GHC.Show.showList__ @ Defs.Version Defs.$fShowVersion1 ls s) -}
+3329419535fec99edec0e43ff47f12ba
+  $fShowVersion_$cshowsPrec ::
+    GHC.Types.Int -> Defs.Version -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <S(S),1*U(U)><L,1*U><L,U>, Inline: [0],
+     Unfolding: InlineRule (3, True, False)
+                (\ (w :: GHC.Types.Int)
+                   (w1 :: Defs.Version)
+                   (w2 :: GHC.Base.String) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 Defs.$w$cshowsPrec3 ww1 w1 w2 }) -}
+3047b0e27710ae8a0398929869a46044
+  $fShowVersion_showl :: [Defs.VNum] -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U>m2 -}
+ae0a4ec5fbd86cffd8618a4df58a1836
+  $s$fRead(,,) ::
+    GHC.Read.Read (GHC.Types.Bool, Defs.Version, Defs.Version)
+  {- Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ (GHC.Types.Bool, Defs.Version, Defs.Version)
+                  (\ (n :: GHC.Types.Int) ->
+                   Text.ParserCombinators.ReadP.run
+                     @ (GHC.Types.Bool, Defs.Version, Defs.Version)
+                     (GHC.Read.$fRead(,,)1
+                        @ GHC.Types.Bool
+                        @ Defs.Version
+                        @ Defs.Version
+                        GHC.Read.$fReadBool
+                        Defs.$fReadVersion
+                        Defs.$fReadVersion
+                        n
+                        @ (GHC.Types.Bool, Defs.Version, Defs.Version)
+                        (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                           @ (GHC.Types.Bool, Defs.Version, Defs.Version))))
+                  (Text.ParserCombinators.ReadP.run
+                     @ [(GHC.Types.Bool, Defs.Version, Defs.Version)]
+                     (((GHC.Read.list
+                          @ (GHC.Types.Bool, Defs.Version, Defs.Version)
+                          (GHC.Read.$fRead(,,)1
+                             @ GHC.Types.Bool
+                             @ Defs.Version
+                             @ Defs.Version
+                             GHC.Read.$fReadBool
+                             Defs.$fReadVersion
+                             Defs.$fReadVersion)
+                            `cast`
+                          ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                            ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                          <(GHC.Types.Bool, Defs.Version,
+                                            Defs.Version)>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                                          <(GHC.Types.Bool,
+                                                                            Defs.Version,
+                                                                            Defs.Version)>_R)))
+                         `cast`
+                       (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                            <[(GHC.Types.Bool, Defs.Version, Defs.Version)]>_R)
+                         GHC.Read.$fRead()8)
+                        `cast`
+                      (Text.ParserCombinators.ReadP.N:ReadP[0]
+                           <[(GHC.Types.Bool, Defs.Version, Defs.Version)]>_R)
+                        @ [(GHC.Types.Bool, Defs.Version, Defs.Version)]
+                        (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                           @ [(GHC.Types.Bool, Defs.Version, Defs.Version)])))
+                  (GHC.Read.$fRead(,,)1
+                     @ GHC.Types.Bool
+                     @ Defs.Version
+                     @ Defs.Version
+                     GHC.Read.$fReadBool
+                     Defs.$fReadVersion
+                     Defs.$fReadVersion)
+                    `cast`
+                  ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                    ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                  <(GHC.Types.Bool, Defs.Version,
+                                    Defs.Version)>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                                  <(GHC.Types.Bool, Defs.Version,
+                                                                    Defs.Version)>_R))
+                  (GHC.Read.list
+                     @ (GHC.Types.Bool, Defs.Version, Defs.Version)
+                     (GHC.Read.$fRead(,,)1
+                        @ GHC.Types.Bool
+                        @ Defs.Version
+                        @ Defs.Version
+                        GHC.Read.$fReadBool
+                        Defs.$fReadVersion
+                        Defs.$fReadVersion)
+                       `cast`
+                     ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                       ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                     <(GHC.Types.Bool, Defs.Version,
+                                       Defs.Version)>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                                     <(GHC.Types.Bool, Defs.Version,
+                                                                       Defs.Version)>_R))) -}
+be55995289993c68517808a53c35c292
+  $s$fRead(,,)_$creadListPrec ::
+    Text.ParserCombinators.ReadPrec.ReadPrec
+      [(GHC.Types.Bool, Defs.Version, Defs.Version)]
+  {- Unfolding: InlineRule (0, True, False)
+                (GHC.Read.list
+                   @ (GHC.Types.Bool, Defs.Version, Defs.Version)
+                   (GHC.Read.$fRead(,,)1
+                      @ GHC.Types.Bool
+                      @ Defs.Version
+                      @ Defs.Version
+                      GHC.Read.$fReadBool
+                      Defs.$fReadVersion
+                      Defs.$fReadVersion)
+                     `cast`
+                   ((<Text.ParserCombinators.ReadPrec.Prec>_R
+                     ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                   <(GHC.Types.Bool, Defs.Version,
+                                     Defs.Version)>_R)) ; Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                                                   <(GHC.Types.Bool, Defs.Version,
+                                                                     Defs.Version)>_R))) -}
+5406e4f0ba9c36bea025418dda34fccc
+  $s$fRead(,,)_$creadsPrec ::
+    GHC.Types.Int
+    -> Text.ParserCombinators.ReadP.ReadS
+         (GHC.Types.Bool, Defs.Version, Defs.Version)
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (n :: GHC.Types.Int) ->
+                 Text.ParserCombinators.ReadP.run
+                   @ (GHC.Types.Bool, Defs.Version, Defs.Version)
+                   (GHC.Read.$fRead(,,)1
+                      @ GHC.Types.Bool
+                      @ Defs.Version
+                      @ Defs.Version
+                      GHC.Read.$fReadBool
+                      Defs.$fReadVersion
+                      Defs.$fReadVersion
+                      n
+                      @ (GHC.Types.Bool, Defs.Version, Defs.Version)
+                      (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                         @ (GHC.Types.Bool, Defs.Version, Defs.Version)))) -}
+db6dd5fb8e7bd9b10ac55938d4acdcd6
+  $sconcatMap :: (a -> [b]) -> [a] -> [b]
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,C(U)><S,1*U>,
+     Inline: (sat-args=2),
+     Unfolding: InlineRule (2, False, False)
+                (\ @ a @ b (f2 :: a -> [b]) (xs :: [a]) ->
+                 GHC.Base.build
+                   @ b
+                   (\ @ b1 (c :: b -> b1 -> b1)[OneShot] (n :: b1)[OneShot] ->
+                    GHC.Base.foldr
+                      @ a
+                      @ b1
+                      (\ (x :: a) (b2 :: b1)[OneShot] ->
+                       GHC.Base.foldr @ b @ b1 c b2 (f2 x))
+                      n
+                      xs)) -}
+36a6498ff606e71a52942c3915ae371c
+  $tc'DB :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   6325312023611924767##
+                   876323962888546056##
+                   Defs.$trModule
+                   Defs.$tc'DB2
+                   0#
+                   Defs.$tc'DB1) -}
+447c13c4a954394f82a894cd8fdba8a9
+  $tc'DB1 :: GHC.Types.KindRep
+  {- HasNoCafRefs, Strictness: m4, Inline: [~] -}
+248900851de326b4562938edd64e15e5
+  $tc'DB2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Defs.$tc'DB3) -}
+a7a24ef41ccb8727bb81d88ff4a875a3
+  $tc'DB3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'DB"#) -}
+db1e7c42e9413945e36441ff9284c2f1
+  $tc'P :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   14689428416444814737##
+                   14284728465566091442##
+                   Defs.$trModule
+                   Defs.$tc'P2
+                   0#
+                   Defs.$tc'P1) -}
+9794cd122eff5f4e3a851f2af9f1cc7f
+  $tc'P1 :: GHC.Types.KindRep
+  {- HasNoCafRefs, Strictness: m4, Inline: [~] -}
+8ed14760afc6312ea34f519058e65b31
+  $tc'P2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Defs.$tc'P3) -}
+82ada939e2b09f1f0a09fd3b45227711
+  $tc'P3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'P"#) -}
+2c98b9b252504118e1a10a0918a85b5b
+  $tc'Pkg :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   6917000776074693272##
+                   12105909834210370664##
+                   Defs.$trModule
+                   Defs.$tc'Pkg2
+                   0#
+                   Defs.$tc'Pkg1) -}
+1524623a2323b270512fe7586efda7c9
+  $tc'Pkg1 :: GHC.Types.KindRep
+  {- HasNoCafRefs, Strictness: m4, Inline: [~] -}
+fd9530368ad232ceb88b53b912e401da
+  $tc'Pkg2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Defs.$tc'Pkg3) -}
+4bec53a17b9e2a9e567105dc8e377537
+  $tc'Pkg3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'Pkg"#) -}
+949e2b81c911256e1ae7815d920e12a0
+  $tc'V :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   10566041596752672885##
+                   11053405406559600887##
+                   Defs.$trModule
+                   Defs.$tc'V2
+                   0#
+                   Defs.$tc'V1) -}
+95967b30a1bf4975a8859f69444c11c8
+  $tc'V1 :: GHC.Types.KindRep
+  {- HasNoCafRefs, Strictness: m4, Inline: [~] -}
+276585035150f34e30474bb49ddb577d
+  $tc'V2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Defs.$tc'V3) -}
+014a6436c0fd4547ba6f93fc6e3c46e8
+  $tc'V3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'V"#) -}
+45a9bfb79632e5766cfda5871205908b
+  $tc'VN :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   8221176107792877271##
+                   18238718113179435262##
+                   Defs.$trModule
+                   Defs.$tc'VN2
+                   0#
+                   Defs.$tc'VN1) -}
+27bfb19de27f85715840d75684fc84d2
+  $tc'VN1 :: GHC.Types.KindRep
+  {- HasNoCafRefs, Strictness: m4, Inline: [~] -}
+e24c14c91f05a160ff266632dbe5c646
+  $tc'VN2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Defs.$tc'VN3) -}
+33d664f0595973410b750183423c7c1b
+  $tc'VN3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'VN"#) -}
+0a00d5017b2ec9189368bfc98f0293d2
+  $tcDatabase :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   4584836357397721912##
+                   8952611782064149233##
+                   Defs.$trModule
+                   Defs.$tcDatabase1
+                   0#
+                   GHC.Types.krep$*) -}
+71e94b13d33445e9f218f2bc814e1862
+  $tcDatabase1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Defs.$tcDatabase2) -}
+fb6a4eeedb4861dbbbf7b9354ac4cb89
+  $tcDatabase2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Database"#) -}
+8fd599537dea5304e8d1a35437a2c30a
+  $tcPName :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   6392805912403939656##
+                   12407562133363641058##
+                   Defs.$trModule
+                   Defs.$tcPName1
+                   0#
+                   GHC.Types.krep$*) -}
+1460cf14966dbc387c7c1e74f1d1b731
+  $tcPName1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Defs.$tcPName2) -}
+9f051d992726f740546ecbd9bca3bc15
+  $tcPName2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("PName"#) -}
+759aeca0f8cf4aef56b043f15c383994
+  $tcPkg :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   6280384395678902591##
+                   13736709206443644990##
+                   Defs.$trModule
+                   Defs.$tcPkg1
+                   0#
+                   GHC.Types.krep$*) -}
+84057fb6f98a6dc30a78dafbd3047a4d
+  $tcPkg1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Defs.$tcPkg2) -}
+9a2b5e74c9a8cb1d9a36037e1d65726b
+  $tcPkg2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Pkg"#) -}
+8730f0d5349a354e18749b010ce2e352
+  $tcVNum :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   15849764632570352324##
+                   2915103632950039705##
+                   Defs.$trModule
+                   Defs.$tcVNum1
+                   0#
+                   GHC.Types.krep$*) -}
+0f99e7b712f26cc3ef37def4e2309f6b
+  $tcVNum1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Defs.$tcVNum2) -}
+f3c71dc3ffb40e3f73fa578cdb4ad560
+  $tcVNum2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("VNum"#) -}
+f32a42f9f635920b7ed7d0166252a9cc
+  $tcVersion :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   1941207509762231967##
+                   13098543680796587218##
+                   Defs.$trModule
+                   Defs.$tcVersion1
+                   0#
+                   GHC.Types.krep$*) -}
+6430b8fd2b9dcae3a44a14d1bcf85835
+  $tcVersion1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Defs.$tcVersion2) -}
+f376ae8695b2b6e2121cfe20ed35da32
+  $tcVersion2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Version"#) -}
+19f6c21f16851c1dc3a1e98b69950ca6
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module Defs.$trModule3 Defs.$trModule1) -}
+825616bc87a324bccf5372021e291fd2
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Defs.$trModule2) -}
+465d2f55bb424d531179e03cccfbd679
+  $trModule2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Defs"#) -}
+91130d5d88ed853c631e49cb7df62a03
+  $trModule3 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Defs.$trModule4) -}
+9ed8f991877208896f92857d408eeb21
+  $trModule4 :: GHC.Prim.Addr#
+  {- HasNoCafRefs,
+     Unfolding: ("appm-0.0.0-bBoXP3Z3yF8cAWvQVfHOK"#) -}
+42e8cb04e61c392615963ae5be1fe8e1
+  $w$c< ::
+    GHC.Prim.Int#
+    -> GHC.Base.String
+    -> GHC.Prim.Int#
+    -> GHC.Base.String
+    -> GHC.Types.Bool
+  {- Arity: 4, HasNoCafRefs, Strictness: <S,U><L,1*U><S,U><L,1*U>,
+     Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   (ww1 :: GHC.Base.String)
+                   (ww2 :: GHC.Prim.Int#)
+                   (ww3 :: GHC.Base.String) ->
+                 case GHC.Prim.<# ww ww2 of lwild {
+                   DEFAULT
+                   -> case GHC.Prim.==# ww ww2 of lwild1 {
+                        DEFAULT -> GHC.Types.False
+                        1# -> GHC.Classes.$fOrd[]_$s$c<1 ww1 ww3 }
+                   1# -> GHC.Types.True }) -}
+161b55b23aea86c9bbf3b8d604c7d6fc
+  $w$c<= ::
+    Defs.PName
+    -> Defs.Version -> Defs.PName -> Defs.Version -> GHC.Types.Bool
+  {- Arity: 4, HasNoCafRefs, Strictness: <S,U><L,1*U><S,U><L,1*U>,
+     Inline: [0],
+     Unfolding: (\ (ww :: Defs.PName)
+                   (ww1 :: Defs.Version)
+                   (ww2 :: Defs.PName)
+                   (ww3 :: Defs.Version) ->
+                 case GHC.Classes.$fOrd[]_$s$ccompare1
+                        ww `cast` (Defs.N:PName[0])
+                        ww2 `cast` (Defs.N:PName[0]) of wild {
+                   DEFAULT
+                   -> case GHC.Base.eqString
+                             ww `cast` (Defs.N:PName[0])
+                             ww2 `cast` (Defs.N:PName[0]) of wild1 {
+                        GHC.Types.False -> GHC.Types.False
+                        GHC.Types.True
+                        -> case GHC.Classes.$fOrd[]_$ccompare
+                                  @ Defs.VNum
+                                  Defs.$fOrdVNum
+                                  ww1 `cast` (Defs.N:Version[0])
+                                  ww3 `cast` (Defs.N:Version[0]) of wild2 {
+                             DEFAULT -> GHC.Types.True GHC.Types.GT -> GHC.Types.False } }
+                   GHC.Types.LT -> GHC.Types.True }) -}
+c9c1689caa6e9420da07b1077d147f3a
+  $w$c<=1 ::
+    GHC.Prim.Int#
+    -> GHC.Base.String
+    -> GHC.Prim.Int#
+    -> GHC.Base.String
+    -> GHC.Types.Bool
+  {- Arity: 4, HasNoCafRefs, Strictness: <S,U><L,1*U><S,U><L,1*U>,
+     Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   (ww1 :: GHC.Base.String)
+                   (ww2 :: GHC.Prim.Int#)
+                   (ww3 :: GHC.Base.String) ->
+                 case GHC.Prim.<# ww2 ww of lwild {
+                   DEFAULT
+                   -> case GHC.Prim.==# ww2 ww of lwild1 {
+                        DEFAULT -> GHC.Types.True
+                        1#
+                        -> case GHC.Classes.$fOrd[]_$s$ccompare1 ww3 ww1 of wild {
+                             DEFAULT -> GHC.Types.True GHC.Types.LT -> GHC.Types.False } }
+                   1# -> GHC.Types.False }) -}
+bbe5e8a72e7458b2a6f6d8d70fe8beb7
+  $w$c== ::
+    Defs.PName
+    -> Defs.Version
+    -> GHC.Base.String
+    -> Defs.Constrs
+    -> Defs.PName
+    -> Defs.Version
+    -> GHC.Base.String
+    -> Defs.Constrs
+    -> GHC.Types.Bool
+  {- Arity: 8, HasNoCafRefs,
+     Strictness: <S,1*U><L,1*U><L,1*U><L,1*U><S,1*U><L,1*U><L,1*U><L,1*U>,
+     Inline: [0],
+     Unfolding: (\ (ww :: Defs.PName)
+                   (ww1 :: Defs.Version)
+                   (ww2 :: GHC.Base.String)
+                   (ww3 :: Defs.Constrs)
+                   (ww4 :: Defs.PName)
+                   (ww5 :: Defs.Version)
+                   (ww6 :: GHC.Base.String)
+                   (ww7 :: Defs.Constrs) ->
+                 case GHC.Base.eqString
+                        ww `cast` (Defs.N:PName[0])
+                        ww4 `cast` (Defs.N:PName[0]) of wild {
+                   GHC.Types.False -> GHC.Types.False
+                   GHC.Types.True
+                   -> case GHC.Classes.$fEq[]_$c==
+                             @ Defs.VNum
+                             Defs.$fEqVNum
+                             ww1 `cast` (Defs.N:Version[0])
+                             ww5 `cast` (Defs.N:Version[0]) of wild1 {
+                        GHC.Types.False -> GHC.Types.False
+                        GHC.Types.True
+                        -> case GHC.Base.eqString ww2 ww6 of wild2 {
+                             GHC.Types.False -> GHC.Types.False
+                             GHC.Types.True
+                             -> GHC.Classes.$fEq[]_$c==
+                                  @ (Defs.PName, Defs.PConstr)
+                                  Defs.$fEqPkg_$s$fEq(,)
+                                  ww3
+                                  ww7 } } }) -}
+61afbb935f1c98e4a9f165cb3d337598
+  $w$c==1 ::
+    GHC.Prim.Int#
+    -> GHC.Base.String
+    -> GHC.Prim.Int#
+    -> GHC.Base.String
+    -> GHC.Types.Bool
+  {- Arity: 4, HasNoCafRefs, Strictness: <S,U><L,1*U><S,U><L,1*U>,
+     Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   (ww1 :: GHC.Base.String)
+                   (ww2 :: GHC.Prim.Int#)
+                   (ww3 :: GHC.Base.String) ->
+                 case GHC.Prim.==# ww ww2 of lwild {
+                   DEFAULT -> GHC.Types.False 1# -> GHC.Base.eqString ww1 ww3 }) -}
+893679bb7d3b17b5debc20e21a10d4cc
+  $w$c> ::
+    Defs.PName
+    -> Defs.Version
+    -> GHC.Base.String
+    -> Defs.Constrs
+    -> Defs.PName
+    -> Defs.Version
+    -> GHC.Base.String
+    -> Defs.Constrs
+    -> GHC.Types.Bool
+  {- Arity: 8, HasNoCafRefs,
+     Strictness: <S,U><L,U><L,1*U><L,1*U><S,U><L,U><L,1*U><L,1*U>,
+     Inline: [0],
+     Unfolding: (\ (ww :: Defs.PName)
+                   (ww1 :: Defs.Version)
+                   (ww2 :: GHC.Base.String)
+                   (ww3 :: Defs.Constrs)
+                   (ww4 :: Defs.PName)
+                   (ww5 :: Defs.Version)
+                   (ww6 :: GHC.Base.String)
+                   (ww7 :: Defs.Constrs) ->
+                 case Defs.$w$c== ww ww1 ww2 ww3 ww4 ww5 ww6 ww7 of wild {
+                   GHC.Types.False
+                   -> case GHC.Classes.$fOrd[]_$s$ccompare1
+                             ww `cast` (Defs.N:PName[0])
+                             ww4 `cast` (Defs.N:PName[0]) of wild1 {
+                        DEFAULT
+                        -> case GHC.Base.eqString
+                                  ww `cast` (Defs.N:PName[0])
+                                  ww4 `cast` (Defs.N:PName[0]) of wild2 {
+                             GHC.Types.False -> GHC.Types.True
+                             GHC.Types.True
+                             -> case GHC.Classes.$fOrd[]_$ccompare
+                                       @ Defs.VNum
+                                       Defs.$fOrdVNum
+                                       ww1 `cast` (Defs.N:Version[0])
+                                       ww5 `cast` (Defs.N:Version[0]) of wild3 {
+                                  DEFAULT -> GHC.Types.False GHC.Types.GT -> GHC.Types.True } }
+                        GHC.Types.LT -> GHC.Types.False }
+                   GHC.Types.True -> GHC.Types.False }) -}
+def16b4d80384d5433b4db1e912c93f6
+  $w$c>= ::
+    GHC.Prim.Int#
+    -> GHC.Base.String
+    -> GHC.Prim.Int#
+    -> GHC.Base.String
+    -> GHC.Types.Bool
+  {- Arity: 4, HasNoCafRefs, Strictness: <S,U><L,1*U><S,U><L,1*U>,
+     Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   (ww1 :: GHC.Base.String)
+                   (ww2 :: GHC.Prim.Int#)
+                   (ww3 :: GHC.Base.String) ->
+                 case GHC.Prim.<# ww ww2 of lwild {
+                   DEFAULT
+                   -> case GHC.Prim.==# ww ww2 of lwild1 {
+                        DEFAULT -> GHC.Types.True
+                        1#
+                        -> case GHC.Classes.$fOrd[]_$s$ccompare1 ww1 ww3 of wild {
+                             DEFAULT -> GHC.Types.True GHC.Types.LT -> GHC.Types.False } }
+                   1# -> GHC.Types.False }) -}
+6a5449cd4024e2b26cbae693b8937b81
+  $w$c>=1 ::
+    Defs.PName
+    -> Defs.Version
+    -> GHC.Base.String
+    -> Defs.Constrs
+    -> Defs.PName
+    -> Defs.Version
+    -> GHC.Base.String
+    -> Defs.Constrs
+    -> GHC.Types.Bool
+  {- Arity: 8, HasNoCafRefs,
+     Strictness: <S,U><L,U><L,1*U><L,1*U><S,U><L,U><L,1*U><L,1*U>,
+     Inline: [0],
+     Unfolding: (\ (ww :: Defs.PName)
+                   (ww1 :: Defs.Version)
+                   (ww2 :: GHC.Base.String)
+                   (ww3 :: Defs.Constrs)
+                   (ww4 :: Defs.PName)
+                   (ww5 :: Defs.Version)
+                   (ww6 :: GHC.Base.String)
+                   (ww7 :: Defs.Constrs) ->
+                 case Defs.$w$c== ww ww1 ww2 ww3 ww4 ww5 ww6 ww7 of wild {
+                   GHC.Types.False
+                   -> case GHC.Classes.$fOrd[]_$s$ccompare1
+                             ww `cast` (Defs.N:PName[0])
+                             ww4 `cast` (Defs.N:PName[0]) of wild1 {
+                        DEFAULT
+                        -> case GHC.Base.eqString
+                                  ww `cast` (Defs.N:PName[0])
+                                  ww4 `cast` (Defs.N:PName[0]) of wild2 {
+                             GHC.Types.False -> GHC.Types.True
+                             GHC.Types.True
+                             -> case GHC.Classes.$fOrd[]_$ccompare
+                                       @ Defs.VNum
+                                       Defs.$fOrdVNum
+                                       ww1 `cast` (Defs.N:Version[0])
+                                       ww5 `cast` (Defs.N:Version[0]) of wild3 {
+                                  DEFAULT -> GHC.Types.False GHC.Types.GT -> GHC.Types.True } }
+                        GHC.Types.LT -> GHC.Types.False }
+                   GHC.Types.True -> GHC.Types.True }) -}
+79d7f0df95274b516af26b3acb64aed6
+  $w$ccompare ::
+    GHC.Prim.Int#
+    -> GHC.Base.String
+    -> GHC.Prim.Int#
+    -> GHC.Base.String
+    -> GHC.Types.Ordering
+  {- Arity: 4, HasNoCafRefs, Strictness: <S,U><L,1*U><S,U><L,1*U>,
+     Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   (ww1 :: GHC.Base.String)
+                   (ww2 :: GHC.Prim.Int#)
+                   (ww3 :: GHC.Base.String) ->
+                 case GHC.Prim.<# ww ww2 of lwild {
+                   DEFAULT
+                   -> case GHC.Prim.==# ww ww2 of lwild1 {
+                        DEFAULT -> GHC.Types.GT
+                        1# -> GHC.Classes.$fOrd[]_$s$ccompare1 ww1 ww3 }
+                   1# -> GHC.Types.LT }) -}
+76743869e4e79b445efc3466b49a71c6
+  $w$ccompare1 ::
+    Defs.PName
+    -> Defs.Version
+    -> GHC.Base.String
+    -> Defs.Constrs
+    -> Defs.PName
+    -> Defs.Version
+    -> GHC.Base.String
+    -> Defs.Constrs
+    -> GHC.Types.Ordering
+  {- Arity: 8, HasNoCafRefs,
+     Strictness: <S,U><L,U><L,1*U><L,1*U><S,U><L,U><L,1*U><L,1*U>,
+     Inline: [0],
+     Unfolding: (\ (ww :: Defs.PName)
+                   (ww1 :: Defs.Version)
+                   (ww2 :: GHC.Base.String)
+                   (ww3 :: Defs.Constrs)
+                   (ww4 :: Defs.PName)
+                   (ww5 :: Defs.Version)
+                   (ww6 :: GHC.Base.String)
+                   (ww7 :: Defs.Constrs) ->
+                 case Defs.$w$c== ww ww1 ww2 ww3 ww4 ww5 ww6 ww7 of wild {
+                   GHC.Types.False
+                   -> case GHC.Classes.$fOrd[]_$s$ccompare1
+                             ww `cast` (Defs.N:PName[0])
+                             ww4 `cast` (Defs.N:PName[0]) of wild1 {
+                        DEFAULT
+                        -> case GHC.Base.eqString
+                                  ww `cast` (Defs.N:PName[0])
+                                  ww4 `cast` (Defs.N:PName[0]) of wild2 {
+                             GHC.Types.False -> GHC.Types.GT
+                             GHC.Types.True
+                             -> case GHC.Classes.$fOrd[]_$ccompare
+                                       @ Defs.VNum
+                                       Defs.$fOrdVNum
+                                       ww1 `cast` (Defs.N:Version[0])
+                                       ww5 `cast` (Defs.N:Version[0]) of wild3 {
+                                  DEFAULT -> GHC.Types.LT GHC.Types.GT -> GHC.Types.GT } }
+                        GHC.Types.LT -> GHC.Types.LT }
+                   GHC.Types.True -> GHC.Types.EQ }) -}
+72116789c94c7310ad831055c34dc36c
+  $w$creadPrec ::
+    GHC.Prim.Int#
+    -> forall b.
+       (Defs.Database -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S,U><L,C(U)>, Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   @ b
+                   (w :: Defs.Database -> Text.ParserCombinators.ReadP.P b) ->
+                 case GHC.Prim.<=# ww 10# of lwild {
+                   DEFAULT -> Text.ParserCombinators.ReadP.Fail @ b
+                   1#
+                   -> let {
+                        lvl118 :: Text.ParserCombinators.ReadP.P b
+                        = let {
+                            lvl119 :: Text.ParserCombinators.ReadP.P b
+                            = (Defs.$fReadDatabase_$creadListPrec1
+                                 `cast`
+                               (Text.ParserCombinators.ReadPrec.N:ReadPrec[0] <[Defs.Pkg]>_R)
+                                 Defs.$fReadDatabase5)
+                                `cast`
+                              (Text.ParserCombinators.ReadP.N:ReadP[0] <[Defs.Pkg]>_R)
+                                @ b
+                                (\ (a1 :: [Defs.Pkg]) -> w a1 `cast` (Sym (Defs.N:Database[0])))
+                          } in
+                          Text.Read.Lex.expect2
+                            @ b
+                            (\ (a3 :: Text.Read.Lex.Lexeme) ->
+                             case a3 of wild {
+                               DEFAULT -> Text.ParserCombinators.ReadP.Fail @ b
+                               Text.Read.Lex.Ident a1
+                               -> case GHC.Base.eqString a1 Defs.$fReadDatabase3 of wild1 {
+                                    GHC.Types.False -> Text.ParserCombinators.ReadP.Fail @ b
+                                    GHC.Types.True -> lvl119 } })
+                      } in
+                      let {
+                        k :: () -> Text.ParserCombinators.ReadP.P b
+                          {- Arity: 1, Strictness: <L,A>,
+                             Unfolding: InlineRule (1, True, True) (\ (a3 :: ()) -> lvl118) -}
+                        = \ (a3 :: ()) -> lvl118
+                      } in
+                      Text.ParserCombinators.ReadP.Look
+                        @ b
+                        (\ (a :: GHC.Base.String) ->
+                         Text.ParserCombinators.ReadP.skipSpaces2 a @ b k) }) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  $w$creadPrec1 ::
+    GHC.Prim.Int#
+    -> forall b.
+       (Defs.Pkg -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S,U><L,C(U)>, Inline: [0] -}
+5f19c9b9fbea2b2b9245083ff941c0d5
+  $w$creadPrec2 ::
+    GHC.Prim.Int#
+    -> forall b.
+       (Defs.PName -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S,U><L,C(U)>, Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   @ b
+                   (w :: Defs.PName -> Text.ParserCombinators.ReadP.P b) ->
+                 case GHC.Prim.<=# ww 10# of lwild {
+                   DEFAULT -> Text.ParserCombinators.ReadP.Fail @ b
+                   1#
+                   -> let {
+                        lvl118 :: Text.ParserCombinators.ReadP.P b
+                        = let {
+                            lvl119 :: Text.ParserCombinators.ReadP.P b
+                            = GHC.Read.$fRead()6
+                                @ GHC.Base.String
+                                GHC.Read.$fReadChar2
+                                  `cast`
+                                (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                          <GHC.Base.String>_R))
+                                Defs.$fReadDatabase5
+                                @ b
+                                (\ (a1 :: GHC.Base.String) -> w a1 `cast` (Sym (Defs.N:PName[0])))
+                          } in
+                          Text.Read.Lex.expect2
+                            @ b
+                            (\ (a3 :: Text.Read.Lex.Lexeme) ->
+                             case a3 of wild {
+                               DEFAULT -> Text.ParserCombinators.ReadP.Fail @ b
+                               Text.Read.Lex.Ident a1
+                               -> case GHC.Base.eqString a1 Defs.$fReadPName3 of wild1 {
+                                    GHC.Types.False -> Text.ParserCombinators.ReadP.Fail @ b
+                                    GHC.Types.True -> lvl119 } })
+                      } in
+                      let {
+                        k :: () -> Text.ParserCombinators.ReadP.P b
+                          {- Arity: 1, Strictness: <L,A>,
+                             Unfolding: InlineRule (1, True, True) (\ (a3 :: ()) -> lvl118) -}
+                        = \ (a3 :: ()) -> lvl118
+                      } in
+                      Text.ParserCombinators.ReadP.Look
+                        @ b
+                        (\ (a :: GHC.Base.String) ->
+                         Text.ParserCombinators.ReadP.skipSpaces2 a @ b k) }) -}
+9f624f421752e49159a078fe8b02f46a
+  $w$creadPrec3 ::
+    GHC.Prim.Int#
+    -> forall b.
+       (Defs.VNum -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S,U><L,C(U)>, Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   @ b
+                   (w :: Defs.VNum -> Text.ParserCombinators.ReadP.P b) ->
+                 case GHC.Prim.<=# ww 10# of lwild {
+                   DEFAULT -> Text.ParserCombinators.ReadP.Fail @ b
+                   1#
+                   -> let {
+                        lvl118 :: Text.ParserCombinators.ReadP.P b
+                        = let {
+                            lvl119 :: Text.ParserCombinators.ReadP.P b
+                            = GHC.Read.$fReadInt_$sreadNumber
+                                GHC.Read.$fReadInt2
+                                Defs.$fReadDatabase5
+                                @ b
+                                (\ (a1 :: GHC.Types.Int) ->
+                                 GHC.Read.$fRead()6
+                                   @ GHC.Base.String
+                                   GHC.Read.$fReadChar2
+                                     `cast`
+                                   (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                             <GHC.Base.String>_R))
+                                   Defs.$fReadDatabase5
+                                   @ b
+                                   (\ (a2 :: GHC.Base.String) -> w (Defs.VN a1 a2)))
+                          } in
+                          Text.Read.Lex.expect2
+                            @ b
+                            (\ (a3 :: Text.Read.Lex.Lexeme) ->
+                             case a3 of wild {
+                               DEFAULT -> Text.ParserCombinators.ReadP.Fail @ b
+                               Text.Read.Lex.Ident a1
+                               -> case GHC.Base.eqString a1 Defs.$fReadVNum3 of wild1 {
+                                    GHC.Types.False -> Text.ParserCombinators.ReadP.Fail @ b
+                                    GHC.Types.True -> lvl119 } })
+                      } in
+                      let {
+                        k :: () -> Text.ParserCombinators.ReadP.P b
+                          {- Arity: 1, Strictness: <L,A>,
+                             Unfolding: InlineRule (1, True, True) (\ (a3 :: ()) -> lvl118) -}
+                        = \ (a3 :: ()) -> lvl118
+                      } in
+                      Text.ParserCombinators.ReadP.Look
+                        @ b
+                        (\ (a :: GHC.Base.String) ->
+                         Text.ParserCombinators.ReadP.skipSpaces2 a @ b k) }) -}
+3329419535fec99edec0e43ff47f12ba
+  $w$creadPrec4 ::
+    GHC.Prim.Int#
+    -> forall b.
+       (Defs.Version -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S,U><L,C(U)>, Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   @ b
+                   (w :: Defs.Version -> Text.ParserCombinators.ReadP.P b) ->
+                 case GHC.Prim.<=# ww 10# of lwild {
+                   DEFAULT -> Text.ParserCombinators.ReadP.Fail @ b
+                   1#
+                   -> let {
+                        lvl118 :: Text.ParserCombinators.ReadP.P b
+                        = let {
+                            lvl119 :: Text.ParserCombinators.ReadP.P b
+                            = (Defs.$fReadVNum_$creadListPrec
+                                 `cast`
+                               (Text.ParserCombinators.ReadPrec.N:ReadPrec[0] <[Defs.VNum]>_R)
+                                 Defs.$fReadDatabase5)
+                                `cast`
+                              (Text.ParserCombinators.ReadP.N:ReadP[0] <[Defs.VNum]>_R)
+                                @ b
+                                (\ (a1 :: [Defs.VNum]) -> w a1 `cast` (Sym (Defs.N:Version[0])))
+                          } in
+                          Text.Read.Lex.expect2
+                            @ b
+                            (\ (a3 :: Text.Read.Lex.Lexeme) ->
+                             case a3 of wild {
+                               DEFAULT -> Text.ParserCombinators.ReadP.Fail @ b
+                               Text.Read.Lex.Ident a1
+                               -> case GHC.Base.eqString a1 Defs.$fReadVersion3 of wild1 {
+                                    GHC.Types.False -> Text.ParserCombinators.ReadP.Fail @ b
+                                    GHC.Types.True -> lvl119 } })
+                      } in
+                      let {
+                        k :: () -> Text.ParserCombinators.ReadP.P b
+                          {- Arity: 1, Strictness: <L,A>,
+                             Unfolding: InlineRule (1, True, True) (\ (a3 :: ()) -> lvl118) -}
+                        = \ (a3 :: ()) -> lvl118
+                      } in
+                      Text.ParserCombinators.ReadP.Look
+                        @ b
+                        (\ (a :: GHC.Base.String) ->
+                         Text.ParserCombinators.ReadP.skipSpaces2 a @ b k) }) -}
+9f084b6d18c9dc8c065fc60e400b8713
+  $w$cshow :: GHC.Types.Int -> GHC.Base.String -> GHC.Base.String
+  {- Arity: 2, Strictness: <L,1*U(U)><L,1*U>, Inline: [0],
+     Unfolding: (\ (ww :: GHC.Types.Int) (ww1 :: GHC.Base.String) ->
+                 GHC.CString.unpackAppendCString#
+                   Defs.$fShowVNum2
+                   (case ww of ww2 { GHC.Types.I# ww3 ->
+                    case GHC.Show.$wshowSignedInt
+                           11#
+                           ww3
+                           (GHC.Types.:
+                              @ GHC.Types.Char
+                              GHC.Show.showSpace1
+                              (GHC.Types.:
+                                 @ GHC.Types.Char
+                                 GHC.Show.$fShow(,)3
+                                 (GHC.Show.showLitString
+                                    ww1
+                                    Defs.$fShowVNum3))) of ww4 { (#,#) ww5 ww6 ->
+                    GHC.Types.: @ GHC.Types.Char ww5 ww6 } })) -}
+5f19c9b9fbea2b2b9245083ff941c0d5
+  $w$cshowsPrec ::
+    GHC.Prim.Int# -> Defs.PName -> GHC.Base.String -> GHC.Base.String
+  {- Arity: 3, Strictness: <S,U><L,1*U><L,U>, Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   (w :: Defs.PName)
+                   (w1 :: GHC.Base.String) ->
+                 case GHC.Prim.>=# ww 11# of lwild {
+                   DEFAULT
+                   -> GHC.CString.unpackAppendCString#
+                        Defs.$fShowPName2
+                        (GHC.Types.:
+                           @ GHC.Types.Char
+                           GHC.Show.$fShow(,)3
+                           (GHC.Show.showLitString
+                              w `cast` (Defs.N:PName[0])
+                              (GHC.Types.: @ GHC.Types.Char GHC.Show.$fShow(,)3 w1)))
+                   1#
+                   -> GHC.Types.:
+                        @ GHC.Types.Char
+                        GHC.Show.$fShow(,)4
+                        (GHC.CString.unpackAppendCString#
+                           Defs.$fShowPName2
+                           (GHC.Types.:
+                              @ GHC.Types.Char
+                              GHC.Show.$fShow(,)3
+                              (GHC.Show.showLitString
+                                 w `cast` (Defs.N:PName[0])
+                                 (GHC.Types.:
+                                    @ GHC.Types.Char
+                                    GHC.Show.$fShow(,)3
+                                    (GHC.Types.: @ GHC.Types.Char GHC.Show.$fShow(,)2 w1))))) }) -}
+3f83048760bacfa242927f44ef5913be
+  $w$cshowsPrec1 ::
+    GHC.Prim.Int#
+    -> Defs.PName
+    -> Defs.Version
+    -> GHC.Base.String
+    -> Defs.Constrs
+    -> GHC.Base.String
+    -> GHC.Base.String
+  {- Arity: 6, Strictness: <S,U><L,1*U><L,1*U><L,1*U><L,1*U><L,U>,
+     Inline: [0] -}
+4696e359220c2e140734f2996a129129
+  $w$cshowsPrec2 ::
+    GHC.Prim.Int#
+    -> GHC.Types.Int
+    -> GHC.Base.String
+    -> GHC.Base.String
+    -> GHC.Base.String
+  {- Arity: 4, Strictness: <S,U><L,1*U(U)><L,1*U><L,U>, Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   (ww1 :: GHC.Types.Int)
+                   (ww2 :: GHC.Base.String)
+                   (w :: GHC.Base.String) ->
+                 let {
+                   p :: GHC.Show.ShowS {- Arity: 1, Strictness: <L,U> -}
+                   = \ (x :: GHC.Base.String)[OneShot] ->
+                     GHC.CString.unpackAppendCString#
+                       Defs.$fShowVNum2
+                       (case ww1 of ww3 { GHC.Types.I# ww4 ->
+                        case GHC.Show.$wshowSignedInt
+                               11#
+                               ww4
+                               (GHC.Types.:
+                                  @ GHC.Types.Char
+                                  GHC.Show.showSpace1
+                                  (GHC.Types.:
+                                     @ GHC.Types.Char
+                                     GHC.Show.$fShow(,)3
+                                     (GHC.Show.showLitString
+                                        ww2
+                                        (GHC.Types.:
+                                           @ GHC.Types.Char
+                                           GHC.Show.$fShow(,)3
+                                           x)))) of ww5 { (#,#) ww6 ww7 ->
+                        GHC.Types.: @ GHC.Types.Char ww6 ww7 } })
+                 } in
+                 case GHC.Prim.>=# ww 11# of lwild {
+                   DEFAULT -> p w
+                   1#
+                   -> GHC.Types.:
+                        @ GHC.Types.Char
+                        GHC.Show.$fShow(,)4
+                        (p (GHC.Types.: @ GHC.Types.Char GHC.Show.$fShow(,)2 w)) }) -}
+3329419535fec99edec0e43ff47f12ba
+  $w$cshowsPrec3 ::
+    GHC.Prim.Int# -> Defs.Version -> GHC.Base.String -> GHC.Base.String
+  {- Arity: 3, Strictness: <S,U><L,1*U><L,U>, Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   (w :: Defs.Version)
+                   (w1 :: GHC.Base.String) ->
+                 let {
+                   p :: GHC.Show.ShowS {- Arity: 1, Strictness: <L,U> -}
+                   = \ (x :: GHC.Base.String)[OneShot] ->
+                     GHC.CString.unpackAppendCString#
+                       Defs.$fShowVersion2
+                       (case w `cast` (Defs.N:Version[0]) of wild {
+                          [] -> GHC.CString.unpackAppendCString# GHC.Show.showList__4 x
+                          : x1 xs
+                          -> GHC.Types.:
+                               @ GHC.Types.Char
+                               GHC.Show.showList__3
+                               (case x1 of wild1 { Defs.VN b1 b2 ->
+                                GHC.CString.unpackAppendCString#
+                                  Defs.$fShowVNum2
+                                  (case b1 of ww2 { GHC.Types.I# ww3 ->
+                                   case GHC.Show.$wshowSignedInt
+                                          11#
+                                          ww3
+                                          (GHC.Types.:
+                                             @ GHC.Types.Char
+                                             GHC.Show.showSpace1
+                                             (GHC.Types.:
+                                                @ GHC.Types.Char
+                                                GHC.Show.$fShow(,)3
+                                                (GHC.Show.showLitString
+                                                   b2
+                                                   (GHC.Types.:
+                                                      @ GHC.Types.Char
+                                                      GHC.Show.$fShow(,)3
+                                                      (let {
+                                                         lvl30 :: [GHC.Types.Char]
+                                                         = GHC.Types.:
+                                                             @ GHC.Types.Char
+                                                             GHC.Show.showList__2
+                                                             x
+                                                       } in
+                                                       letrec {
+                                                         showl :: [Defs.VNum] -> GHC.Base.String
+                                                           {- Arity: 1, Strictness: <S,1*U> -}
+                                                         = \ (ds3 :: [Defs.VNum]) ->
+                                                           case ds3 of wild2 {
+                                                             [] -> lvl30
+                                                             : y ys
+                                                             -> GHC.Types.:
+                                                                  @ GHC.Types.Char
+                                                                  GHC.Show.showList__1
+                                                                  (case y of wild3 { Defs.VN b4 b5 ->
+                                                                   GHC.CString.unpackAppendCString#
+                                                                     Defs.$fShowVNum2
+                                                                     (case b4 of ww1 { GHC.Types.I# ww5 ->
+                                                                      case GHC.Show.$wshowSignedInt
+                                                                             11#
+                                                                             ww5
+                                                                             (GHC.Types.:
+                                                                                @ GHC.Types.Char
+                                                                                GHC.Show.showSpace1
+                                                                                (GHC.Types.:
+                                                                                   @ GHC.Types.Char
+                                                                                   GHC.Show.$fShow(,)3
+                                                                                   (GHC.Show.showLitString
+                                                                                      b5
+                                                                                      (GHC.Types.:
+                                                                                         @ GHC.Types.Char
+                                                                                         GHC.Show.$fShow(,)3
+                                                                                         (showl
+                                                                                            ys))))) of ww4 { (#,#) ww6 ww7 ->
+                                                                      GHC.Types.:
+                                                                        @ GHC.Types.Char
+                                                                        ww6
+                                                                        ww7 } }) }) }
+                                                       } in
+                                                       showl xs))))) of ww4 { (#,#) ww5 ww6 ->
+                                   GHC.Types.: @ GHC.Types.Char ww5 ww6 } }) }) })
+                 } in
+                 case GHC.Prim.>=# ww 11# of lwild {
+                   DEFAULT -> p w1
+                   1#
+                   -> GHC.Types.:
+                        @ GHC.Types.Char
+                        GHC.Show.$fShow(,)4
+                        (p (GHC.Types.: @ GHC.Types.Char GHC.Show.$fShow(,)2 w1)) }) -}
+40bd9dd137116bb2f8b3b87519ae6b1b
+  $wprettyConstr ::
+    Defs.PName
+    -> GHC.Types.Bool
+    -> Defs.Version
+    -> Defs.Version
+    -> GHC.Base.String
+  {- Arity: 4, Strictness: <L,U><S,U><L,U><L,1*U>, Inline: [0],
+     Unfolding: (\ (ww :: Defs.PName)
+                   (ww1 :: GHC.Types.Bool)
+                   (ww2 :: Defs.Version)
+                   (ww3 :: Defs.Version) ->
+                 let {
+                   arg :: [GHC.Types.Char]
+                   = GHC.Base.++
+                       @ GHC.Types.Char
+                       ww `cast` (Defs.N:PName[0])
+                       (let {
+                          arg1 :: [GHC.Types.Char]
+                          = GHC.Base.++
+                              @ GHC.Types.Char
+                              (Defs.prettyVer ww2)
+                              (GHC.CString.unpackAppendCString#
+                                 Defs.prettyPkg9
+                                 (let {
+                                    arg2 :: [GHC.Types.Char]
+                                    = GHC.Base.++
+                                        @ GHC.Types.Char
+                                        ww `cast` (Defs.N:PName[0])
+                                        (case ww1 of wild {
+                                           GHC.Types.False
+                                           -> GHC.Base.++
+                                                @ GHC.Types.Char
+                                                Defs.prettyConstr8
+                                                (GHC.Base.++
+                                                   @ GHC.Types.Char
+                                                   (Defs.prettyVer ww3)
+                                                   Defs.prettyConstr7)
+                                           GHC.Types.True
+                                           -> GHC.Base.++
+                                                @ GHC.Types.Char
+                                                Defs.prettyConstr5
+                                                (GHC.Base.++
+                                                   @ GHC.Types.Char
+                                                   (Defs.prettyVer ww3)
+                                                   Defs.prettyConstr7) })
+                                  } in
+                                  case ww1 of wild {
+                                    GHC.Types.False
+                                    -> GHC.Base.++ @ GHC.Types.Char Defs.prettyConstr3 arg2
+                                    GHC.Types.True
+                                    -> GHC.Base.++ @ GHC.Types.Char Defs.prettyConstr1 arg2 }))
+                        } in
+                        case ww1 of wild {
+                          GHC.Types.False
+                          -> GHC.Base.++ @ GHC.Types.Char Defs.prettyConstr5 arg1
+                          GHC.Types.True
+                          -> case GHC.Classes.$fOrd[]_$ccompare
+                                    @ Defs.VNum
+                                    Defs.$fOrdVNum
+                                    ww2 `cast` (Defs.N:Version[0])
+                                    Defs.minV1 of wild1 {
+                               DEFAULT -> GHC.Base.++ @ GHC.Types.Char Defs.prettyConstr5 arg1
+                               GHC.Types.GT
+                               -> GHC.Base.++ @ GHC.Types.Char Defs.prettyConstr8 arg1 } })
+                 } in
+                 case ww1 of wild {
+                   GHC.Types.False
+                   -> GHC.Base.++ @ GHC.Types.Char Defs.prettyConstr3 arg
+                   GHC.Types.True
+                   -> GHC.Base.++ @ GHC.Types.Char Defs.prettyConstr1 arg }) -}
+5f8331b311cf18398f8b557c4d271c08
+  $wprettyPkg ::
+    Defs.PName
+    -> Defs.Version
+    -> GHC.Base.String
+    -> Defs.Constrs
+    -> GHC.Base.String
+  {- Arity: 4, Strictness: <L,1*U><L,U><L,1*U><L,1*U>, Inline: [0],
+     Unfolding: (\ (ww :: Defs.PName)
+                   (ww1 :: Defs.Version)
+                   (ww2 :: GHC.Base.String)
+                   (ww3 :: Defs.Constrs) ->
+                 GHC.CString.unpackAppendCString#
+                   Defs.prettyPkg10
+                   (GHC.Base.++
+                      @ GHC.Types.Char
+                      ww `cast` (Defs.N:PName[0])
+                      (GHC.CString.unpackAppendCString#
+                         Defs.prettyPkg9
+                         (let {
+                            arg :: [GHC.Types.Char]
+                            = case ww2 of wild {
+                                [] -> Defs.prettyPkg_go ww3
+                                : ds3 ds4
+                                -> GHC.CString.unpackAppendCString#
+                                     Defs.prettyPkg8
+                                     (let {
+                                        z :: [GHC.Types.Char]
+                                        = GHC.CString.unpackAppendCString#
+                                            Defs.prettyPkg7
+                                            (Defs.prettyPkg_go ww3)
+                                      } in
+                                      letrec {
+                                        go :: [GHC.Types.Char] -> [GHC.Types.Char]
+                                          {- Arity: 1, Strictness: <S,1*U> -}
+                                        = \ (ds5 :: [GHC.Types.Char]) ->
+                                          case ds5 of wild1 {
+                                            [] -> z
+                                            : y ys
+                                            -> case y of wild2 { GHC.Types.C# ds6 ->
+                                               case ds6 of ds7 {
+                                                 DEFAULT
+                                                 -> GHC.Types.: @ GHC.Types.Char wild2 (go ys)
+                                                 '"'#
+                                                 -> GHC.Base.++
+                                                      @ GHC.Types.Char
+                                                      Defs.prettyPkg5
+                                                      (go ys) } } }
+                                      } in
+                                      go wild) }
+                          } in
+                          case GHC.Classes.$fEq[]_$c==
+                                 @ Defs.VNum
+                                 Defs.$fEqVNum
+                                 ww1 `cast` (Defs.N:Version[0])
+                                 Defs.prettyPkg2 of wild {
+                            GHC.Types.False
+                            -> GHC.CString.unpackAppendCString#
+                                 Defs.prettyPkg1
+                                 (GHC.Base.++
+                                    @ GHC.Types.Char
+                                    (Defs.prettyVer ww1)
+                                    (GHC.CString.unpackAppendCString# Defs.prettyPkg9 arg))
+                            GHC.Types.True -> arg })))) -}
+8c166b6e32f01bcd8bb0027ca3b54fbe
+  type Constrs = [(Defs.PName, Defs.PConstr)]
+72116789c94c7310ad831055c34dc36c
+  newtype Database = DB [Defs.Pkg]
+e382a89c48b00d742ff8f78333a8dd20
+  type ErrMsg = GHC.Base.String
+eea4ebb637b297d1a426835d321dacfb
+  type PConstr = (GHC.Types.Bool, Defs.Version, Defs.Version)
+5f19c9b9fbea2b2b9245083ff941c0d5
+  newtype PName = P GHC.Base.String
+b4c1d87cd7afe226783959c5cb87dbfc
+  data Pkg
+    = Pkg {name :: Defs.PName,
+           ver :: Defs.Version,
+           desc :: GHC.Base.String,
+           deps :: Defs.Constrs}
+937cea62bc665f23bf865f9bce4039de
+  type Sol = [(Defs.PName, Defs.Version)]
+9f624f421752e49159a078fe8b02f46a
+  data VNum = VN GHC.Types.Int GHC.Base.String
+3329419535fec99edec0e43ff47f12ba
+  newtype Version = V [Defs.VNum]
+b4c1d87cd7afe226783959c5cb87dbfc
+  deps :: Defs.Pkg -> Defs.Constrs
+  RecSel Left Defs.Pkg
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(LLLS),1*U(A,A,A,1*U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds3 :: Defs.Pkg) ->
+                 case ds3 of wild { Defs.Pkg ds4 ds5 ds6 ds7 -> ds7 }) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  desc :: Defs.Pkg -> GHC.Base.String
+  RecSel Left Defs.Pkg
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(LLSL),1*U(A,A,1*U,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds3 :: Defs.Pkg) ->
+                 case ds3 of wild { Defs.Pkg ds4 ds5 ds6 ds7 -> ds6 }) -}
+37bff769d65deb23ad62a1beebedea35
+  maxV :: Defs.Version
+  {- Strictness: m2,
+     Unfolding: InlineRule (0, True, True)
+                Defs.maxV1 `cast` (Sym (Defs.N:Version[0])) -}
+575b69abc42c09bf442e2e3b8697f669
+  maxV1 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   Defs.maxV2
+                   (GHC.Types.[] @ Defs.VNum)) -}
+7c7eedf54af64c50af27f38cad18b0fc
+  maxV2 :: Defs.VNum
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (Defs.VN Defs.maxV3 (GHC.Types.[] @ GHC.Types.Char)) -}
+c96606e6bc4c1e36554eebb956587b87
+  maxV3 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.I# 1000000#) -}
+2dc3e762e476c7b8171c947794f8982b
+  minV :: Defs.Version
+  {- Strictness: m2,
+     Unfolding: InlineRule (0, True, True)
+                Defs.minV1 `cast` (Sym (Defs.N:Version[0])) -}
+83da3fe13b481ea0b3bc4dc834d1b7d0
+  minV1 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   Defs.minV2
+                   (GHC.Types.[] @ Defs.VNum)) -}
+f9f02120367f916c9d3339208ada85d6
+  minV2 :: Defs.VNum
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (Defs.VN
+                   Defs.$fShowPkg2
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  name :: Defs.Pkg -> Defs.PName
+  RecSel Left Defs.Pkg
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(SLLL),1*U(1*U,A,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds3 :: Defs.Pkg) ->
+                 case ds3 of wild { Defs.Pkg ds4 ds5 ds6 ds7 -> ds4 }) -}
+dca1ac6bdf0eb9f61f1cda6dd9dd7421
+  prettyConstr :: (Defs.PName, Defs.PConstr) -> GHC.Base.String
+  {- Arity: 1, Strictness: <S(LS(SLL)),1*U(U,1*U(U,U,1*U))>,
+     Inline: [0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: (Defs.PName, Defs.PConstr)) ->
+                 case w of ww { (,) ww1 ww2 ->
+                 case ww2 of ww3 { (,,) ww4 ww5 ww6 ->
+                 Defs.$wprettyConstr ww1 ww4 ww5 ww6 } }) -}
+e5c32b4d3e93ba2d849cbf227aa66eb0
+  prettyConstr1 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Defs.prettyConstr2) -}
+e4ddd56162ef99a6359689c12590ff25
+  prettyConstr2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("  requires "#) -}
+8f6873c7e7c202184270e197e89362b1
+  prettyConstr3 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Defs.prettyConstr4) -}
+824c39fd7d18dd853b0988c3257b188e
+  prettyConstr4 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("  conflicts "#) -}
+9ad7814930a7f201c01681695e96ed41
+  prettyConstr5 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Defs.prettyConstr6) -}
+f89718e4b0636946506d760261aa5d59
+  prettyConstr6 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: (" < "#) -}
+c0b07e42e2a61a314686b4a08c093509
+  prettyConstr7 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Defs.prettyPkg9) -}
+1215cbd6b5f3259f80751f5230ec063e
+  prettyConstr8 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Defs.prettyConstr9) -}
+38d1457f46f67ab327a0f207d1fa218f
+  prettyConstr9 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: (" >= "#) -}
+86eaae56aca47a0670be468d40a71971
+  prettyConstrs :: Defs.Constrs -> GHC.Base.String
+  {- Arity: 1,
+     Unfolding: (Defs.$sconcatMap
+                   @ (Defs.PName, Defs.PConstr)
+                   @ GHC.Types.Char
+                   Defs.prettyConstr) -}
+d4b95c903b6f312e21c9bbea5694c7a1
+  prettyPName :: Defs.PName -> GHC.Base.String
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (0, True, True)
+                Defs.prettyPName1 `cast` (<Defs.PName>_R ->_R Defs.N:PName[0]) -}
+08a5860fe047981d55095eeca3601b62
+  prettyPName1 :: Defs.PName -> Defs.PName
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, True)
+                (\ (ds3 :: Defs.PName) -> ds3) -}
+e3f422f84d90172c35250de0d9d4b3f6
+  prettyPkg :: Defs.Pkg -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U(1*U,U,1*U,1*U)>, Inline: [0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: Defs.Pkg) ->
+                 case w of ww { Defs.Pkg ww1 ww2 ww3 ww4 ->
+                 Defs.$wprettyPkg ww1 ww2 ww3 ww4 }) -}
+8fa3e72b6b979101f6e06223f1657bc0
+  prettyPkg1 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("  version "#) -}
+a98d045d0464f9ff18e7a4ce4f66844b
+  prettyPkg10 :: GHC.Prim.Addr#
+  {- HasNoCafRefs,
+     Unfolding: ("package {\n\
+                 \  name "#) -}
+8c985a5d1e27714a1ada496270270583
+  prettyPkg2 :: [Defs.VNum]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Defs.VNum
+                   Defs.prettyPkg3
+                   (GHC.Types.[] @ Defs.VNum)) -}
+73409256bee74a46ad083bcaec11048f
+  prettyPkg3 :: Defs.VNum
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (Defs.VN
+                   Defs.prettyPkg4
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+16e915088ea0485455650aaf2b10a5ab
+  prettyPkg4 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 1#) -}
+b1c748f57742ca91c9197f6cabb0f19c
+  prettyPkg5 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Defs.prettyPkg6) -}
+4ad6ff79f9535d1be2e539c1ada859c5
+  prettyPkg6 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("\"\""#) -}
+8f6cba356340864046b93a8df4c0eca1
+  prettyPkg7 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("\";\n"#) -}
+63d60c221ce1d50d8273e3344f32010b
+  prettyPkg8 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("  description \""#) -}
+830716f18a9dce8a45a25e1b81576af3
+  prettyPkg9 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: (";\n"#) -}
+ba8fdb6e01a0c8d28dd03073741615fd
+  prettyPkg_go :: [(Defs.PName, Defs.PConstr)] -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <S,1*U> -}
+e410ab232c0e0f45b5431adb01ae60b3
+  prettyPkgs :: [Defs.Pkg] -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: (\ (x :: [Defs.Pkg]) ->
+                 case GHC.Base.map
+                        @ Defs.Pkg
+                        @ [GHC.Types.Char]
+                        Defs.prettyPkg
+                        x of wild {
+                   [] -> GHC.Types.[] @ GHC.Types.Char
+                   : x1 xs1
+                   -> Data.OldList.intercalate_$spoly_go
+                        @ GHC.Types.Char
+                        x1
+                        (Data.OldList.prependToAll
+                           @ [GHC.Types.Char]
+                           Defs.prettyPkgs_xs
+                           xs1) }) -}
+f9c082fc4fe12f45b0ff2309a076725f
+  prettyPkgs1 :: GHC.Prim.Addr#
+  {- HasNoCafRefs,
+     Unfolding: ("\n\
+                 \\n"#) -}
+d9917332d50a94a7b72a75fe6883c7f4
+  prettyPkgs_xs :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Defs.prettyPkgs1) -}
+711646bd26e958291752cb9996b89a34
+  prettyVNum :: Defs.VNum -> GHC.Base.String
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(S(S)L),1*U(1*U(U),1*U)>m2, Inline: [0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: Defs.VNum) ->
+                 case w of ww { Defs.VN ww1 ww2 ->
+                 case ww1 of ww3 { GHC.Types.I# ww4 ->
+                 case GHC.Show.$wshowSignedInt
+                        0#
+                        ww4
+                        (GHC.Types.[] @ GHC.Types.Char) of ww5 { (#,#) ww6 ww7 ->
+                 GHC.Base.++_$s++ @ GHC.Types.Char ww2 ww6 ww7 } } }) -}
+4d71eaa93676720b0bf826d10929a11c
+  prettyVer :: Defs.Version -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: (\ (ds3 :: Defs.Version) ->
+                 case GHC.Base.map
+                        @ Defs.VNum
+                        @ [GHC.Types.Char]
+                        Defs.prettyVNum
+                        ds3 `cast` (Defs.N:Version[0]) of wild {
+                   [] -> GHC.Types.[] @ GHC.Types.Char
+                   : x xs1
+                   -> Data.OldList.intercalate_$spoly_go
+                        @ GHC.Types.Char
+                        x
+                        (Data.OldList.prependToAll
+                           @ [GHC.Types.Char]
+                           Defs.prettyVer1
+                           xs1) }) -}
+b3cfe88ba4ad3333280c1062b699a7dd
+  prettyVer1 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Defs.prettyVer2) -}
+201deda37428bc4e39725d9254ca7cf3
+  prettyVer2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("."#) -}
+4699d956a94050f99cf804112b64a3c9
+  stdV :: Defs.Version
+  {- Strictness: m2,
+     Unfolding: InlineRule (0, True, True)
+                Defs.prettyPkg2 `cast` (Sym (Defs.N:Version[0])) -}
+b4c1d87cd7afe226783959c5cb87dbfc
+  ver :: Defs.Pkg -> Defs.Version
+  RecSel Left Defs.Pkg
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(LSLL),1*U(A,1*U,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds3 :: Defs.Pkg) ->
+                 case ds3 of wild { Defs.Pkg ds4 ds5 ds6 ds7 -> ds5 }) -}
+instance [safe] GHC.Classes.Eq [Defs.Database] = Defs.$fEqDatabase
+instance [safe] GHC.Classes.Eq [Defs.PName] = Defs.$fEqPName
+instance [safe] GHC.Classes.Eq [Defs.Pkg] = Defs.$fEqPkg
+instance [safe] GHC.Classes.Eq [Defs.VNum] = Defs.$fEqVNum
+instance [safe] GHC.Classes.Eq [Defs.Version] = Defs.$fEqVersion
+instance [safe] GHC.Classes.Ord [Defs.PName] = Defs.$fOrdPName
+instance [safe] GHC.Classes.Ord [Defs.Pkg] = Defs.$fOrdPkg
+instance [safe] GHC.Classes.Ord [Defs.VNum] = Defs.$fOrdVNum
+instance [safe] GHC.Classes.Ord [Defs.Version] = Defs.$fOrdVersion
+instance [safe] GHC.Read.Read [Defs.Database] = Defs.$fReadDatabase
+instance [safe] GHC.Read.Read [Defs.PName] = Defs.$fReadPName
+instance [safe] GHC.Read.Read [Defs.Pkg] = Defs.$fReadPkg
+instance [safe] GHC.Read.Read [Defs.VNum] = Defs.$fReadVNum
+instance [safe] GHC.Read.Read [Defs.Version] = Defs.$fReadVersion
+instance [safe] GHC.Show.Show [Defs.Database] = Defs.$fShowDatabase
+instance [safe] GHC.Show.Show [Defs.PName] = Defs.$fShowPName
+instance [safe] GHC.Show.Show [Defs.Pkg] = Defs.$fShowPkg
+instance [safe] GHC.Show.Show [Defs.VNum] = Defs.$fShowVNum
+instance [safe] GHC.Show.Show [Defs.Version] = Defs.$fShowVersion
+"SPEC/Defs $fEq(,) @ PName @ (Bool, Version, Version)" forall (v1 :: GHC.Classes.Eq
+                                                                       (GHC.Types.Bool,
+                                                                        Defs.Version, Defs.Version))
+                                                              (v :: GHC.Classes.Eq Defs.PName)
+  GHC.Classes.$fEq(,) @ Defs.PName
+                      @ (GHC.Types.Bool, Defs.Version, Defs.Version)
+                      v
+                      v1
+  = Defs.$fEqPkg_$s$fEq(,)
+"SPEC/Defs $fEq(,)_$c/= @ PName @ (Bool, Version, Version)" forall ($dEq1 :: GHC.Classes.Eq
+                                                                               (GHC.Types.Bool,
+                                                                                Defs.Version,
+                                                                                Defs.Version))
+                                                                   ($dEq :: GHC.Classes.Eq
+                                                                              Defs.PName)
+  GHC.Classes.$fEq(,)_$c/= @ Defs.PName
+                           @ (GHC.Types.Bool, Defs.Version, Defs.Version)
+                           $dEq
+                           $dEq1
+  = Defs.$fEqPkg_$s$fEq(,)_$c/=
+"SPEC/Defs $fEq(,,) @ Bool @ Version @ Version" forall (v2 :: GHC.Classes.Eq
+                                                                Defs.Version)
+                                                       (v1 :: GHC.Classes.Eq Defs.Version)
+                                                       (v :: GHC.Classes.Eq GHC.Types.Bool)
+  GHC.Classes.$fEq(,,) @ GHC.Types.Bool
+                       @ Defs.Version
+                       @ Defs.Version
+                       v
+                       v1
+                       v2
+  = Defs.$fEqPkg_$s$fEq(,,)
+"SPEC/Defs $fEq(,,)_$c/= @ Bool @ Version @ Version" forall ($dEq2 :: GHC.Classes.Eq
+                                                                        Defs.Version)
+                                                            ($dEq1 :: GHC.Classes.Eq Defs.Version)
+                                                            ($dEq :: GHC.Classes.Eq GHC.Types.Bool)
+  GHC.Classes.$fEq(,,)_$c/= @ GHC.Types.Bool
+                            @ Defs.Version
+                            @ Defs.Version
+                            $dEq
+                            $dEq1
+                            $dEq2
+  = Defs.$fEqPkg_$s$fEq(,,)_$c/=
+"SPEC/Defs $fEq[]_$c/= @ Pkg" forall ($dEq :: GHC.Classes.Eq
+                                                Defs.Pkg)
+  GHC.Classes.$fEq[]_$c/= @ Defs.Pkg $dEq
+  = Defs.$fEqDatabase_$s$fEq[]_$c/=
+"SPEC/Defs $fEq[]_$c/= @ VNum" forall ($dEq :: GHC.Classes.Eq
+                                                 Defs.VNum)
+  GHC.Classes.$fEq[]_$c/= @ Defs.VNum $dEq
+  = Defs.$fEqVersion_$s$fEq[]_$c/=
+"SPEC/Defs $fRead(,,) @ Bool @ Version @ Version" forall (v2 :: GHC.Read.Read
+                                                                  Defs.Version)
+                                                         (v1 :: GHC.Read.Read Defs.Version)
+                                                         (v :: GHC.Read.Read GHC.Types.Bool)
+  GHC.Read.$fRead(,,) @ GHC.Types.Bool
+                      @ Defs.Version
+                      @ Defs.Version
+                      v
+                      v1
+                      v2
+  = Defs.$s$fRead(,,)
+"SPEC/Defs $fRead(,,)_$creadListPrec @ Bool @ Version @ Version" forall ($dRead2 :: GHC.Read.Read
+                                                                                      Defs.Version)
+                                                                        ($dRead1 :: GHC.Read.Read
+                                                                                      Defs.Version)
+                                                                        ($dRead :: GHC.Read.Read
+                                                                                     GHC.Types.Bool)
+  GHC.Read.$fRead(,,)_$creadListPrec @ GHC.Types.Bool
+                                     @ Defs.Version
+                                     @ Defs.Version
+                                     $dRead
+                                     $dRead1
+                                     $dRead2
+  = Defs.$s$fRead(,,)_$creadListPrec
+"SPEC/Defs $fRead(,,)_$creadsPrec @ Bool @ Version @ Version" forall ($dRead2 :: GHC.Read.Read
+                                                                                   Defs.Version)
+                                                                     ($dRead1 :: GHC.Read.Read
+                                                                                   Defs.Version)
+                                                                     ($dRead :: GHC.Read.Read
+                                                                                  GHC.Types.Bool)
+  GHC.Read.$fRead(,,)_$creadsPrec @ GHC.Types.Bool
+                                  @ Defs.Version
+                                  @ Defs.Version
+                                  $dRead
+                                  $dRead1
+                                  $dRead2
+  = Defs.$s$fRead(,,)_$creadsPrec
+"SPEC/Defs concatMap @ [] _ _" [orphan] forall @ a
+                                               @ b
+                                               ($dFoldable :: Data.Foldable.Foldable [])
+  Data.Foldable.concatMap @ [] @ a @ b $dFoldable
+  = Defs.$sconcatMap @ a @ b
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+

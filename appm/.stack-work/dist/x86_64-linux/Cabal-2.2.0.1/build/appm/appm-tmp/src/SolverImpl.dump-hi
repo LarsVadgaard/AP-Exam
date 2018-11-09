@@ -1,0 +1,943 @@
+
+==================== FINAL INTERFACE ====================
+2018-11-05 09:10:42.053396676 UTC
+
+interface main:SolverImpl 8043
+  interface hash: c6da08a8fc205f2acb15372455564db7
+  ABI hash: d60cb30c5dfe2625054519f10dcc8a03
+  export-list hash: f05930123442f0487749f06da38b80cc
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 8159db7c32bdb9b5583c3379f950f8b0
+  opt_hash: 14e536840aca4e889cad654e6f9b79c1
+  hpc_hash: 93b885adfe0da089cdf634904fd59f71
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  SolverImpl.equiv
+  SolverImpl.execSolver
+  SolverImpl.get
+  SolverImpl.getPkgs
+  SolverImpl.getSols
+  SolverImpl.groupByName
+  SolverImpl.inSol
+  SolverImpl.install
+  SolverImpl.isRequired
+  SolverImpl.normalize
+  SolverImpl.normalize'
+  SolverImpl.normalize''
+  SolverImpl.put
+  SolverImpl.quality
+  SolverImpl.solve
+  SolverImpl.takeIfSat
+  SolverImpl.toSol
+  SolverImpl.Context
+  SolverImpl.Solver{SolverImpl.S runSolver}
+module dependencies: Defs Utils
+package dependencies: array-0.5.2.0 base-4.11.1.0*
+                      containers-0.5.11.0 deepseq-1.4.3.0 ghc-prim-0.5.2.0
+                      integer-gmp-1.0.2.0
+orphans: base-4.11.1.0:GHC.Float base-4.11.1.0:GHC.Base
+family instance modules: base-4.11.1.0:Control.Applicative
+                         base-4.11.1.0:Data.Complex base-4.11.1.0:Data.Functor.Compose
+                         base-4.11.1.0:Data.Functor.Const
+                         base-4.11.1.0:Data.Functor.Identity
+                         base-4.11.1.0:Data.Functor.Product base-4.11.1.0:Data.Functor.Sum
+                         base-4.11.1.0:Data.Monoid base-4.11.1.0:Data.Semigroup
+                         base-4.11.1.0:Data.Semigroup.Internal base-4.11.1.0:Data.Version
+                         base-4.11.1.0:Data.Void base-4.11.1.0:GHC.Exts
+                         base-4.11.1.0:GHC.Generics base-4.11.1.0:GHC.IO.Exception
+                         containers-0.5.11.0:Data.Map.Internal
+                         containers-0.5.11.0:Data.Set.Internal
+import  -/  base-4.11.1.0:Control.Arrow ce43199b5356a11ee2a8317f0ec30aee
+import  -/  base-4.11.1.0:Control.Monad c5f960c67d822497578bffbd3e4c01cf
+import  -/  base-4.11.1.0:Data.Either 39d922b371c4c52d426e9ee66de8371a
+import  -/  base-4.11.1.0:Data.Foldable 8ed35c38958063956af33c935ea03444
+import  -/  base-4.11.1.0:Data.Functor f522c3501272159820fd6f242510732f
+import  -/  base-4.11.1.0:Data.List 83dc843e47bfc0c5af51e19c6f3476d5
+import  -/  base-4.11.1.0:Data.Maybe 409c3da2b142470b68be39ce1d97a9f7
+import  -/  base-4.11.1.0:Data.OldList 1b35aa3c6805ff7c8887a35a866fe006
+import  -/  base-4.11.1.0:Data.Ord 8579f16310a4ec69c00617051bb5c3d9
+import  -/  base-4.11.1.0:Data.Traversable 7ad4edb9184ea1ae8e73f6b94f115c8c
+import  -/  base-4.11.1.0:Data.Tuple 3af66f3ac61ed95ba8a3a3f68ebc5003
+import  -/  base-4.11.1.0:GHC.Base 604111500e81281298777e721c75643b
+import  -/  base-4.11.1.0:GHC.List 1e4357702d8d00cded0703bd293e50e8
+import  -/  base-4.11.1.0:GHC.Num 8e54b26dce4495382dc4b50cf36ab754
+import  -/  base-4.11.1.0:GHC.Show 73be67392447c974f19c3befd83c46c0
+import  -/  base-4.11.1.0:Prelude 0750c25585e2b797cd78291d423d39dd
+import  -/  containers-0.5.11.0:Data.Map f51b9cf04edd738eb6d014be576b3403
+import  -/  ghc-prim-0.5.2.0:GHC.Classes 122abfcd7450c6c11602933c9ca5f80d
+import  -/  ghc-prim-0.5.2.0:GHC.Types d9b3023de7feae4a5308d643da5543f7
+import  -/  Defs d68c6b51a0680ceeccb798bbdf84422d
+  exports: 5ff9e865f120cee4a14d24bffcee71a0
+  Constrs 9a7c3453c9d2e31f7e4903b75f608e72
+  DB 0ef6550e66dade1302bb59d02ca19238
+  Database f1583a426d94974bff3b76eacb5d8923
+  PName f57ad031236d47377cee1c770af63619
+  Pkg 67c0e1532f060e36c08615a4e1246c25
+  Sol ecbba19d4c7e407535cb2f8a0395ec83
+  deps 67c0e1532f060e36c08615a4e1246c25
+  desc 67c0e1532f060e36c08615a4e1246c25
+  name 67c0e1532f060e36c08615a4e1246c25
+  ver 67c0e1532f060e36c08615a4e1246c25
+import  -/  Utils 4f98c61aa38838f38e3d1e041c1d0979
+  exports: 1b834eb832ec9a3ae541398e0df3efef
+  merge c9d74a5272b0f05d443491f30ba98a54
+  satisfies 48f6f54f253be34b353d7dd3ef38e09b
+d9c69b269b6a9879eb573de05055e373
+  $fApplicativeSolver :: GHC.Base.Applicative SolverImpl.Solver
+  DFunId
+  {- Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ SolverImpl.Solver
+                  SolverImpl.$fFunctorSolver
+                  SolverImpl.$fApplicativeSolver5
+                    `cast`
+                  (forall (a :: <*>_N).
+                   <a>_R ->_R Sym (SolverImpl.N:Solver[0] <a>_R))
+                  SolverImpl.$fApplicativeSolver4
+                    `cast`
+                  (forall (a :: <*>_N) (b :: <*>_N).
+                   <SolverImpl.Solver (a -> b)>_R
+                   ->_R <SolverImpl.Solver a>_R
+                   ->_R Sym (SolverImpl.N:Solver[0] <b>_R))
+                  SolverImpl.$fApplicativeSolver3
+                    `cast`
+                  (forall (a :: <*>_N) (b :: <*>_N) (c :: <*>_N).
+                   <a -> b -> c>_R
+                   ->_R <SolverImpl.Solver a>_R
+                   ->_R <SolverImpl.Solver b>_R
+                   ->_R Sym (SolverImpl.N:Solver[0] <c>_R))
+                  SolverImpl.$fApplicativeSolver2
+                    `cast`
+                  (forall (a :: <*>_N) (b :: <*>_N).
+                   <SolverImpl.Solver a>_R
+                   ->_R <SolverImpl.Solver b>_R
+                   ->_R Sym (SolverImpl.N:Solver[0] <b>_R))
+                  (\ @ a @ b -> SolverImpl.$fApplicativeSolver1 @ b @ a)
+                    `cast`
+                  (forall (a :: <*>_N) (b :: <*>_N).
+                   <SolverImpl.Solver a>_R
+                   ->_R <SolverImpl.Solver b>_R
+                   ->_R Sym (SolverImpl.N:Solver[0] <a>_R)) -}
+d9c69b269b6a9879eb573de05055e373
+  $fApplicativeSolver1 ::
+    SolverImpl.Solver a
+    -> SolverImpl.Solver b -> SolverImpl.Context -> (a, [Defs.Sol])
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <L,1*C1(U(1*U,1*U))><L,1*C1(U(A,1*U))><S,1*U(U,U)>m,
+     Inline: [0],
+     Unfolding: InlineRule (3, True, False)
+                (\ @ b
+                   @ a
+                   (w :: SolverImpl.Solver a)
+                   (w1 :: SolverImpl.Solver b)
+                   (w2 :: SolverImpl.Context) ->
+                 case w2 of ww { (,) ww1 ww2 ->
+                 let {
+                   ds :: (a, [Defs.Sol])
+                   = w `cast` (SolverImpl.N:Solver[0] <a>_R) (ww1, ww2)
+                 } in
+                 (case ds of wild { (,) a1 s' -> a1 },
+                  case w1 `cast` (SolverImpl.N:Solver[0] <b>_R)
+                         (case ds of wild { (,) a1 s' -> s' }, ww2) of wild { (,) a1 s' ->
+                  s' }) }) -}
+d9c69b269b6a9879eb573de05055e373
+  $fApplicativeSolver2 ::
+    SolverImpl.Solver a
+    -> SolverImpl.Solver b -> SolverImpl.Context -> (b, [Defs.Sol])
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <L,1*C1(U(A,1*U))><L,1*C1(U(1*U,1*U))><S,1*U(U,U)>m,
+     Inline: [0],
+     Unfolding: InlineRule (3, True, False)
+                (\ @ a
+                   @ b
+                   (w :: SolverImpl.Solver a)
+                   (w1 :: SolverImpl.Solver b)
+                   (w2 :: SolverImpl.Context) ->
+                 case w2 of ww { (,) ww1 ww2 ->
+                 let {
+                   ds :: (b, [Defs.Sol])
+                   = w1 `cast` (SolverImpl.N:Solver[0] <b>_R)
+                       (case w `cast` (SolverImpl.N:Solver[0] <a>_R)
+                               (ww1, ww2) of wild { (,) a1 s' ->
+                        s' },
+                        ww2)
+                 } in
+                 (case ds of wild { (,) a1 s' -> a1 },
+                  case ds of wild { (,) a1 s' -> s' }) }) -}
+d9c69b269b6a9879eb573de05055e373
+  $fApplicativeSolver3 ::
+    (a -> b -> c)
+    -> SolverImpl.Solver a
+    -> SolverImpl.Solver b
+    -> SolverImpl.Context
+    -> (c, [Defs.Sol])
+  {- Arity: 4, HasNoCafRefs,
+     Strictness: <L,1*C1(C1(U))><L,1*C1(U(1*U,1*U))><L,1*C1(U(1*U,1*U))><S,1*U(U,U)>m,
+     Inline: [0],
+     Unfolding: InlineRule (4, True, False)
+                (\ @ a
+                   @ b
+                   @ c
+                   (w :: a -> b -> c)
+                   (w1 :: SolverImpl.Solver a)
+                   (w2 :: SolverImpl.Solver b)
+                   (w3 :: SolverImpl.Context) ->
+                 case w3 of ww { (,) ww1 ww2 ->
+                 let {
+                   ds :: (a, [Defs.Sol])
+                   = w1 `cast` (SolverImpl.N:Solver[0] <a>_R) (ww1, ww2)
+                 } in
+                 let {
+                   ds1 :: (b, [Defs.Sol])
+                   = w2 `cast` (SolverImpl.N:Solver[0] <b>_R)
+                       (case ds of wild { (,) a1 s' -> s' }, ww2)
+                 } in
+                 (w (case ds of wild { (,) a1 s' -> a1 })
+                    (case ds1 of wild { (,) a1 s' -> a1 }),
+                  case ds1 of wild { (,) a1 s' -> s' }) }) -}
+d9c69b269b6a9879eb573de05055e373
+  $fApplicativeSolver4 ::
+    SolverImpl.Solver (a -> b)
+    -> SolverImpl.Solver a
+    -> ([Defs.Sol], Defs.Database)
+    -> (b, [Defs.Sol])
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <L,1*C1(U(1*C1(U),1*U))><L,1*C1(U(1*U,1*U))><S,1*U(U,U)>m,
+     Inline: [0],
+     Unfolding: InlineRule (3, True, False)
+                (\ @ a
+                   @ b
+                   (w :: SolverImpl.Solver (a -> b))
+                   (w1 :: SolverImpl.Solver a)
+                   (w2 :: ([Defs.Sol], Defs.Database)) ->
+                 case w2 of ww { (,) ww1 ww2 ->
+                 let {
+                   ds :: (a -> b, [Defs.Sol])
+                   = w `cast` (SolverImpl.N:Solver[0] <a -> b>_R) (ww1, ww2)
+                 } in
+                 let {
+                   ds1 :: (a, [Defs.Sol])
+                   = w1 `cast` (SolverImpl.N:Solver[0] <a>_R)
+                       (case ds of wild { (,) a1 s' -> s' }, ww2)
+                 } in
+                 (case ds of wild { (,) a1 s' ->
+                  a1 (case ds1 of wild1 { (,) a2 s'1 -> a2 }) },
+                  case ds1 of wild { (,) a1 s' -> s' }) }) -}
+52f0f7301666fa1fae42846ad6ad935e
+  $fApplicativeSolver5 ::
+    a -> ([Defs.Sol], Defs.Database) -> (a, [Defs.Sol])
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S,1*U(U,A)>m,
+     Unfolding: InlineRule (2, True, False)
+                (\ @ a (a1 :: a) (ds :: ([Defs.Sol], Defs.Database)) ->
+                 case ds of wild { (,) s ds1 -> (a1, s) }) -}
+d9c69b269b6a9879eb573de05055e373
+  $fFunctorSolver :: GHC.Base.Functor SolverImpl.Solver
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ SolverImpl.Solver
+                  SolverImpl.$fFunctorSolver2
+                    `cast`
+                  (forall (a :: <*>_N) (b :: <*>_N).
+                   <a -> b>_R
+                   ->_R <SolverImpl.Solver a>_R
+                   ->_R Sym (SolverImpl.N:Solver[0] <b>_R))
+                  SolverImpl.$fFunctorSolver1
+                    `cast`
+                  (forall (a :: <*>_N) (b :: <*>_N).
+                   <a>_R
+                   ->_R <SolverImpl.Solver b>_R
+                   ->_R Sym (SolverImpl.N:Solver[0] <a>_R)) -}
+d9c69b269b6a9879eb573de05055e373
+  $fFunctorSolver1 ::
+    a -> SolverImpl.Solver b -> SolverImpl.Context -> (a, [Defs.Sol])
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <L,U><L,1*C1(U(A,1*U))><S,1*U(U,U)>m,
+     Unfolding: InlineRule (3, True, False)
+                (\ @ a
+                   @ b
+                   (x :: a)
+                   (eta :: SolverImpl.Solver b)
+                   (eta1 :: SolverImpl.Context) ->
+                 case eta1 of wild { (,) s db ->
+                 (x,
+                  case eta `cast` (SolverImpl.N:Solver[0] <b>_R)
+                         (s, db) of wild1 { (,) a1 s' ->
+                  s' }) }) -}
+d9c69b269b6a9879eb573de05055e373
+  $fFunctorSolver2 ::
+    (a -> b)
+    -> SolverImpl.Solver a
+    -> ([Defs.Sol], Defs.Database)
+    -> (b, [Defs.Sol])
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <L,1*C1(U)><L,1*C1(U(1*U,1*U))><S,1*U(U,U)>m,
+     Unfolding: InlineRule (3, True, False)
+                (\ @ a
+                   @ b
+                   (f :: a -> b)
+                   (m1 :: SolverImpl.Solver a)
+                   (ds :: ([Defs.Sol], Defs.Database)) ->
+                 case ds of wild { (,) s db ->
+                 let {
+                   ds1 :: (a, [Defs.Sol])
+                   = m1 `cast` (SolverImpl.N:Solver[0] <a>_R) (s, db)
+                 } in
+                 (f (case ds1 of wild1 { (,) a1 s' -> a1 }),
+                  case ds1 of wild1 { (,) a1 s' -> s' }) }) -}
+d9c69b269b6a9879eb573de05055e373
+  $fMonadSolver :: GHC.Base.Monad SolverImpl.Solver
+  DFunId
+  {- Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ SolverImpl.Solver
+                  SolverImpl.$fApplicativeSolver
+                  SolverImpl.$fMonadSolver1
+                    `cast`
+                  (forall (a :: <*>_N) (b :: <*>_N).
+                   <SolverImpl.Solver a>_R
+                   ->_R <a -> SolverImpl.Solver b>_R
+                   ->_R Sym (SolverImpl.N:Solver[0] <b>_R))
+                  SolverImpl.$fMonadSolver_$c>>
+                  SolverImpl.$fApplicativeSolver5
+                    `cast`
+                  (forall (a :: <*>_N).
+                   <a>_R ->_R Sym (SolverImpl.N:Solver[0] <a>_R))
+                  (\ @ a ->
+                   GHC.Err.errorWithoutStackTrace
+                     @ 'GHC.Types.LiftedRep
+                     @ (SolverImpl.Solver a)) -}
+d9c69b269b6a9879eb573de05055e373
+  $fMonadSolver1 ::
+    SolverImpl.Solver a
+    -> (a -> SolverImpl.Solver b)
+    -> ([Defs.Sol], Defs.Database)
+    -> (b, [Defs.Sol])
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <L,1*C1(U(1*U,1*U))><C(C(S)),1*C1(C1(U(U,U)))><S,1*U(U,U)>,
+     Inline: [0],
+     Unfolding: InlineRule (3, True, False)
+                (\ @ a
+                   @ b
+                   (w :: SolverImpl.Solver a)
+                   (w1 :: a -> SolverImpl.Solver b)
+                   (w2 :: ([Defs.Sol], Defs.Database)) ->
+                 case w2 of ww { (,) ww1 ww2 ->
+                 SolverImpl.$w$c>>= @ a @ b w w1 ww1 ww2 }) -}
+d9c69b269b6a9879eb573de05055e373
+  $fMonadSolver_$c>> ::
+    SolverImpl.Solver a -> SolverImpl.Solver b -> SolverImpl.Solver b
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <L,1*C1(U(A,1*U))><C(S),1*C1(U(U,U))><S,1*U(U,U)>,
+     Inline: (sat-args=2),
+     Unfolding: InlineRule (2, False, False)
+                (\ @ a
+                   @ b
+                   (m1 :: SolverImpl.Solver a)
+                   (k :: SolverImpl.Solver b)
+                   (ds :: ([Defs.Sol], Defs.Database)) ->
+                 case ds of wild { (,) s db ->
+                 k `cast` (SolverImpl.N:Solver[0] <b>_R)
+                   (case m1 `cast` (SolverImpl.N:Solver[0] <a>_R)
+                           (s, db) of wild1 { (,) a1 s' ->
+                    s' },
+                    db) })
+                  `cast`
+                (forall (a :: <*>_N) (b :: <*>_N).
+                 <SolverImpl.Solver a>_R
+                 ->_R <SolverImpl.Solver b>_R
+                 ->_R Sym (SolverImpl.N:Solver[0] <b>_R)) -}
+cba5bb11e8ff276422f501570b25e37d
+  $tc'S :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   5710689673433611955##
+                   1106818623679249521##
+                   SolverImpl.$trModule
+                   SolverImpl.$tc'S2
+                   1#
+                   SolverImpl.$tc'S1) -}
+d9e3a893519e31639f0c064110f45271
+  $tc'S1 :: GHC.Types.KindRep
+  {- HasNoCafRefs, Strictness: m4, Inline: [~] -}
+93122ad77683dfd84fc8b9488a91bbdb
+  $tc'S2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS SolverImpl.$tc'S3) -}
+99af06ca86981590e68b942804905553
+  $tc'S3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'S"#) -}
+5c7b0a43420ca003f3b95a2ea785fd33
+  $tcSolver :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   18188253208798063783##
+                   15995771188680098671##
+                   SolverImpl.$trModule
+                   SolverImpl.$tcSolver1
+                   0#
+                   GHC.Types.krep$*Arr*) -}
+3139b50383fcfd343f5ee749dabee3db
+  $tcSolver1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS SolverImpl.$tcSolver2) -}
+a6d0c821692774a6f784ff4864875583
+  $tcSolver2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Solver"#) -}
+4677c26903e63285b1ea32b0a95e70e9
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module
+                   SolverImpl.$trModule3
+                   SolverImpl.$trModule1) -}
+5bcb6dc59d5418f38f537ca64260c9b2
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS SolverImpl.$trModule2) -}
+6674b64506a6d729be87951f14258caa
+  $trModule2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("SolverImpl"#) -}
+9dd2b6df88b8c7f23b56736858075d7c
+  $trModule3 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS SolverImpl.$trModule4) -}
+1b845544c8621e2bcbfbf253975dac06
+  $trModule4 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("main"#) -}
+d9c69b269b6a9879eb573de05055e373
+  $w$c>>= ::
+    SolverImpl.Solver a
+    -> (a -> SolverImpl.Solver b)
+    -> [Defs.Sol]
+    -> Defs.Database
+    -> (b, [Defs.Sol])
+  {- Arity: 4, HasNoCafRefs,
+     Strictness: <L,1*C1(U(1*U,1*U))><C(C(S)),1*C1(C1(U(U,U)))><L,U><L,U>,
+     Inline: [0],
+     Unfolding: (\ @ a
+                   @ b
+                   (w :: SolverImpl.Solver a)
+                   (w1 :: a -> SolverImpl.Solver b)
+                   (ww :: [Defs.Sol])
+                   (ww1 :: Defs.Database) ->
+                 let {
+                   ds :: (a, [Defs.Sol])
+                   = w `cast` (SolverImpl.N:Solver[0] <a>_R) (ww, ww1)
+                 } in
+                 (w1 (case ds of wild { (,) a1 s' -> a1 }))
+                   `cast`
+                 (SolverImpl.N:Solver[0] <b>_R)
+                   (case ds of wild { (,) a1 s' -> s' }, ww1)) -}
+f4ea1359ec03a1cf276cb8d542e97433
+  $wequiv ::
+    GHC.Base.String
+    -> Defs.Constrs
+    -> GHC.Base.String
+    -> Defs.Constrs
+    -> GHC.Types.Bool
+  {- Arity: 4, HasNoCafRefs,
+     Strictness: <S,1*U><L,1*U><S,1*U><L,1*U>, Inline: [0],
+     Unfolding: (\ (ww :: GHC.Base.String)
+                   (ww1 :: Defs.Constrs)
+                   (ww2 :: GHC.Base.String)
+                   (ww3 :: Defs.Constrs) ->
+                 case GHC.Base.eqString ww ww2 of wild {
+                   GHC.Types.False -> GHC.Types.False
+                   GHC.Types.True
+                   -> GHC.Classes.$fEq[]_$c==
+                        @ (Defs.PName, Defs.PConstr)
+                        Defs.$fEqPkg_$s$fEq(,)
+                        (Data.OldList.sortBy
+                           @ (Defs.PName, Defs.PConstr)
+                           SolverImpl.equiv1
+                           ww1)
+                        (Data.OldList.sortBy
+                           @ (Defs.PName, Defs.PConstr)
+                           SolverImpl.equiv1
+                           ww3) }) -}
+f7bed769cf59997693bc2584529792f3
+  $wgo2 ::
+    [(Defs.PName, Defs.Version)]
+    -> [(Defs.PName, Defs.Version)]
+    -> GHC.Integer.Type.Integer
+    -> GHC.Integer.Type.Integer
+    -> GHC.Types.Ordering
+  {- Arity: 4, Strictness: <S,1*U><L,1*U><S,U><S,U>, Inline: [0] -}
+c5b4bbfa7538254ab722ffdd4456f9c0
+  $wlvl ::
+    Defs.PName
+    -> (GHC.Types.Bool, Defs.Version, Defs.Version)
+    -> Defs.PName
+    -> (GHC.Types.Bool, Defs.Version, Defs.Version)
+    -> GHC.Types.Ordering
+  {- Arity: 4, HasNoCafRefs,
+     Strictness: <S,1*U><L,1*U(1*U,1*U,1*U)><S,1*U><L,1*U(1*U,1*U,1*U)>,
+     Inline: [0],
+     Unfolding: (\ (ww :: Defs.PName)
+                   (ww1 :: (GHC.Types.Bool, Defs.Version, Defs.Version))
+                   (ww2 :: Defs.PName)
+                   (ww3 :: (GHC.Types.Bool, Defs.Version, Defs.Version)) ->
+                 case GHC.Classes.$fOrd[]_$s$ccompare1
+                        ww `cast` (Defs.N:PName[0])
+                        ww2 `cast` (Defs.N:PName[0]) of wild {
+                   GHC.Types.LT -> GHC.Types.LT
+                   GHC.Types.EQ
+                   -> case ww1 of ww4 { (,,) ww5 ww6 ww7 ->
+                      case ww3 of ww8 { (,,) ww9 ww10 ww11 ->
+                      let {
+                        $j1 :: GHC.Types.Ordering <join 0>
+                        = case GHC.Classes.$fOrd[]_$ccompare
+                                 @ Defs.VNum
+                                 Defs.$fOrdVNum
+                                 ww6 `cast` (Defs.N:Version[0])
+                                 ww10 `cast` (Defs.N:Version[0]) of wild1 {
+                            GHC.Types.LT -> GHC.Types.LT
+                            GHC.Types.EQ
+                            -> GHC.Classes.$fOrd[]_$ccompare
+                                 @ Defs.VNum
+                                 Defs.$fOrdVNum
+                                 ww7 `cast` (Defs.N:Version[0])
+                                 ww11 `cast` (Defs.N:Version[0])
+                            GHC.Types.GT -> GHC.Types.GT }
+                      } in
+                      case ww5 of wild1 {
+                        GHC.Types.False
+                        -> case ww9 of wild2 {
+                             GHC.Types.False -> $j1 GHC.Types.True -> GHC.Types.LT }
+                        GHC.Types.True
+                        -> case ww9 of wild2 {
+                             GHC.Types.False -> GHC.Types.GT GHC.Types.True -> $j1 } } } }
+                   GHC.Types.GT -> GHC.Types.GT }) -}
+e9096ec2aff232ba8f05685217b42dca
+  $wlvl1 ::
+    Defs.PName
+    -> Defs.Version -> Defs.PName -> Defs.Version -> GHC.Types.Ordering
+  {- Arity: 4, HasNoCafRefs,
+     Strictness: <S,1*U><L,1*U><S,1*U><L,1*U>, Inline: [0],
+     Unfolding: (\ (ww :: Defs.PName)
+                   (ww1 :: Defs.Version)
+                   (ww2 :: Defs.PName)
+                   (ww3 :: Defs.Version) ->
+                 case GHC.Classes.$fOrd[]_$s$ccompare1
+                        ww `cast` (Defs.N:PName[0])
+                        ww2 `cast` (Defs.N:PName[0]) of wild {
+                   GHC.Types.LT -> GHC.Types.LT
+                   GHC.Types.EQ
+                   -> GHC.Classes.$fOrd[]_$ccompare
+                        @ Defs.VNum
+                        Defs.$fOrdVNum
+                        ww1 `cast` (Defs.N:Version[0])
+                        ww3 `cast` (Defs.N:Version[0])
+                   GHC.Types.GT -> GHC.Types.GT }) -}
+2f45b2811232ccfc7a6b1da29ad5acbd
+  $wtakeIfSat ::
+    [Defs.Pkg]
+    -> Defs.Constrs
+    -> Defs.Sol
+    -> GHC.Base.Maybe (Defs.Constrs, Defs.Sol)
+  {- Arity: 3, HasNoCafRefs, Strictness: <L,U><S,U><L,1*U>,
+     Inline: [0],
+     Unfolding: (\ (w :: [Defs.Pkg])
+                   (ww :: Defs.Constrs)
+                   (ww1 :: Defs.Sol) ->
+                 let {
+                   newsol :: [(Defs.PName, Defs.Version)]
+                   = GHC.Base.++
+                       @ (Defs.PName, Defs.Version)
+                       ww1
+                       (GHC.Base.map
+                          @ Defs.Pkg
+                          @ (Defs.PName, Defs.Version)
+                          SolverImpl.takeIfSat1
+                          w)
+                 } in
+                 let {
+                   exit :: GHC.Base.Maybe (Defs.Constrs, Defs.Sol) <join 0>
+                   = let {
+                       exit1 :: Defs.Constrs -> GHC.Base.Maybe (Defs.Constrs, Defs.Sol)
+                         <join 1> {- Arity: 1, Strictness: <L,U> -}
+                       = \ (eta :: Defs.Constrs)[OneShot] ->
+                         GHC.Base.Just
+                           @ (Defs.Constrs, [(Defs.PName, Defs.Version)])
+                           (eta, newsol)
+                     } in
+                     letrec {
+                       go1 :: [Defs.Pkg]
+                              -> Defs.Constrs -> GHC.Base.Maybe (Defs.Constrs, Defs.Sol)
+                         <join 2> {- Arity: 2, Strictness: <S,1*U><L,U> -}
+                       = \ (ds :: [Defs.Pkg]) (eta :: Defs.Constrs) ->
+                         case ds of wild {
+                           [] -> exit1 eta
+                           : y ys
+                           -> case Utils.merge
+                                     eta
+                                     (case y of wild1 { Defs.Pkg ds4 ds5 ds6 ds7 ->
+                                      ds7 }) of wild1 {
+                                GHC.Base.Nothing -> GHC.Base.Nothing @ (Defs.Constrs, Defs.Sol)
+                                GHC.Base.Just x -> go1 ys x } }
+                     } in
+                     go1 w ww
+                 } in
+                 letrec {
+                   go1 :: [(Defs.PName, Defs.PConstr)]
+                          -> GHC.Base.Maybe (Defs.Constrs, Defs.Sol)
+                     <join 1> {- Arity: 1, Strictness: <S,1*U> -}
+                   = \ (ds :: [(Defs.PName, Defs.PConstr)]) ->
+                     case ds of wild {
+                       [] -> exit
+                       : y ys
+                       -> case y of ww2 { (,) ww3 ww4 ->
+                          case ww4 of ww5 { (,,) ww6 ww7 ww8 ->
+                          case Utils.$wsatisfies' newsol ww3 ww6 ww7 ww8 of wild1 {
+                            GHC.Types.False -> GHC.Base.Nothing @ (Defs.Constrs, Defs.Sol)
+                            GHC.Types.True -> go1 ys } } } }
+                 } in
+                 go1 ww) -}
+c58baa69bfc72fa5a13700af5e5b4fc7
+  type Context = ([Defs.Sol], Defs.Database)
+d9c69b269b6a9879eb573de05055e373
+  newtype Solver a
+    = S {runSolver :: SolverImpl.Context -> (a, [Defs.Sol])}
+6c8476cf9a72d6dc15c10bd4aac1aae9
+  equiv :: Defs.Pkg -> Defs.Pkg -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(LLSL),1*U(A,A,1*U,1*U)><S(LLSL),1*U(A,A,1*U,1*U)>,
+     Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Defs.Pkg) (w1 :: Defs.Pkg) ->
+                 case w of ww { Defs.Pkg ww1 ww2 ww3 ww4 ->
+                 case w1 of ww5 { Defs.Pkg ww6 ww7 ww8 ww9 ->
+                 SolverImpl.$wequiv ww3 ww4 ww8 ww9 } }) -}
+1c6408f71368ebdf0ea845afe21cb4e8
+  equiv1 ::
+    (Defs.PName, (GHC.Types.Bool, Defs.Version, Defs.Version))
+    -> (Defs.PName, (GHC.Types.Bool, Defs.Version, Defs.Version))
+    -> GHC.Types.Ordering
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SL),1*U(1*U,1*U(1*U,1*U,1*U))><S(SL),1*U(1*U,1*U(1*U,1*U,1*U))>,
+     Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: (Defs.PName,
+                          (GHC.Types.Bool, Defs.Version, Defs.Version)))
+                   (w1 :: (Defs.PName,
+                           (GHC.Types.Bool, Defs.Version, Defs.Version))) ->
+                 case w of ww { (,) ww1 ww2 ->
+                 case w1 of ww3 { (,) ww4 ww5 ->
+                 SolverImpl.$wlvl ww1 ww2 ww4 ww5 } }) -}
+069aaaadad1df183125c814ca707d5e8
+  execSolver ::
+    SolverImpl.Solver a -> SolverImpl.Context -> [Defs.Sol]
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <C(S(LS)),1*C1(U(A,1*U))><L,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ @ a (act :: SolverImpl.Solver a) (x :: SolverImpl.Context) ->
+                 case act `cast` (SolverImpl.N:Solver[0] <a>_R)
+                        x of wild { (,) ds1 y ->
+                 y }) -}
+a8ad64e98a623839c84f48f909dcb0d6
+  get :: SolverImpl.Solver Defs.Database
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U(U,U)>m,
+     Unfolding: InlineRule (0, True, True)
+                SolverImpl.get1
+                  `cast`
+                (Sym (SolverImpl.N:Solver[0] <Defs.Database>_R)) -}
+83b98a57c53a2fc6f8410d5700eb5644
+  get1 :: ([Defs.Sol], Defs.Database) -> (Defs.Database, [Defs.Sol])
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U(U,U)>m,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: ([Defs.Sol], Defs.Database)) ->
+                 case ds of wild { (,) s db -> (db, s) }) -}
+86457caa1cd1229eb326011576b20cc2
+  getPkgs :: Defs.PName -> Defs.Database -> GHC.Base.Maybe [Defs.Pkg]
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S,1*U>,
+     Unfolding: (\ (p :: Defs.PName) (ds :: Defs.Database) ->
+                 case Data.OldList.sortBy
+                        @ Defs.Pkg
+                        SolverImpl.getPkgs1
+                        (GHC.List.filter
+                           @ Defs.Pkg
+                           (\ (x :: Defs.Pkg) ->
+                            case x of wild { Defs.Pkg ds4 ds5 ds6 ds7 ->
+                            GHC.Base.eqString
+                              p `cast` (Defs.N:PName[0])
+                              ds4 `cast` (Defs.N:PName[0]) })
+                           ds `cast` (Defs.N:Database[0])) of wild {
+                   [] -> GHC.Base.Nothing @ [Defs.Pkg]
+                   : ipv ipv1 -> GHC.Base.Just @ [Defs.Pkg] wild }) -}
+9350a3ca354e89072dc4fbea12cc07a6
+  getPkgs1 :: Defs.Pkg -> Defs.Pkg -> GHC.Types.Ordering
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(LSLL),1*U(A,1*U,A,A)><S(LSLL),1*U(A,1*U,A,A)>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (x :: Defs.Pkg) (y :: Defs.Pkg)[OneShot] ->
+                 case y of wild { Defs.Pkg ds4 ds5 ds6 ds7 ->
+                 case x of wild1 { Defs.Pkg ds1 ds2 ds3 ds10 ->
+                 GHC.Classes.$fOrd[]_$ccompare
+                   @ Defs.VNum
+                   Defs.$fOrdVNum
+                   ds5 `cast` (Defs.N:Version[0])
+                   ds2 `cast` (Defs.N:Version[0]) } }) -}
+0d3e01f950d2072092b05b2ecd9bbd5a
+  getSols :: Defs.Database -> [Defs.Pkg] -> GHC.Base.Maybe [Defs.Sol]
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S,1*U>,
+     Unfolding: (\ (db :: Defs.Database) (pkgs :: [Defs.Pkg]) ->
+                 let {
+                   lvl15 :: ([Defs.Sol], Defs.Database)
+                   = (GHC.Types.[] @ Defs.Sol, db)
+                 } in
+                 letrec {
+                   go1 :: [Defs.Pkg] -> [Defs.Sol] {- Arity: 1, Strictness: <S,1*U> -}
+                   = \ (ds :: [Defs.Pkg]) ->
+                     case ds of wild {
+                       [] -> GHC.Types.[] @ Defs.Sol
+                       : y ys
+                       -> case y of wild1 { Defs.Pkg ds4 ds5 ds6 ds7 ->
+                          case (SolverImpl.solve
+                                  ds7
+                                  (GHC.Types.:
+                                     @ (Defs.PName, Defs.Version)
+                                     (ds4, ds5)
+                                     (GHC.Types.[] @ (Defs.PName, Defs.Version))))
+                                 `cast`
+                               (SolverImpl.N:Solver[0] <()>_R)
+                                 lvl15 of wild2 { (,) ds1 y1 ->
+                          GHC.Base.++ @ [(Defs.PName, Defs.Version)] y1 (go1 ys) } } }
+                 } in
+                 case go1 pkgs of wild {
+                   [] -> GHC.Base.Nothing @ [Defs.Sol]
+                   : ipv ipv1 -> GHC.Base.Just @ [Defs.Sol] wild }) -}
+a67f05a35b68bd5ec00d32f9ed32dd28
+  groupByName :: [Defs.Pkg] -> [[Defs.Pkg]]
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
+3271968641892e4488efe4317822f4c5
+  inSol :: Defs.Pkg -> Defs.Sol -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U(U,A,A,A)><S,1*U>,
+     Unfolding: InlineRule (0, True, True)
+                SolverImpl.inSol1
+                  `cast`
+                (<Defs.Pkg>_R
+                 ->_R <[(Defs.PName, Defs.Version)]>_R
+                 ->_R Data.Semigroup.Internal.N:Any[0]) -}
+5b56a9a2c12335d413341ac5bb16d71e
+  inSol1 ::
+    Defs.Pkg
+    -> [(Defs.PName, Defs.Version)] -> Data.Semigroup.Internal.Any
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U(U,A,A,A)><S,1*U>,
+     Unfolding: (\ (pkg :: Defs.Pkg)
+                   (eta :: [(Defs.PName, Defs.Version)]) ->
+                 letrec {
+                   go1 :: [(Defs.PName, Defs.Version)] -> Data.Semigroup.Internal.Any
+                     <join 1> {- Arity: 1, Strictness: <S,1*U> -}
+                   = \ (ds :: [(Defs.PName, Defs.Version)]) ->
+                     case ds of wild {
+                       []
+                       -> GHC.Types.False `cast` (Sym (Data.Semigroup.Internal.N:Any[0]))
+                       : y ys
+                       -> case y of wild1 { (,) p ds1 ->
+                          case pkg of wild2 { Defs.Pkg ds4 ds5 ds6 ds7 ->
+                          case GHC.Base.eqString
+                                 p `cast` (Defs.N:PName[0])
+                                 ds4 `cast` (Defs.N:PName[0]) of wild3 {
+                            GHC.Types.False -> go1 ys
+                            GHC.Types.True
+                            -> GHC.Types.True
+                                 `cast`
+                               (Sym (Data.Semigroup.Internal.N:Any[0])) } } } }
+                 } in
+                 go1 eta) -}
+8c49ec1c38e56b1cad3a106a02da6db6
+  install :: Defs.Database -> Defs.PName -> GHC.Base.Maybe Defs.Sol
+  {- Arity: 2, Strictness: <S,U><L,U>,
+     Unfolding: (\ (db :: Defs.Database) (p :: Defs.PName) ->
+                 case SolverImpl.getPkgs p db of wild {
+                   GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                   GHC.Base.Just x
+                   -> case SolverImpl.getSols db x of wild1 {
+                        GHC.Base.Nothing -> GHC.Base.Nothing @ Defs.Sol
+                        GHC.Base.Just x1
+                        -> GHC.Base.Just @ Defs.Sol (GHC.List.head @ Defs.Sol x1) } }) -}
+0bf1fdf76d2711f8eec9c7af65aaf589
+  isRequired :: Defs.Pkg -> Defs.Constrs -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U(U,A,A,A)><S,1*U>,
+     Unfolding: InlineRule (0, True, True)
+                SolverImpl.isRequired1
+                  `cast`
+                (<Defs.Pkg>_R
+                 ->_R <[(Defs.PName,
+                         (GHC.Types.Bool, Defs.Version, Defs.Version))]>_R
+                 ->_R Data.Semigroup.Internal.N:Any[0]) -}
+db3ef000120905fb085c2358a2ba7f9c
+  isRequired1 ::
+    Defs.Pkg
+    -> [(Defs.PName, (GHC.Types.Bool, Defs.Version, Defs.Version))]
+    -> Data.Semigroup.Internal.Any
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U(U,A,A,A)><S,1*U>,
+     Unfolding: (\ (pkg :: Defs.Pkg)
+                   (eta :: [(Defs.PName,
+                             (GHC.Types.Bool, Defs.Version, Defs.Version))]) ->
+                 letrec {
+                   go1 :: [(Defs.PName, (GHC.Types.Bool, Defs.Version, Defs.Version))]
+                          -> Data.Semigroup.Internal.Any
+                     <join 1> {- Arity: 1, Strictness: <S,1*U> -}
+                   = \ (ds :: [(Defs.PName,
+                                (GHC.Types.Bool, Defs.Version, Defs.Version))]) ->
+                     case ds of wild {
+                       []
+                       -> GHC.Types.False `cast` (Sym (Data.Semigroup.Internal.N:Any[0]))
+                       : y ys
+                       -> case y of wild1 { (,) p ds1 ->
+                          case ds1 of wild2 { (,,) b ds2 ds3 ->
+                          case b of wild3 {
+                            GHC.Types.False -> go1 ys
+                            GHC.Types.True
+                            -> case pkg of wild4 { Defs.Pkg ds4 ds5 ds6 ds7 ->
+                               case GHC.Base.eqString
+                                      ds4 `cast` (Defs.N:PName[0])
+                                      p `cast` (Defs.N:PName[0]) of wild5 {
+                                 GHC.Types.False -> go1 ys
+                                 GHC.Types.True
+                                 -> GHC.Types.True
+                                      `cast`
+                                    (Sym (Data.Semigroup.Internal.N:Any[0])) } } } } } }
+                 } in
+                 go1 eta) -}
+26ab16b2d5804f267418afa8d6404a05
+  normalize ::
+    Defs.Database -> Data.Either.Either GHC.Base.String Defs.Database
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Defs.Database) ->
+                 case SolverImpl.normalize' ds `cast` (Defs.N:Database[0]) of wild {
+                   Data.Either.Left x
+                   -> Data.Either.Left @ [GHC.Types.Char] @ Defs.Database x
+                   Data.Either.Right y
+                   -> Data.Either.Right
+                        @ [GHC.Types.Char]
+                        @ Defs.Database
+                        y `cast` (Sym (Defs.N:Database[0])) }) -}
+be07b30104ca95042e4782434c6231f6
+  normalize' ::
+    [Defs.Pkg] -> Data.Either.Either GHC.Base.String [Defs.Pkg]
+  {- Arity: 1, Strictness: <S,1*U> -}
+ee00848ff6d48999ba901c3a10861c1f
+  normalize'' ::
+    Defs.Pkg
+    -> [Defs.Pkg]
+    -> ([Defs.Pkg], [Defs.Pkg])
+    -> Data.Either.Either [GHC.Types.Char] ([Defs.Pkg], [Defs.Pkg])
+  {- Arity: 3, Strictness: <L,1*U(U,U,U,U)><S,1*U><L,U(U,U)> -}
+5db12d455801d5ce42623677e57e7355
+  put :: Defs.Sol -> SolverImpl.Solver ()
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S,1*U(U,A)>m,
+     Unfolding: InlineRule (0, True, True)
+                SolverImpl.put1
+                  `cast`
+                (<Defs.Sol>_R ->_R Sym (SolverImpl.N:Solver[0] <()>_R)) -}
+c5b89eb7b6ec0bff9856fe6392191cfa
+  put1 :: Defs.Sol -> ([Defs.Sol], Defs.Database) -> ((), [Defs.Sol])
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S,1*U(U,A)>m,
+     Unfolding: InlineRule (2, True, False)
+                (\ (s' :: Defs.Sol) (ds :: ([Defs.Sol], Defs.Database)) ->
+                 case ds of wild { (,) s ds1 ->
+                 (GHC.Tuple.(), GHC.Types.: @ Defs.Sol s' s) }) -}
+924851b36c84142f1790b624f0a84613
+  quality :: Defs.Sol -> Defs.Sol -> GHC.Types.Ordering
+  {- Arity: 2, Strictness: <S,U><S,U>,
+     Unfolding: (\ (sol1 :: Defs.Sol) (sol2 :: Defs.Sol) ->
+                 case GHC.List.$wlenAcc
+                        @ (Defs.PName, Defs.Version)
+                        sol1
+                        0# of ww2 { DEFAULT ->
+                 case GHC.List.$wlenAcc
+                        @ (Defs.PName, Defs.Version)
+                        sol2
+                        0# of ww1 { DEFAULT ->
+                 case GHC.Prim.<# ww2 ww1 of lwild {
+                   DEFAULT
+                   -> case GHC.Prim.># ww2 ww1 of lwild1 {
+                        DEFAULT
+                        -> SolverImpl.$wgo2
+                             (Data.OldList.sortBy
+                                @ (Defs.PName, Defs.Version)
+                                SolverImpl.quality2
+                                sol1)
+                             (Data.OldList.sortBy
+                                @ (Defs.PName, Defs.Version)
+                                SolverImpl.quality2
+                                sol2)
+                             SolverImpl.quality1
+                             SolverImpl.quality1
+                        1# -> GHC.Types.LT }
+                   1# -> GHC.Types.GT } } }) -}
+92e12a4a85b92260a399e9f218d06b22
+  quality1 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (0) -}
+d462a4bcba12ae3cbb1d21659a41baee
+  quality2 ::
+    (Defs.PName, Defs.Version)
+    -> (Defs.PName, Defs.Version) -> GHC.Types.Ordering
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SL),1*U(1*U,1*U)><S(SL),1*U(1*U,1*U)>, Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: (Defs.PName, Defs.Version))
+                   (w1 :: (Defs.PName, Defs.Version)) ->
+                 case w of ww { (,) ww1 ww2 ->
+                 case w1 of ww3 { (,) ww4 ww5 ->
+                 SolverImpl.$wlvl1 ww1 ww2 ww4 ww5 } }) -}
+d9c69b269b6a9879eb573de05055e373
+  runSolver ::
+    SolverImpl.Solver a -> SolverImpl.Context -> (a, [Defs.Sol])
+  RecSel Left SolverImpl.Solver
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (0, True, True)
+                SolverImpl.runSolver1
+                  `cast`
+                (forall (a :: <*>_N).
+                 <SolverImpl.Solver a>_R ->_R SolverImpl.N:Solver[0] <a>_R) -}
+d9c69b269b6a9879eb573de05055e373
+  runSolver1 :: SolverImpl.Solver a -> SolverImpl.Solver a
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, True)
+                (\ @ a (ds :: SolverImpl.Solver a) -> ds) -}
+bf094f268cf31e8cd984956036eb3a5b
+  solve :: Defs.Constrs -> Defs.Sol -> SolverImpl.Solver ()
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,U><L,U> -}
+703d97c193ebbb0aaf00450d249b9798
+  takeIfSat ::
+    [Defs.Pkg]
+    -> (Defs.Constrs, Defs.Sol)
+    -> GHC.Base.Maybe (Defs.Constrs, Defs.Sol)
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S(SL),1*U(U,1*U)>,
+     Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: [Defs.Pkg]) (w1 :: (Defs.Constrs, Defs.Sol)) ->
+                 case w1 of ww { (,) ww1 ww2 ->
+                 SolverImpl.$wtakeIfSat w ww1 ww2 }) -}
+184be989125c8481c1c174dc507a9db0
+  takeIfSat1 :: Defs.Pkg -> (Defs.PName, Defs.Version)
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U(1*U,1*U,A,A)>m,
+     Unfolding: InlineRule (1, True, False)
+                (\ (eta :: Defs.Pkg) -> (Defs.name eta, Defs.ver eta)) -}
+03c50410db586e674859b8ef65325c70
+  toSol :: [Defs.Pkg] -> Defs.Sol
+  {- Arity: 1, HasNoCafRefs,
+     Unfolding: (GHC.Base.map
+                   @ Defs.Pkg
+                   @ (Defs.PName, Defs.Version)
+                   SolverImpl.takeIfSat1) -}
+instance [safe] GHC.Base.Applicative [SolverImpl.Solver]
+  = SolverImpl.$fApplicativeSolver
+instance [safe] GHC.Base.Functor [SolverImpl.Solver]
+  = SolverImpl.$fFunctorSolver
+instance [safe] GHC.Base.Monad [SolverImpl.Solver]
+  = SolverImpl.$fMonadSolver
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+
