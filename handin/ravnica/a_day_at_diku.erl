@@ -3,12 +3,6 @@
 -export([run_world/0]).
 
 
-% Print stuff
--ifndef(PRINT).
--define(PRINT(Var), io:format("DEBUG: ~p:~p - ~p~n~n ~p~n~n", [?MODULE, ?LINE, ??Var, Var])).
--endif.
-
-
 make_drunker({CreateRef, Stats}) ->
     #{sobriety := CurSobriety} = Stats,
     {CreateRef, Stats#{sobriety := CurSobriety - 1}}.

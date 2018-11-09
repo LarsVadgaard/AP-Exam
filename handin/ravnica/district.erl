@@ -135,6 +135,10 @@ under_activation(internal, {From, activate, Visited}, {N,C,T,D}) ->
     false -> {next_state, active, {N,C,T,D}, [{reply, From, active}]}
   end;
 
+% same as in under_configuration
+under_activation({call, From}, options, {N,C,T,D}) ->
+  {keep_state, {N,C,T,D}, [{reply, From, {ok, maps:keys(N)}}]};
+
 % handle other events generically
 under_activation({call, From}, _, Data) ->
   {keep_state, Data, [{reply, From, {error, not_valid}}]};

@@ -57,9 +57,9 @@ prop_activate() ->
     ?FORALL(T, ?SUCHTHAT(T1, territory(), maps:size(T1) > 0),
     ?LET(T1, setup_territory(T),
     ?FORALL(D, elements(T1),
+    ?LET({ok,O}, district:options(D),
+    ?IMPLIES(length(O) > 0,
     ?IMPLIES(district:activate(D) == active,
-      ?LET({ok,O}, district:options(D),
-      ?IMPLIES(length(O) > 0,
         ?FORALL(Act, elements(O),
         ?LET({CRef,CStat}, creature(),
         ?IMPLIES(district:enter(D,{CRef,CStat}) == ok,
@@ -80,10 +80,16 @@ prop_shutdown() ->
     ?FORALL(T, ?SUCHTHAT(T1, territory(), maps:size(T1) > 0),
     ?LET(T1, setup_territory(T),
     ?FORALL(D, elements(T1),
+    ?LET({ok,O}, district:options(D),
+    ?IMPLIES(length(O) > 0,
     ?IMPLIES(district:activate(D) == active,
-      ?IMPLIES(district:shutdown(D,self()) == ok,
-        is_shut_down(D)
-    ))))).
+        ?FORALL(Act, elements(O),
+        ?LET({CRef,CStat}, creature(),
+        ?IMPLIES(district:enter(D,{CRef,CStat}) == ok,
+          ?LET({ok,To}, district:take_action(D,CRef,Act),
+          ?IMPLIES(district:shutdown(D,self()) == ok,
+            (is_shut_down(D)) and (is_shut_down(To))
+    ))))))))))).
 
 is_shut_down(D) ->
   case process_info(D) of
@@ -97,9 +103,9 @@ prop_take_action() ->
     ?FORALL(T, ?SUCHTHAT(T1, territory(), maps:size(T1) > 0),
     ?LET(T1, setup_territory(T),
     ?FORALL(D, elements(T1),
+    ?LET({ok,O}, district:options(D),
+    ?IMPLIES(length(O) > 0,
     ?IMPLIES(district:activate(D) == active,
-      ?LET({ok,O}, district:options(D),
-      ?IMPLIES(length(O) > 0,
         ?FORALL(Act, elements(O),
         ?LET({CRef,CStat}, creature(),
         ?IMPLIES(district:enter(D,{CRef,CStat}) == ok,

@@ -33,4 +33,32 @@ This solution may not be the most elegant since it repeats some code from \textt
 \paragraph{Shutting down a district} This works much in the same way as \texttt{activate}. After sending the required message to the \texttt{NextPlane} argument, the district immediately goes to the \texttt{shutting\_down} state and forces an internal event that makes it shut down its neighbours. After they have all been visited, It uses the \texttt{gen\_statem:stop} to actually terminate the process.
 
 
-\subsection*{QuickCheck \texttt{district}}
+
+
+\subsection*{Testing \texttt{district}}
+
+I have already gone over some reasons why my implementation should behave correctly. To further ensure the behavour of my implementation, I have implemented some unit tests and some property-based tests.
+
+\paragraph{Unit testing} I have chosen to do a series of unit tests much like I did in Haskell. In case the property-based QuickCheck tests are not producing good enough instances, at least these unit tests can tell a bit about the integrity of each part of the implementation. I chose to use EUnit for this task, since it is simple and easy to use, and its error messages when tests fail are very helpful.
+
+There are 50 unit tests which, collectively, cover all requirements from the assignment. These range from connecting districts, moving a creature from a district to another, activating territories with cycles and self loops, registering well-formed triggers and triggers returning ill-formed data and throwing exceptions, and shutting down while checking the messages afterwards. In my opinion, these tests show that the behaviour of my implementation is at least pretty close to the intended behaviour described in the assignment. The fact that all tests pass indicates that a large portion of the solution is correct. The tests can be found in \texttt{ravnica/district\_bb}.
+
+
+\paragraph{QuickChecking the properties} I have written a territory generator that simply creates a random map as described in the assignment. I have also, as was the task, implemented \texttt{setup\_territory}, which takes this map and creates a district for each of the keys, creates all connections from the \texttt{\{atom(),key()\}} list, and finally returns all district pids as the resulting territory. I won't go into detail about the concrete implementations of these. An example of a generated territory (on the form before setting up the actual districts) can be seen in Appendix \ref{app:genter}. \\
+
+\noindent In order to check the neighbours of and the creatures in the districts after calling som API function, I initially used \texttt{sys:get\_state}. However, I realized that this is heavily implementation-specific (how is the state data represented?), so I had to choose a much simpler, and not as flexible, approach.
+Thus, I have implemented property-based for three API functions:
+\begin{itemize}
+  \item \texttt{activate}
+  \item \texttt{shutdown}
+  \item \texttt{take\_action}
+\end{itemize}
+When testing activation, I simply make sure that if we can successully activate some district in the generated territory, then the neighbours will be active afterwards. This is done by creating a creature and moving it to the neighbours. This gives me the pid of the neighbour, and I check the state using \texttt{sys:get\_state} (not relying on the state data, only the state itself). I could assume that moving the creature would be enough since it is only allowed when both the current district and the neighbour are active, but actually fetching the state is in my opinion a better indicator.
+
+When testing the territory when shutting down, I activate some district in the generated territory, create a creature, move it to some neighbour, get the pid of said neighbour, shut down the current district, and check that both processes have terminated using \texttt{process\_info}. This would indicate that a district is actually correctly shut down.
+
+When testing actions, I simply create a creature, enter it in some district from the generated territory, move it to a neighbour through an action, and then try to move it from the same district to a neighbour through the same action. This should fail, since the creature is no longer in the inital district.
+
+\paragraph{Assessment} I realize that my specific property-based tests are not a sure guarantee that my implementation is perfect; they are rather simple, only testing within a very local neighbourhood in any generated territory. However, they still do show some qualities about my implementation that are required in a correct solution, so they are in my opinion far from worthless.
+
+The unit tests, on the other hand, strongly indicate correct behaviour on various instances with intentional edge cases and errors. Here, not a single instance behaves unexpectedly as long as it is well-formed as per the assignment.
