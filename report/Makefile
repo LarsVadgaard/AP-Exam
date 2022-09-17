@@ -1,6 +1,6 @@
 main    := report
 outfile := report
-outdir  := trash
+outdir  := out
 
 compile := pdflatex --output-directory=$(outdir) \
 					 -shell-escape -file-line-error \
