@@ -1,6 +1,6 @@
 # Exam in Advanced Programming
 
-This is the repository containing my solution for the final exam in the Advanced Programming (2018) course on the master's degree at the University of Copenhagen.
+This is the repository containing my solution for the final exam in the Advanced Programming (2018) course on the master's degree in computer science at the University of Copenhagen.
 
 ## `handout`
 The `handout` folder contains the files and information given to us at the start of the exam. These were not done by me and haven't been altered since they were published.
@@ -10,6 +10,5 @@ The `handin` folder contains my solution for the exam. All of this (except the s
 
 The date in the report is recent, as I had to compileit again because it was never added to the repo.
 
-
-
-
+## `report`
+The `report` folder contains the written report for the exam (written in LaTeX). The compiled report would be put in a zipfile along with the `handin` folder and handed in.
